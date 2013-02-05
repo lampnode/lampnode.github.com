@@ -1,5 +1,6 @@
 
 http://lampnode.github.com/archive.html
+http://lampnode.github.com/github.html
 http://lampnode.github.com/categories.html
 http://lampnode.github.com/about.html
 http://lampnode.github.com/pages.html

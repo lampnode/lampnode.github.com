@@ -3,8 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Categories</title>
-    
+    <title>Github</title>
+    <meta name="description" content="Github guideline">
     <meta name="author" content="Robert  Chain">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -48,7 +48,7 @@
     
       
       	
-      	<li><a href="/github.html">Github</a></li>
+      	<li class="active"><a href="/github.html" class="active">Github</a></li>
       	
       
     
@@ -56,7 +56,7 @@
     
       
       	
-      	<li class="active"><a href="/categories.html" class="active">Categories</a></li>
+      	<li><a href="/categories.html">Categories</a></li>
       	
       
     
@@ -110,77 +110,63 @@
       <div class="content">
         
 <div class="page-header">
-  <h1>Categories </h1>
+  <h1>Github </h1>
 </div>
 
 <div class="row">
   <div class="span12">
-    
+    <h2 id='about_github'>About Github</h2>
 
-<ul class="tag_box inline">
-  
-  
+<p><a href='https://github.com'>GitHub</a> is the best place to share code with friends, co-workers, classmates, and complete strangers. Over three million people use GitHub to build amazing things together.</p>
 
+<h3 id='about_git'>About Git</h3>
 
-  
-     
-    	<li><a href="/categories.html#lessons-ref">
-    		lessons <span>1</span>
-    	</a></li>
-     
-    	<li><a href="/categories.html#Github-ref">
-    		Github <span>1</span>
-    	</a></li>
-    
-  
+<p>In software development, Git is a distributed revision control and source code management (SCM) system with an emphasis on speed.Git was initially designed and developed by Linus Torvalds for Linux kernel development; it has since been adopted by many other projects. Every Git working directory is a full-fledged repository with complete history and full revision tracking capabilities, not dependent on network access or a central server.</p>
 
+<h2 id='simple_guide_for_github'>Simple Guide For github</h2>
 
+<h3 id='checkout_an_existed_repository'>Checkout an existed repository</h3>
+
+<pre><code>$git clone USERNAME@github.com:/path/to/repository</code></pre>
+
+<h3 id='add_and_commit'>Add and commit</h3>
+
+<pre><code>$git add &lt;filename&gt; # or git add .
+$git commit -m &quot;Commit message&quot;</code></pre>
+
+<p>Note:The file(s) have been committed to the HEAD, but not in your remote repository yet.</p>
+
+<h3 id='pushing_changes'>Pushing changes</h3>
+
+<p>After commited, your changes are now in the HEAD of your local working copy. To send those changes to your remote repository, execute the following command:</p>
+
+<pre><code>$git push origin master</code></pre>
+
+<h3 id='update_the_workspace'>Update the workspace</h3>
+
+<p>In order to update your local repository to the newest commit, you should execute the following command in your working directory to fetch and merge remote changes. $git pull</p>
+
+<h3 id='hints'>Hints</h3>
+
+<p>Use colorful git output</p>
+
+<pre><code>$git config color.ui true</code></pre>
+
+<p>Use interactive adding</p>
+
+<pre><code>$git add -i</code></pre>
+
+<h2 id='links_and_resources'>Links and Resources</h2>
+
+<ul>
+<li>
+<p>Graphical clients: <a href='http://gitx.laullon.com'>GitX</a>, <a href='http://mac.github.com/'>GitHub for Mac</a></p>
+</li>
+
+<li>
+<p>Guides: <a href='https://help.github.com'>GitHub help</a></p>
+</li>
 </ul>
-
-
- 
-  <h2 id="lessons-ref">lessons</h2>
-  <ul>
-      
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/lessons/2011/12/29/jekyll-introduction">Jekyll Introduction</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
- 
-  <h2 id="Github-ref">Github</h2>
-  <ul>
-      
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/Github/2013/02/05/install-github-and-jekyll-on-ubuntu">Install Github and jekyll on Ubuntu</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
   </div>
 </div>
 
