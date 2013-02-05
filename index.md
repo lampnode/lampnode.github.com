@@ -1,46 +1,66 @@
 ---
 layout: page
-title: Hello World!
-tagline: Supporting tagline
+title: Welcome to LAMPNode
+tagline: Focus On LAMP Technologies
 ---
 {% include JB/setup %}
 
-Read [Jekyll Quick Start](http://jekyllbootstrap.com/usage/jekyll-quick-start.html)
+## The LAMPnode:A knowledge archives just for the LAMP Developers
 
-Complete usage and documentation available at: [Jekyll Bootstrap](http://jekyllbootstrap.com)
+The LAMPNode is aimed at the web developers as written by a developer working on LAMP. The site is for a collection of softwares and program languages that I use, with methods of installing and configuration that works better on LAMP. The more I learn, the more I realize how far I have to go still. So please refer to these tutorials as my notes and always investigate further, especially when it comes to your LAMP better! We all start somewhere, so here you can see my growth.
 
-## Update Author Attributes
-
-In `_config.yml` remember to specify your own data:
+If you find mistakes, have suggestions, and or questions please mail me at robert.c@lampnode.com, thank you!
     
-    title : My Blog =)
-    
-    author :
-      name : Name Lastname
-      email : blah@email.test
-      github : username
-      twitter : username
+## About LAMP
 
-The theme should reference these variables whenever needed.
-    
-## Sample Posts
+LAMP is an acronym for asolution stack of free , open source software, originally coined from the first letters of Linux operating system, Apache HTTP Server, MySQL database software and PHP programming language, principal components to build a viable general purpose web server.
 
-This blog contains sample posts which help stage pages and blog data.
-When you don't need the samples anymore just delete the `_posts/core-samples` folder.
+### Linux
 
-    $ rm -rf _posts/core-samples
+Linux is a Unix-like computer operating system kernel. Like the other LAMP components, Linux is free open-source software which means the source code is provided with operating system, which can be edited according to specific needs.
 
-Here's a sample "posts list".
+### Apache
 
+Apache Web Server project is a free software/open source web server, the most popular in use.
+
+### Mysql
+
+MySQL is a multithreaded, multi-user, SQL database management system (DBMS) now owned by Oracle Corporation with more than eleven million installations.
+
+### PHP
+
+PHP is a widely-used general-purpose scripting language that is especially suited for Web development and can be embedded into HTML.
+
+---
+
+<img src="/images/Linux_logo.gif" style="padding:10px;margin:10px;border:1px solid grey;" />
+
+<img src="/images/Apache-logo.png" style="margin:10px;padding:10px;border:1px solid grey;" />
+
+<img src="/images/Mysql_logo.jpg" style="margin:10px;padding:10px;border:1px solid grey;" />
+
+<img src="/images/Php-logo.gif" style="margin:10px;padding:10px;border:1px solid grey;" />
+
+---
+
+## Software Recommendations
+
+- Mail: Thunderbird
+- File Management: VisualSVN Server - FileZilla
+- SSH: PuTTY - WinSCP
+- Documents Management: Evernote
+- System: grub4dos | ext2explore
+- IDE: Eclipse
+- Server: Tomcat Httpd
+
+------
+## Posts List
 <ul class="posts">
   {% for post in site.posts %}
     <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></li>
   {% endfor %}
 </ul>
 
-## To-Do
 
-This theme is still unfinished. If you'd like to be added as a contributor, [please fork](http://github.com/plusjade/jekyll-bootstrap)!
-We need to clean up the themes, make theme usage guides with theme-specific markup examples.
 
 

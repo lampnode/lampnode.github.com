@@ -10,7 +10,7 @@ pygments: true
 # so be sure to set them if your theme uses them.
 #
 title : LAMPNode
-tagline: Site Tagline
+tagline: Focus On LAMP Technologies
 author :
   name : Robert  Chain
   email : robert.c@lampnode.com

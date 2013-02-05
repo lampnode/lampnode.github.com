@@ -1,10 +1,11 @@
 
-http://username.github.com/archive.html
-http://username.github.com/categories.html
-http://username.github.com/pages.html
-http://username.github.com/sitemap.txt
-http://username.github.com/index.html
-http://username.github.com/atom.xml
-http://username.github.com/tags.html
+http://lampnode.github.com/archive.html
+http://lampnode.github.com/categories.html
+http://lampnode.github.com/pages.html
+http://lampnode.github.com/sitemap.txt
+http://lampnode.github.com/index.html
+http://lampnode.github.com/atom.xml
+http://lampnode.github.com/tags.html
 
-http://username.github.com/lessons/2011/12/29/jekyll-introduction
+http://lampnode.github.com/2013/02/05/install-github-and-jekyll-on-ubuntu
+http://lampnode.github.com/lessons/2011/12/29/jekyll-introduction
