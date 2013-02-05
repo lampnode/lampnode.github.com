@@ -4,7 +4,7 @@
  <title>LAMPNode</title>
  <link href="http://lampnode.github.com/atom.xml" rel="self"/>
  <link href="http://lampnode.github.com"/>
- <updated>2013-02-05T13:54:25+08:00</updated>
+ <updated>2013-02-05T14:35:57+08:00</updated>
  <id>http://lampnode.github.com</id>
  <author>
    <name>Robert  Chain</name>
@@ -14,10 +14,54 @@
  
  <entry>
    <title>Install Github and jekyll on Ubuntu</title>
-   <link href="http://lampnode.github.com/2013/02/05/install-github-and-jekyll-on-ubuntu"/>
+   <link href="http://lampnode.github.com/Github/2013/02/05/install-github-and-jekyll-on-ubuntu"/>
    <updated>2013-02-05T00:00:00+08:00</updated>
-   <id>http://lampnode.github.com/2013/02/05/install-github-and-jekyll-on-ubuntu</id>
-   <content type="html"></content>
+   <id>http://lampnode.github.com/Github/2013/02/05/install-github-and-jekyll-on-ubuntu</id>
+   <content type="html">&lt;p&gt;Jekyll is a Git compatible static site generator that can be installed on Ubuntu.&lt;/p&gt;
+
+&lt;h2 id='installation'&gt;Installation&lt;/h2&gt;
+
+&lt;h3 id='install_dependencies'&gt;Install Dependencies&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;$sudo apt-get install git ruby rubygems python-pygments
+$sudo gem install rdiscount&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id='install_jekyll'&gt;Install Jekyll&lt;/h3&gt;
+
+&lt;p&gt;In order to preview your blog locally you will need to install the Jekyll ruby gem. $sudo gem install jekyll&lt;/p&gt;
+
+&lt;h3 id='install_rake'&gt;Install rake&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;$sudo gem install rake&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id='usages'&gt;Usages&lt;/h2&gt;
+
+&lt;h3 id='start_jekyll'&gt;Start Jekyll&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;$cd USERNAME.github.com
+$jekyll --server&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Your can access this by http://loclaohost:4000&lt;/p&gt;
+
+&lt;h3 id='for_rake'&gt;For Rake&lt;/h3&gt;
+
+&lt;h4 id='create_a_new_page'&gt;Create a new page&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;$rake page name=&amp;quot;about.md&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id='create_a_new_post'&gt;Create a new post&lt;/h4&gt;
+
+&lt;p&gt;Begin a new post&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$rake post title=&amp;quot;Your post title&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The rake task automatically creates a file with properly formatted filename and YAML Front Matter. Make sure to specify your own title. By default, the date is the current date.&lt;/p&gt;
+
+&lt;h2 id='commit_to_github'&gt;Commit to GitHub&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;$git add .
+$git commit -m &amp;quot;Add some content&amp;quot;
+$git push origin master&lt;/code&gt;&lt;/pre&gt;</content>
  </entry>
  
  <entry>
