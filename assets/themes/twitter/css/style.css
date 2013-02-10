@@ -1,6 +1,9 @@
 /* Override some defaults */
 html, body {
-  background-color: #eee;
+  background-color: #fff;
+  background-image: url('page-bg.png');
+  background-repeat: repeat-x;
+  background-position: 0 40px;
 }
 .navbar {
   margin-bottom: 0;
@@ -14,18 +17,30 @@ html, body {
 
 /* The white background content wrapper */
 
-.contentNavi{ width:20%; float:left; border:1px solid #cccccc;height:auto;margin:0px; padding:10px 0px;}
-.contentMain{float:left;border:1px solid #cccccc;width:70%;margin:0px 1%;padding:10px 1%;}
+.contentNavi{background-color:#ffffff;width:20%; float:left; border:1px solid #cccccc;height:auto;margin:0px; padding:10px 0px;
+	-webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+}
+.contentMain{background-color:#ffffff;float:left;border:1px solid #cccccc;width:70%;margin:0px 1%;padding:10px 1%;
+	-webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+}
 
 /*For laster updated*/
-.lastUpdated{}
-.lastUpdated li{padding:5px 0px;list-style:none;}
-.lastUpdatedDate {border:0;background-color:#0099ff;padding:5px;color:#ffffff;}
-.lastUpdatedItem dt{border:0;padding:5px;}
+.lastUpdated{padding:0px;margin-left:5px;}
+.lastUpdated li{padding:5px 0px;list-style:none;margin:0px;}
+.lastUpdatedDate {border:0;background-color:#0099ff;padding:3px;color:#ffffff;
+	-webkit-border-radius: 5px;
+  	-moz-border-radius: 5px;
+  	border-radius: 5px;
+}
+.lastUpdatedItem {border:1px solid #cccccc;padding:0px 3px;margin:0px;}
+.lastUpdatedItem dt{;padding:5px;}
 .lastUpdatedTitle{font-size:16px;padding:5px;}
 
 .content {
-  background-color: #fff;
   padding: 20px;
   margin: 0px 0px; 
   clear:both;
@@ -42,11 +57,15 @@ html, body {
   margin: -20px -20px 20px;
 }
 
+.sideNav{list-style:none;}
+.sideNav .active{color:#990066;}
+
+pre{color:green;}
 .topbar .btn {
   border: 0;
 }
 
-
+h2{border-left:5px solid #cccccc;padding:3px 0px 3px 10px; margin:5px 0px;}
 /* tag_box ======================================================== */
 
 .tag_box {
