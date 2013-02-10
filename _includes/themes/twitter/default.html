@@ -37,13 +37,23 @@
         </div>
       </div>
     </div>
+	 
+  <div style="clear:both;"></div>   
 
-    <div class="container">
-
+   <div class="container">
       <div class="content">
-        {{ content }}
+         <div class="contentNavi">
+            <ul class="sideNav">
+             {% assign pages_list = site.pages %}
+             {% assign group = 'navigation' %}
+             {% include JB/pages_list %}
+           </ul>
+      	</div>
+	<div class="contentMain"> 
+	 {{ content }}
+	</div>
       </div>
-
+      <div style="clear:both;border:5px solid #cccccc;margin:10px 0px;padding:0px;"></div>
       <footer>
 	<p>&copy; {{ site.author.name }} {{ site.time | date: '%Y' }}
           with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
