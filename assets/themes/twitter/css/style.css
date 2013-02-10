@@ -15,13 +15,25 @@ html, body {
 /* The white background content wrapper */
 
 .contentNavi{ width:20%; float:left; border:1px solid #cccccc;height:auto;margin:0px; padding:10px 0px;}
-.contentMain{float:left;border:1px solid #cccccc;width:70%;margin:0px 1% 10px 1%;padding:10px 1%;}
+.contentMain{float:left;border:1px solid #cccccc;width:70%;margin:0px 1%;padding:10px 1%;}
+
+/*For laster updated*/
+.lastUpdated{}
+.lastUpdated li{padding:5px 0px;list-style:none;}
+.lastUpdatedDate {border:0;background-color:#0099ff;padding:5px;color:#ffffff;}
+.lastUpdatedItem dt{border:0;padding:5px;}
+.lastUpdatedTitle{font-size:16px;padding:5px;}
 
 .content {
   background-color: #fff;
   padding: 20px;
-  margin: 0; /* negative indent the amount of the padding to maintain the grid system */
+  margin: 0px 0px; 
+  clear:both;
+  overflow:hidden;
+  height:auto;
 }
+.page-content-title{border-bottom:1px solid #cccccc;margin-bottom:10px;}
+.page-content-title h1{color:#3399ff;padding:10px 0px;margin:0px;}
 
 /* Page header tweaks */
 .page-header {

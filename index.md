@@ -7,11 +7,13 @@ tagline: Focus On LAMP Technologies
 
 ## Last updated
 
-<ul >
+<ul class="lastUpdated">
     {% for post in site.posts limit 4 %}
-    <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></li>
-        {{ post.content | strip_html | truncatewords:75}}<br>
-            <a href="{{ post.url }}">Read more...</a><br><br>
+     <li><dl class="lastUpdatedItem">
+	<dt><span class="lastUpdatedDate">{{ post.date | date_to_string }}</span>  <a class="lastUpdatedTitle"  href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></dt>
+       <dd> {{ post.content | strip_html | truncatewords:75}}
+            <a href="{{ post.url }}">Read more...</a></dd>
+      </dl></li>
     {% endfor %}
 </ul>
 
