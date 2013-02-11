@@ -11,5 +11,6 @@ http://lampnode.github.com/archive.html
 http://lampnode.github.com/tags.html
 
 http://lampnode.github.com/Linux/2013/02/11/install-touchpad-indicator-in-ubuntu-1204
+http://lampnode.github.com/Linux/2013/02/11/harden-ssh-access-on-centos-6
 http://lampnode.github.com/Github/2013/02/05/install-github-and-jekyll-on-ubuntu
 http://lampnode.github.com/lessons/2011/12/29/jekyll-introduction

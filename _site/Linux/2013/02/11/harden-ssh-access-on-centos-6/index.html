@@ -3,8 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>在Ubuntu上安装Github和Jekyll | LAMPNODE | Focus On LAMP Technologies</title>
-    <meta name="description" content="Install github and jekyll on Ubuntu 12.04 or later">
+    <title>Harden SSH access on CentOS 6 | LAMPNODE | Focus On LAMP Technologies</title>
+    <meta name="description" content="">
     <meta name="author" content="Robert  Chain">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -195,13 +195,13 @@
 	<div class="contentMain"> 
 	 
 <div class="page-content-title">
-  <h1>在Ubuntu上安装Github和Jekyll</h1>
-     <small>Install Github and jekyll on Ubuntu</small> 
+  <h1>Harden SSH access on CentOS 6</h1>
+   
 </div>
 
 <div class="page-content-info">
     <h4>Published</h4>
-    <div class="date"><span>05 February 2013</span></div>
+    <div class="date"><span>11 February 2013</span></div>
 
   
     <h4>Tags</h4>
@@ -212,7 +212,7 @@
 
   
      
-    	<li><a href="/tags.html#Ubuntu-ref">Ubuntu <span>2</span></a></li>
+    	<li><a href="/tags.html#CentOs-ref">CentOs <span>1</span></a></li>
     
   
 
@@ -225,60 +225,111 @@
 
 <div class="row">
   <div class="span8">
-    <p>Jekyll is a Git compatible static site generator that can be installed on Ubuntu.</p>
+    <p>In a few simple steps, you will be able to diminish risks of unauthorized ssh accesses Your ssh settings can be found in &#8220;/etc/ssh/sshd_config&#8221;, this is where you will have to modify the configuration settings below.</p>
 
-<h2 id='installation'>Installation</h2>
+<p>Note: The config file is NOT &#8220;/etc/ssh/ssh_config&#8221;</p>
 
-<h3 id='install_dependencies'>Install Dependencies</h3>
+<h2 id='change_your_ssh_port'>Change your ssh port</h2>
 
-<pre><code>$sudo apt-get install git ruby rubygems python-pygments
-$sudo gem install rdiscount</code></pre>
+<h3 id='modify_config'>Modify config</h3>
 
-<h3 id='install_jekyll'>Install Jekyll</h3>
+<p>By default, ssh run on port 22. You will need to change this default value to an arbitrary port number :</p>
 
-<p>In order to preview your blog locally you will need to install the Jekyll ruby gem. $sudo gem install jekyll</p>
+<pre><code>[root@server.com]#vim /etc/ssh/sshd_config</code></pre>
 
-<h3 id='install_rake'>Install rake</h3>
+<p>This will require ssh connexions to use the 60125 port</p>
 
-<pre><code>$sudo gem install rake</code></pre>
+<pre><code>Port 60128</code></pre>
 
-<h2 id='usages'>Usages</h2>
+<h2 id='setup_iptables'>Setup iptables</h2>
 
-<h3 id='start_jekyll'>Start Jekyll</h3>
+<pre><code>[root@server.com]# vim /etc/sysconfig/iptables</code></pre>
 
-<pre><code>$cd USERNAME.github.com
-$jekyll --server</code></pre>
+<p>Add the following to this file:</p>
 
-<p>Your can access this by http://loclaohost:4000</p>
+<pre><code>-A INPUT -m state --state NEW -m tcp -p tcp --dport 60128 -j ACCEPT</code></pre>
 
-<h3 id='for_rake'>For Rake</h3>
+<p>Restart and check the the iptables:</p>
 
-<h4 id='create_a_new_page'>Create a new page</h4>
+<pre><code>[root@server.com]# /etc/init.d/iptables restart
+[root@server.com]# iptables --list
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+ACCEPT     all  --  anywhere             anywhere            state RELATED,ESTABLISHED 
+ACCEPT     icmp --  anywhere             anywhere            
+ACCEPT     all  --  anywhere             anywhere            
+ACCEPT     tcp  --  anywhere             anywhere            state NEW tcp dpt:ssh 
+ACCEPT     tcp  --  anywhere             anywhere            state NEW tcp dpt:http 
+ACCEPT     tcp  --  anywhere             anywhere            state NEW tcp dpt:https 
+ACCEPT     tcp  --  anywhere             anywhere            state NEW tcp dpt:60128 
 
-<pre><code>$rake page name=&quot;about.md&quot;</code></pre>
+.......</code></pre>
 
-<h4 id='create_a_new_post'>Create a new post</h4>
+<h2 id='disable_root_login'>Disable root login</h2>
 
-<p>Begin a new post</p>
+<p>If the hacker still gets to connect to your ssh port, he will need authentication. Obvisously he will try the root account which grant maximum priviledge on the server, so you want to disable direct root ssh access.</p>
 
-<pre><code>$rake post title=&quot;Your post title&quot;</code></pre>
+<p>Find this line in your /etc/ssh/sshd_config and change its value to &#8220;no&#8221;</p>
 
-<p>The rake task automatically creates a file with properly formatted filename and YAML Front Matter. Make sure to specify your own title. By default, the date is the current date.</p>
+<pre><code>PermitRootLogin no</code></pre>
 
-<h2 id='commit_to_github'>Commit to GitHub</h2>
+<h2 id='disable_protocol_1'>Disable Protocol 1</h2>
 
-<pre><code>$git add .
-$git commit -m &quot;Add some content&quot;
-$git push origin master</code></pre>
+<p>SSH has two protocols it may use, protocol 1 and protocol 2. The older protocol 1 is less secure and should be disabled unless you know that you specifically require it. Look for the following line in the /etc/ssh/sshd_config file, uncomment it and amend as shown:</p>
+
+<pre><code># Protocol 2,1
+Protocol 2</code></pre>
+
+<h2 id='use_publicprivate_keys_for_authentication'>Use Public/Private Keys for Authentication</h2>
+
+<h3 id='clientcreate_publicprivate_key'>Client:Create public/private key</h3>
+
+<p>First, create a public/private key pair on the client that you will use to connect to the server:</p>
+
+<pre><code>[edwin@client]$ ssh-keygen -t rsa</code></pre>
+
+<p>This will create two files in your (hidden) ~/.ssh directory called id_rsa and id_rsa.pub. id_rsa is your private key and id_rsa.pub is your public key. Now set permissions on your private key:</p>
+
+<pre><code>[edwin@client]$ chmod 700 ~/.ssh
+[edwin@client]$ chmod 600 ~/.ssh/id_rsa </code></pre>
+
+<h3 id='serversetup_authorized_keys'>Server:Setup authorized_keys</h3>
+
+<p>Copy the public key (id_rsa.pub) to the server and install it to the authorized_keys list:</p>
+
+<pre><code>[root@server.com]# cat id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</code></pre>
+
+<p>Note: once you have imported the public key, you can delete it from the server.</p>
+
+<p>and finally set file permissions on the server:</p>
+
+<pre><code>[root@server.com]# chmod 700 ~/.ssh
+[root@server.com]# chmod 600 ~/.ssh/authorized_keys</code></pre>
+
+<p>The above permissions are required if StrictModes is set to yes in /etc/ssh/sshd_config (the default).</p>
+
+<h3 id='serversetup_sshd_config'>Server:Setup sshd_config</h3>
+
+<p>Once you have checked you can successfully login to the server using your public/private key pair, you can disable password authentication completely by adding the following setting to your /etc/ssh/sshd_config file:</p>
+
+<p>Disable password authentication forcing use of keys PasswordAuthentication no</p>
+
+<h3 id='serverrestart_sshd_service'>Server:Restart sshd service</h3>
+
+<pre><code>[root@server.com]# /etc/rc.d/init.d/sshd restart</code></pre>
+
+<h3 id='clienttest'>Client:Test</h3>
+
+<pre><code>[edwin@client]$ ssh root@server.com -p 60128</code></pre>
     <hr>
     <div class="pagination">
       <ul>
       
-        <li class="prev"><a href="/lessons/2011/12/29/jekyll-introduction" title="Jekyll Introduction">&larr; Previous</a></li>
+        <li class="prev"><a href="/Github/2013/02/05/install-github-and-jekyll-on-ubuntu" title="在Ubuntu上安装Github和Jekyll">&larr; Previous</a></li>
       
         <li><a href="/archive.html">Archive</a></li>
       
-        <li class="next"><a href="/Linux/2013/02/11/harden-ssh-access-on-centos-6" title="Harden SSH access on CentOS 6">Next &rarr;</a></li>
+        <li class="next"><a href="/Linux/2013/02/11/install-touchpad-indicator-in-ubuntu-1204" title="在Ubuntu 12.04上安装配置Touchpad Indicator">Next &rarr;</a></li>
       
       </ul>
     </div>

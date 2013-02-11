@@ -4,7 +4,7 @@
  <title>LAMPNode</title>
  <link href="http://lampnode.github.com/atom.xml" rel="self"/>
  <link href="http://lampnode.github.com"/>
- <updated>2013-02-11T22:26:14+08:00</updated>
+ <updated>2013-02-11T23:08:20+08:00</updated>
  <id>http://lampnode.github.com</id>
  <author>
    <name>Robert  Chain</name>
@@ -32,6 +32,109 @@
 &lt;h2 id='usage'&gt;Usage&lt;/h2&gt;
 
 &lt;p&gt;安装好的Touchpad-indicator会在Applications菜单里，一般是放在 Accessories 这个子菜单里.&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Harden SSH access on CentOS 6</title>
+   <link href="http://lampnode.github.com/Linux/2013/02/11/harden-ssh-access-on-centos-6"/>
+   <updated>2013-02-11T00:00:00+08:00</updated>
+   <id>http://lampnode.github.com/Linux/2013/02/11/harden-ssh-access-on-centos-6</id>
+   <content type="html">&lt;p&gt;In a few simple steps, you will be able to diminish risks of unauthorized ssh accesses Your ssh settings can be found in &amp;#8220;/etc/ssh/sshd_config&amp;#8221;, this is where you will have to modify the configuration settings below.&lt;/p&gt;
+
+&lt;p&gt;Note: The config file is NOT &amp;#8220;/etc/ssh/ssh_config&amp;#8221;&lt;/p&gt;
+
+&lt;h2 id='change_your_ssh_port'&gt;Change your ssh port&lt;/h2&gt;
+
+&lt;h3 id='modify_config'&gt;Modify config&lt;/h3&gt;
+
+&lt;p&gt;By default, ssh run on port 22. You will need to change this default value to an arbitrary port number :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@server.com]#vim /etc/ssh/sshd_config&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will require ssh connexions to use the 60125 port&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Port 60128&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id='setup_iptables'&gt;Setup iptables&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@server.com]# vim /etc/sysconfig/iptables&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Add the following to this file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-A INPUT -m state --state NEW -m tcp -p tcp --dport 60128 -j ACCEPT&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Restart and check the the iptables:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@server.com]# /etc/init.d/iptables restart
+[root@server.com]# iptables --list
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+ACCEPT     all  --  anywhere             anywhere            state RELATED,ESTABLISHED 
+ACCEPT     icmp --  anywhere             anywhere            
+ACCEPT     all  --  anywhere             anywhere            
+ACCEPT     tcp  --  anywhere             anywhere            state NEW tcp dpt:ssh 
+ACCEPT     tcp  --  anywhere             anywhere            state NEW tcp dpt:http 
+ACCEPT     tcp  --  anywhere             anywhere            state NEW tcp dpt:https 
+ACCEPT     tcp  --  anywhere             anywhere            state NEW tcp dpt:60128 
+
+.......&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id='disable_root_login'&gt;Disable root login&lt;/h2&gt;
+
+&lt;p&gt;If the hacker still gets to connect to your ssh port, he will need authentication. Obvisously he will try the root account which grant maximum priviledge on the server, so you want to disable direct root ssh access.&lt;/p&gt;
+
+&lt;p&gt;Find this line in your /etc/ssh/sshd_config and change its value to &amp;#8220;no&amp;#8221;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;PermitRootLogin no&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id='disable_protocol_1'&gt;Disable Protocol 1&lt;/h2&gt;
+
+&lt;p&gt;SSH has two protocols it may use, protocol 1 and protocol 2. The older protocol 1 is less secure and should be disabled unless you know that you specifically require it. Look for the following line in the /etc/ssh/sshd_config file, uncomment it and amend as shown:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Protocol 2,1
+Protocol 2&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id='use_publicprivate_keys_for_authentication'&gt;Use Public/Private Keys for Authentication&lt;/h2&gt;
+
+&lt;h3 id='clientcreate_publicprivate_key'&gt;Client:Create public/private key&lt;/h3&gt;
+
+&lt;p&gt;First, create a public/private key pair on the client that you will use to connect to the server:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[edwin@client]$ ssh-keygen -t rsa&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will create two files in your (hidden) ~/.ssh directory called id_rsa and id_rsa.pub. id_rsa is your private key and id_rsa.pub is your public key. Now set permissions on your private key:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[edwin@client]$ chmod 700 ~/.ssh
+[edwin@client]$ chmod 600 ~/.ssh/id_rsa &lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id='serversetup_authorized_keys'&gt;Server:Setup authorized_keys&lt;/h3&gt;
+
+&lt;p&gt;Copy the public key (id_rsa.pub) to the server and install it to the authorized_keys list:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@server.com]# cat id_rsa.pub &amp;gt;&amp;gt; ~/.ssh/authorized_keys&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note: once you have imported the public key, you can delete it from the server.&lt;/p&gt;
+
+&lt;p&gt;and finally set file permissions on the server:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@server.com]# chmod 700 ~/.ssh
+[root@server.com]# chmod 600 ~/.ssh/authorized_keys&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The above permissions are required if StrictModes is set to yes in /etc/ssh/sshd_config (the default).&lt;/p&gt;
+
+&lt;h3 id='serversetup_sshd_config'&gt;Server:Setup sshd_config&lt;/h3&gt;
+
+&lt;p&gt;Once you have checked you can successfully login to the server using your public/private key pair, you can disable password authentication completely by adding the following setting to your /etc/ssh/sshd_config file:&lt;/p&gt;
+
+&lt;p&gt;Disable password authentication forcing use of keys PasswordAuthentication no&lt;/p&gt;
+
+&lt;h3 id='serverrestart_sshd_service'&gt;Server:Restart sshd service&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@server.com]# /etc/rc.d/init.d/sshd restart&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id='clienttest'&gt;Client:Test&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;[edwin@client]$ ssh root@server.com -p 60128&lt;/code&gt;&lt;/pre&gt;</content>
  </entry>
  
  <entry>
