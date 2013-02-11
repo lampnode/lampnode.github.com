@@ -1,19 +1,25 @@
 ---
 layout: page
-title: "About"
+title: "关于本站"
 description: ""
 group: navigation
 ---
 {% include JB/setup %}
 
-## About Me
+## 关于作者 | About Me
 
 ### Robert L. Chain
-##### Senior PHP Engineer & Red Hat Certified Engineer
 
 ------
 
+#### Position 
+
+- PHP Engineer  
+- Red Hat Certified Engineer
+
 #### Summary
+
+<img src="/images/gravatar.png" width="200px" height="200px" style="float:right;padding:10px;border:1px solid #cccccc;margin:10px;" />
 
 Work 8 many years in IT domain experience, include development of web application software(PHP), linux software(JAVA). Successful project development, software architecture and Linux administrative experience(CentOs, Ubuntu). 
 
