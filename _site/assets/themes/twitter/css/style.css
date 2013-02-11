@@ -22,8 +22,8 @@ html, body {
         -moz-border-radius: 10px;
         border-radius: 10px;
 }
-.gravatar{margin:auto;padding:5px;}
-.authorName{font-size:22px;font-weight:bold;padding:10px 5px;}
+#qvCode{margin:auto;padding:0px;}
+#qvCode img{border:1px solid #ccccc;padding:3px;}
 .contentMain{background-color:#ffffff;float:left;border:1px solid #cccccc;width:760px;margin:0px 0px 0px 5px;padding:10px;
 	-webkit-border-radius: 10px;
         -moz-border-radius: 10px;
