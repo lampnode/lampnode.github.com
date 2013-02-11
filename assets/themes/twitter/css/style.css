@@ -47,8 +47,9 @@ html, body {
   overflow:hidden;
   height:auto;
 }
-.page-content-title{border-bottom:1px solid #cccccc;margin-bottom:10px;}
-.page-content-title h1{color:#3399ff;padding:10px 0px;margin:0px;}
+.page-content-title{margin-bottom:10px;border-bottom:2px dotted #555555;hight:auto;overflow:hidden;clear:both;}
+.page-content-title h1{color:#000000;padding:10px 5px;margin:0px;}
+.page-content-title h1 small{float:left;clear:both;}
 
 /* Page header tweaks */
 .page-header {
@@ -65,7 +66,20 @@ pre{color:green;}
   border: 0;
 }
 
-h2{border-left:5px solid #cccccc;padding:3px 0px 3px 10px; margin:5px 0px;}
+h1{padding:5px 0px 5px 10px; margin:5px 0px;
+        color:#ffffff;
+        border-radius:5px;
+}
+h2{padding:5px 0px 5px 10px; margin:5px 0px;
+	background:#336699;
+        color:#ffffff;
+  	border-radius:5px;
+}
+h3{padding:5px 0px 5px 10px; margin:5px 0px;
+        background:#FFE4C4;
+        color:#0000;
+        border-radius:5px;
+}
 /* tag_box ======================================================== */
 
 .tag_box {

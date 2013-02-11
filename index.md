@@ -12,7 +12,7 @@ tagline: Focus On LAMP Technologies
      <li><dl class="lastUpdatedItem">
 	<dt><span class="lastUpdatedDate">{{ post.date | date_to_string }}</span>  <a class="lastUpdatedTitle"  href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></dt>
        <dd> {{ post.content | strip_html | truncatewords:75}}
-            <a href="{{ post.url }}">Read more...</a></dd>
+            <a href="{{ post.url }}">Read More</a></dd>
       </dl></li>
     {% endfor %}
 </ul>

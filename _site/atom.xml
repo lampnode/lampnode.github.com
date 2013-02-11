@@ -4,7 +4,7 @@
  <title>LAMPNode</title>
  <link href="http://lampnode.github.com/atom.xml" rel="self"/>
  <link href="http://lampnode.github.com"/>
- <updated>2013-02-10T17:05:24+08:00</updated>
+ <updated>2013-02-11T10:24:45+08:00</updated>
  <id>http://lampnode.github.com</id>
  <author>
    <name>Robert  Chain</name>
@@ -13,7 +13,7 @@
 
  
  <entry>
-   <title>Install Github and jekyll on Ubuntu</title>
+   <title>在Ubuntu上安装Github和Jekyll</title>
    <link href="http://lampnode.github.com/Github/2013/02/05/install-github-and-jekyll-on-ubuntu"/>
    <updated>2013-02-05T00:00:00+08:00</updated>
    <id>http://lampnode.github.com/Github/2013/02/05/install-github-and-jekyll-on-ubuntu</id>
