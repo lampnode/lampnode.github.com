@@ -17,12 +17,15 @@ html, body {
 
 /* The white background content wrapper */
 
-.contentNavi{background-color:#ffffff;width:20%; float:left; border:1px solid #cccccc;height:auto;margin:0px; padding:10px 0px;
+.contentNavi{background-color:#ffffff;width:160px; float:left; border:1px solid #cccccc;height:auto;margin:0px; padding:10px 0px;
 	-webkit-border-radius: 10px;
         -moz-border-radius: 10px;
         border-radius: 10px;
 }
-.contentMain{background-color:#ffffff;float:left;border:1px solid #cccccc;width:70%;margin:0px 1%;padding:10px 1%;
+.gravatar{margin:auto;padding:5px;}
+.fullname{font-size:18px;font-weight:bold;padding:10px 5px;}
+
+.contentMain{background-color:#ffffff;float:left;border:1px solid #cccccc;width:760px;margin:0px 0px 0px 5px;padding:10px;
 	-webkit-border-radius: 10px;
         -moz-border-radius: 10px;
         border-radius: 10px;
