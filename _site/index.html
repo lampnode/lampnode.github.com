@@ -141,15 +141,15 @@
 
   
      
+    	<li><a href="/tags.html#Ubuntu-ref">Ubuntu <span>2</span></a></li>
+     
+    	<li><a href="/tags.html#tutorial-ref">tutorial <span>1</span></a></li>
+     
     	<li><a href="/tags.html#jekyll-ref">jekyll <span>1</span></a></li>
      
     	<li><a href="/tags.html#beginner-ref">beginner <span>1</span></a></li>
      
     	<li><a href="/tags.html#intro-ref">intro <span>1</span></a></li>
-     
-    	<li><a href="/tags.html#Ubuntu-ref">Ubuntu <span>1</span></a></li>
-     
-    	<li><a href="/tags.html#tutorial-ref">tutorial <span>1</span></a></li>
     
   
 
@@ -170,6 +170,10 @@
      
     	<li><a href="/categories.html#lessons-ref">
     		lessons <span>1</span>
+    	</a></li>
+     
+    	<li><a href="/categories.html#Linux-ref">
+    		Linux <span>1</span>
     	</a></li>
     
   
@@ -193,13 +197,33 @@
 <ul class='lastUpdated'>
     
      <li><dl class='lastUpdatedItem'>
-	<dt><span class='lastUpdatedDate'>05 Feb 2013</span>  <a class='lastUpdatedTitle' href='/Github/2013/02/05/install-github-and-jekyll-on-ubuntu'>在Ubuntu上安装Github和Jekyll</a></dt>
+	<dt><span class='lastUpdatedDate'>11 Feb 2013</span>  <a href='/Linux/2013/02/11/install-touchpad-indicator-in-ubuntu-1204' class='lastUpdatedTitle'>在Ubuntu 12.04上安装配置Touchpad Indicator</a></dt>
+       <dd> 在Thinkpad系列笔记本上安装Ubuntu 系统，必不可少的会遇到Touchpad 的问题，我是比较讨厌Trackpoint 跟它同时使用，所以安装Touchpad-indicator来管理它.
+
+Installation
+
+安装Touchpad-indicator需要使用的第三方的库：PPA, 安装方法如下
+
+sudo add-apt-repository ppa:atareao/atareao
+
+然后可以直接安装 touchpad indicator:
+
+sudo apt-get update &amp;&amp; sudo apt-get install touchpad-indicator
+
+Usage
+
+安装好的Touchpad-indicator会在Applications菜单里，一般是放在 Accessories 这个子菜单里.
+            <a href='/Linux/2013/02/11/install-touchpad-indicator-in-ubuntu-1204'>Read More</a></dd>
+      </dl></li>
+    
+     <li><dl class='lastUpdatedItem'>
+	<dt><span class='lastUpdatedDate'>05 Feb 2013</span>  <a href='/Github/2013/02/05/install-github-and-jekyll-on-ubuntu' class='lastUpdatedTitle'>在Ubuntu上安装Github和Jekyll</a></dt>
        <dd> Jekyll is a Git compatible static site generator that can be installed on Ubuntu. Installation Install Dependencies $sudo apt-get install git ruby rubygems python-pygments $sudo gem install rdiscount Install Jekyll In order to preview your blog locally you will need to install the Jekyll ruby gem. $sudo gem install jekyll Install rake $sudo gem install rake Usages Start Jekyll $cd USERNAME.github.com $jekyll --server Your can access this by http://loclaohost:4000 For Rake Create a new page...
             <a href='/Github/2013/02/05/install-github-and-jekyll-on-ubuntu'>Read More</a></dd>
       </dl></li>
     
      <li><dl class='lastUpdatedItem'>
-	<dt><span class='lastUpdatedDate'>29 Dec 2011</span>  <a class='lastUpdatedTitle' href='/lessons/2011/12/29/jekyll-introduction'>Jekyll Introduction</a></dt>
+	<dt><span class='lastUpdatedDate'>29 Dec 2011</span>  <a href='/lessons/2011/12/29/jekyll-introduction' class='lastUpdatedTitle'>Jekyll Introduction</a></dt>
        <dd> This Jekyll introduction will outline specifically what Jekyll is and why you would want to use it. Directly following the intro we&#8217;ll learn exactly how Jekyll does what it does. Overview What is Jekyll? Jekyll is a parsing engine bundled as a ruby gem used to build static websites from dynamic components such as templates, partials, liquid code, markdown, etc. Jekyll is known as &#8220;a simple, blog aware, static site generator&#8221;. Examples This website is...
             <a href='/lessons/2011/12/29/jekyll-introduction'>Read More</a></dd>
       </dl></li>
@@ -225,6 +249,8 @@
 <hr />
 <h2 id='posts_list'>Posts List</h2>
 <ul class='posts'>
+  
+    <li><span>11 Feb 2013</span> &raquo; <a href='/Linux/2013/02/11/install-touchpad-indicator-in-ubuntu-1204'>在Ubuntu 12.04上安装配置Touchpad Indicator</a></li>
   
     <li><span>05 Feb 2013</span> &raquo; <a href='/Github/2013/02/05/install-github-and-jekyll-on-ubuntu'>在Ubuntu上安装Github和Jekyll</a></li>
   
