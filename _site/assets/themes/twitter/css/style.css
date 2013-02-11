@@ -40,6 +40,13 @@ html, body {
 .lastUpdatedItem dt{;padding:5px;}
 .lastUpdatedTitle{font-size:16px;padding:5px;}
 
+footer{clear:both;border-top:5px solid #cccccc;margin:10px 0px;padding:10px 0px;}
+.footerLogo{width:120px;float:left;border-right:1px solid #cccccc;padding:0px 10px 0px 0px;margin:0px;}
+.footerBox{border:0;float:left;width:800px;height:auto;padding:0px 0px 0px 10px;margin:0px;}
+.footerBox .footBoxItems{border:0;float:left;text-align:left;clear:both;}
+#footerNaviList{border:0;list-style:none;padding:0px;margin:0px;clear:both;}
+#footerNaviList li{float:left;list-style:none;padding:0px 10px 0px 0px;margin:0px;}
+#footerNaviList .active{color:#990066;}
 .content {
   padding: 20px;
   margin: 0px 0px; 
@@ -71,7 +78,7 @@ h1{padding:5px 0px 5px 10px; margin:5px 0px;
         border-radius:5px;
 }
 h2{padding:5px 0px 5px 10px; margin:5px 0px;
-	background:#336699;
+	background:#5F9EA0;
         color:#ffffff;
   	border-radius:5px;
 }
