@@ -43,7 +43,7 @@ h3{padding:5px 0px 5px 10px; margin:5px 0px;
         -moz-border-radius: 10px;
         border-radius: 10px;
 }
-.siteRss img{padding:5px;margin:0 auto;}
+.siteRss img{padding:0px 10px;border-left:1px solid #cccccc; margin:0;}
 .contentNaviBox{margin:auto;padding:0px 0px 10px 0px;border:0}
 .contentNaviBox .contentNaviBoxTitle{font-size:16px;padding:5px;margin:5px;border-bottom:2px solid #cccccc;}
 .contentMain{background-color:#ffffff;float:left;border:1px solid #cccccc;width:760px;margin:0px 0px 0px 5px;padding:0px 10px;
@@ -69,13 +69,15 @@ h3{padding:5px 0px 5px 10px; margin:5px 0px;
 .lastUpdatedItem dd{line-height:1.5em;}
 .lastUpdatedTitle{font-size:16px;padding:5px;}
 
-footer{clear:both;border-top:5px solid #cccccc;margin:10px 0px;padding:10px 0px;}
-.footerLogo{width:120px;float:left;border-right:0;padding:0px 10px 0px 0px;margin:0px;}
+footer{clear:both;border:0px;margin:10px 0px;padding:0px;}
+#footerContent{border-top:5px solid #cccccc;clear:both;overflow:hidden;height:auto;padding:10px 0px;}
+.footerLogo{width:120px;float:left;border-right:0;padding:10px 10px 0px 0px;margin:0px;}
 .footerBox{border:0;float:left;width:800px;height:auto;padding:0px 0px 0px 10px;margin:0px;}
 .footerBox .footBoxItems{border:0;float:left;text-align:left;clear:both;}
 #footerNaviList{border:0;list-style:none;padding:0px;margin:0px;clear:both;}
 #footerNaviList li{float:left;list-style:none;padding:0px 10px 0px 0px;margin:0px;}
 #footerNaviList .active{color:#990066;}
+#footerNaviBnt{float:right;border:0;padding:0px;margin:0px;}
 .content {
   padding: 20px;
   margin: 0px 0px; 

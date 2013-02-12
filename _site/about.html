@@ -23,13 +23,11 @@
     <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png">
 	--> 
  </head>
-
   <body>
-
     <div class="navbar">
       <div class="navbar-inner">
         <div class="container">
-          <a class="brand" href="/"> &lt;? LAMPNode</a>
+          <a class="brand" href="/" name="top"> &lt;? LAMPNode</a>
           <ul class="nav">
             
             
@@ -186,8 +184,12 @@
 	      	</ul>
 	   </div>
 	  <div class="contentNaviBox">
-        	<a href="/atom.xml" title="ATOM" class="siteRss"><img src="/images/rss.png" /></a>
-	   </div>
+	  	<p class="contentNaviBoxTitle">链接 | Links</p> 
+	  	<ul>
+			<li><a href="http://www.php.net">PHP.net</a></li>
+			<li><a href="http://www.centos.org">Centos.org</a></li>
+		</ul>   
+	  </div>
 	</div>
 	<div class="contentMain"> 
 	 
@@ -253,8 +255,13 @@
       </div>
       
       <footer>
-         <div class="footerLogo">
-		<img src="/images/lampnode-code.png" width="90px" height="90px" style="background-color:#cccccc;border:1px solid #555555;padding:10px;margin:0px 10px"/>
+        <ul id="footerNaviBnt">
+                                <a href="/"><img src="/images/bnt_home.gif"/></a>
+                                <a href="#top"><img src="/images/bnt_top.gif"/></a>
+                        </ul>
+        <div id="footerContent"> 
+	 <div class="footerLogo">
+		<img src="/images/lampnode-code-small.png" width="90px" height="90px" style="background-color:#cccccc;border:1px solid #555555;padding:5px;margin:0px 10px"/>
 	 </div>
          <div class="footerBox">
             	<p class="footBoxItems">
@@ -328,11 +335,13 @@
 
 
 
+				<li> <a href="/atom.xml" title="ATOM" class="siteRss"><img src="/images/atom.png" /></a></li>
 			</ul>
            	</p>
 	   	<p class="footBoxItems">Copyleft 2013 for Robert  Chain, content is available under <a href="http://www.gnu.org/copyleft/fdl.html" class="external ">GNU Free Documentation License 1.3 or later</a>.With help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a> and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a></p>
     	   	<p class="footBoxItems"><img src="/images/gnu-fdl.png" /></p> 
-	</div>     
+	</div>
+     </div>     
 </footer>
 
     </div> <!-- /container -->
