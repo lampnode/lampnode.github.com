@@ -65,34 +65,33 @@
    <div class="container">
       <div class="content">
          <div class="contentNavi">
-           <a href="/atom.xml" title="ATOM" class="siteRss"><img src="/images/rss.png" /></a>
-	   <h3>文档标签</h3>
-           <ul class="tag_box inline">
-  		{% assign tags_list = site.tags %}
-  		{% include JB/tags_list %}
-	   </ul>
-	   <h3>文章类别</h3>
-      	      <ul class="tag_box inline">
-  		{% assign categories_list = site.categories %}
-                {% include JB/categories_list %}
-	      </ul>
-  	   <h3>常用开发工具</h3>
-	      <ul>
-		<li><a href="/library/colors.html">Web Colors Dic</a></li>
-	        <li><a href="/library/github.html">GitHub Guide</a></li>
-	     </ul>
-           <h3>本站二维码</h3>
-           <div id="qvCode">
-                <img src="/images/lampnode-code.png" width="150px" height="150px"/>
-           </div>
-        </div>
+	   <div class="contentNaviBox">
+		<p class="contentNaviBoxTitle">文档标签</p>
+           	<ul class="tag_box inline">
+  			{% assign tags_list = site.tags %}
+  			{% include JB/tags_list %}
+	   	</ul>
+	  </div>
+	   <div class="contentNaviBox">
+		<p class="contentNaviBoxTitle">文章类别</p>
+      	      	<ul class="tag_box inline">
+  			{% assign categories_list = site.categories %}
+                	{% include JB/categories_list %}
+	      	</ul>
+	   </div>
+	  <div class="contentNaviBox">
+        	<a href="/atom.xml" title="ATOM" class="siteRss"><img src="/images/rss.png" /></a>
+	   </div>
+	</div>
 	<div class="contentMain"> 
 	 {{ content }}
 	</div>
       </div>
       
       <footer>
-         <div class="footerLogo"><img src="/images/footer-logo.png" /></div>
+         <div class="footerLogo">
+		<img src="/images/lampnode-code.png" width="90px" height="90px" style="background-color:#cccccc;border:1px solid #555555;padding:10px;margin:0px 10px"/>
+	 </div>
          <div class="footerBox">
             	<p class="footBoxItems">
 	    		<ul id="footerNaviList">

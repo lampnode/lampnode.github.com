@@ -5,6 +5,27 @@ html, body {
   background-repeat: repeat-x;
   background-position: 0 40px;
 }
+
+pre{color:green;}
+.topbar .btn {
+  border: 0;
+}
+
+h1{padding:5px 0px 5px 10px; margin:5px 0px;
+        color:#000000;
+        border-radius:5px;
+}
+h2{padding:5px 0px 5px 10px; margin:20px 0px 10px 0px ;
+        background:#046D8B;
+        color:#ffffff;
+        border-radius:5px;
+}
+h3{padding:5px 0px 5px 10px; margin:5px 0px;
+        background:#FFE4C4;
+        color:#0000;
+        border-radius:5px;
+}
+
 .navbar {
   margin-bottom: 0;
 }
@@ -23,28 +44,33 @@ html, body {
         border-radius: 10px;
 }
 .siteRss img{padding:5px;margin:0 auto;}
-#qvCode{margin:auto;padding:0px;}
-#qvCode img{border:1px solid #ccccc;padding:3px;}
-.contentMain{background-color:#ffffff;float:left;border:1px solid #cccccc;width:760px;margin:0px 0px 0px 5px;padding:10px;
+.contentNaviBox{margin:auto;padding:0px 0px 10px 0px;border:0}
+.contentNaviBox .contentNaviBoxTitle{font-size:16px;padding:5px;margin:5px;border-bottom:2px solid #cccccc;}
+.contentMain{background-color:#ffffff;float:left;border:1px solid #cccccc;width:760px;margin:0px 0px 0px 5px;padding:0px 10px;
 	-webkit-border-radius: 10px;
         -moz-border-radius: 10px;
         border-radius: 10px;
 }
-
+.contentMainBox{width:48%;float:left;margin:0px 1%;}
+.contentMainBoxItem{width:98%;clear:both;border:0;height:auto;overflow:hidden;padding:10px 1%;margin:0px;}
+.contentMainBoxItem ul{list-style:none;padding:5px;margin:0px;}
+.contentMainBoxItem ul li{list-style:none;}
 /*For laster updated*/
 .lastUpdated{padding:0px;margin-left:5px;}
 .lastUpdated li{padding:5px 0px;list-style:none;margin:0px;}
-.lastUpdatedDate {border:0;background-color:#0099ff;padding:3px;color:#ffffff;
+.lastUpdatedDate {border:0;background-color:#800000;padding:3px 5px;color:#ffffff;
 	-webkit-border-radius: 5px;
   	-moz-border-radius: 5px;
   	border-radius: 5px;
+        margin:5px 0px;
 }
 .lastUpdatedItem {border:1px solid #cccccc;padding:0px 3px;margin:0px;}
-.lastUpdatedItem dt{;padding:5px;}
+.lastUpdatedItem dt{;padding:5px;line-height:1.5em;}
+.lastUpdatedItem dd{line-height:1.5em;}
 .lastUpdatedTitle{font-size:16px;padding:5px;}
 
 footer{clear:both;border-top:5px solid #cccccc;margin:10px 0px;padding:10px 0px;}
-.footerLogo{width:120px;float:left;border-right:1px solid #cccccc;padding:0px 10px 0px 0px;margin:0px;}
+.footerLogo{width:120px;float:left;border-right:0;padding:0px 10px 0px 0px;margin:0px;}
 .footerBox{border:0;float:left;width:800px;height:auto;padding:0px 0px 0px 10px;margin:0px;}
 .footerBox .footBoxItems{border:0;float:left;text-align:left;clear:both;}
 #footerNaviList{border:0;list-style:none;padding:0px;margin:0px;clear:both;}
@@ -71,25 +97,6 @@ footer{clear:both;border-top:5px solid #cccccc;margin:10px 0px;padding:10px 0px;
 .sideNav{list-style:none;}
 .sideNav .active{color:#990066;}
 
-pre{color:green;}
-.topbar .btn {
-  border: 0;
-}
-
-h1{padding:5px 0px 5px 10px; margin:5px 0px;
-        color:#000000;
-        border-radius:5px;
-}
-h2{padding:5px 0px 5px 10px; margin:20px 0px 10px 0px ;
-	background:#046D8B;
-        color:#ffffff;
-  	border-radius:5px;
-}
-h3{padding:5px 0px 5px 10px; margin:5px 0px;
-        background:#FFE4C4;
-        color:#0000;
-        border-radius:5px;
-}
 /* tag_box ======================================================== */
 
 .tag_box {

@@ -132,24 +132,24 @@
    <div class="container">
       <div class="content">
          <div class="contentNavi">
-           <a href="/atom.xml" title="ATOM" class="siteRss"><img src="/images/rss.png" /></a>
-	   <h3>文档标签</h3>
-           <ul class="tag_box inline">
-  		
-  		
+	   <div class="contentNaviBox">
+		<p class="contentNaviBoxTitle">文档标签</p>
+           	<ul class="tag_box inline">
+  			
+  			
 
 
   
      
-    	<li><a href="/tags.html#Ubuntu-ref">Ubuntu <span>2</span></a></li>
+    	<li><a href="/tags.html#beginner-ref">beginner <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#CentOs-ref">CentOs <span>1</span></a></li>
      
     	<li><a href="/tags.html#tutorial-ref">tutorial <span>1</span></a></li>
      
     	<li><a href="/tags.html#jekyll-ref">jekyll <span>1</span></a></li>
      
-    	<li><a href="/tags.html#CentOs-ref">CentOs <span>1</span></a></li>
-     
-    	<li><a href="/tags.html#beginner-ref">beginner <span>1</span></a></li>
+    	<li><a href="/tags.html#Ubuntu-ref">Ubuntu <span>2</span></a></li>
      
     	<li><a href="/tags.html#intro-ref">intro <span>1</span></a></li>
     
@@ -157,14 +157,20 @@
 
 
 
-	   </ul>
-	   <h3>文章类别</h3>
-      	      <ul class="tag_box inline">
-  		
-                
+	   	</ul>
+	  </div>
+	   <div class="contentNaviBox">
+		<p class="contentNaviBoxTitle">文章类别</p>
+      	      	<ul class="tag_box inline">
+  			
+                	
 
 
   
+     
+    	<li><a href="/categories.html#Linux-ref">
+    		Linux <span>2</span>
+    	</a></li>
      
     	<li><a href="/categories.html#Github-ref">
     		Github <span>1</span>
@@ -173,34 +179,27 @@
     	<li><a href="/categories.html#lessons-ref">
     		lessons <span>1</span>
     	</a></li>
-     
-    	<li><a href="/categories.html#Linux-ref">
-    		Linux <span>2</span>
-    	</a></li>
     
   
 
 
-	      </ul>
-  	   <h3>常用开发工具</h3>
-	      <ul>
-		<li><a href="/library/colors.html">Web Colors Dic</a></li>
-	        <li><a href="/library/github.html">GitHub Guide</a></li>
-	     </ul>
-           <h3>本站二维码</h3>
-           <div id="qvCode">
-                <img src="/images/lampnode-code.png" width="150px" height="150px"/>
-           </div>
-        </div>
+	      	</ul>
+	   </div>
+	  <div class="contentNaviBox">
+        	<a href="/atom.xml" title="ATOM" class="siteRss"><img src="/images/rss.png" /></a>
+	   </div>
+	</div>
 	<div class="contentMain"> 
 	 
 <div class="page-oontent">
-    <h2 id='last_updated'>Last updated</h2>
+    <div class='contentMainBox'>
+<h2>最新日志 | Updated</h2>
 <ul class='lastUpdated'>
     
      <li><dl class='lastUpdatedItem'>
-	<dt><span class='lastUpdatedDate'>11 Feb 2013</span>  <a href='/Linux/2013/02/11/install-touchpad-indicator-in-ubuntu-1204' class='lastUpdatedTitle'>在Ubuntu 12.04上安装配置Touchpad Indicator</a></dt>
-       <dd> 在Thinkpad系列笔记本上安装Ubuntu 系统，必不可少的会遇到Touchpad 的问题，我是比较讨厌Trackpoint 跟它同时使用，所以安装Touchpad-indicator来管理它.
+       <dt> <a class='lastUpdatedTitle' href='/Linux/2013/02/11/install-touchpad-indicator-in-ubuntu-1204'>在Ubuntu 12.04上安装配置Touchpad Indicator</a></dt>
+       <dd> <span class='lastUpdatedDate'>11 Feb 2013</span> 
+            在Thinkpad系列笔记本上安装Ubuntu 系统，必不可少的会遇到Touchpad 的问题，我是比较讨厌Trackpoint 跟它同时使用，所以安装Touchpad-indicator来管理它.
 
 Installation
 
@@ -219,54 +218,64 @@ Usage
       </dl></li>
     
      <li><dl class='lastUpdatedItem'>
-	<dt><span class='lastUpdatedDate'>11 Feb 2013</span>  <a href='/Linux/2013/02/11/harden-ssh-access-on-centos-6' class='lastUpdatedTitle'>Harden SSH access on CentOS 6</a></dt>
-       <dd> In a few simple steps, you will be able to diminish risks of unauthorized ssh accesses Your ssh settings can be found in &#8220;/etc/ssh/sshd_config&#8221;, this is where you will have to modify the configuration settings below. Note: The config file is NOT &#8220;/etc/ssh/ssh_config&#8221; Change your ssh port Modify config By default, ssh run on port 22. You will need to change this default value to an arbitrary port number : [root@server.com]#vim /etc/ssh/sshd_config This will require...
+       <dt> <a class='lastUpdatedTitle' href='/Linux/2013/02/11/harden-ssh-access-on-centos-6'>Harden SSH access on CentOS 6</a></dt>
+       <dd> <span class='lastUpdatedDate'>11 Feb 2013</span> 
+            In a few simple steps, you will be able to diminish risks of unauthorized ssh accesses Your ssh settings can be found in &#8220;/etc/ssh/sshd_config&#8221;, this is where you will have to modify the configuration settings below. Note: The config file is NOT &#8220;/etc/ssh/ssh_config&#8221; Change your ssh port Modify config By default, ssh run on port 22. You will need to change this default value to an arbitrary port number : [root@server.com]#vim /etc/ssh/sshd_config This will require...
             <a href='/Linux/2013/02/11/harden-ssh-access-on-centos-6'>Read More</a></dd>
       </dl></li>
     
      <li><dl class='lastUpdatedItem'>
-	<dt><span class='lastUpdatedDate'>05 Feb 2013</span>  <a href='/Github/2013/02/05/install-github-and-jekyll-on-ubuntu' class='lastUpdatedTitle'>在Ubuntu上安装Github和Jekyll</a></dt>
-       <dd> Jekyll is a Git compatible static site generator that can be installed on Ubuntu. Installation Install Dependencies $sudo apt-get install git ruby rubygems python-pygments $sudo gem install rdiscount Install Jekyll In order to preview your blog locally you will need to install the Jekyll ruby gem. $sudo gem install jekyll Install rake $sudo gem install rake Usages Start Jekyll $cd USERNAME.github.com $jekyll --server Your can access this by http://loclaohost:4000 For Rake Create a new page...
+       <dt> <a class='lastUpdatedTitle' href='/Github/2013/02/05/install-github-and-jekyll-on-ubuntu'>在Ubuntu上安装Github和Jekyll</a></dt>
+       <dd> <span class='lastUpdatedDate'>05 Feb 2013</span> 
+            Jekyll is a Git compatible static site generator that can be installed on Ubuntu. Installation Install Dependencies $sudo apt-get install git ruby rubygems python-pygments $sudo gem install rdiscount Install Jekyll In order to preview your blog locally you will need to install the Jekyll ruby gem. $sudo gem install jekyll Install rake $sudo gem install rake Usages Start Jekyll $cd USERNAME.github.com $jekyll --server Your can access this by http://loclaohost:4000 For Rake Create a new page...
             <a href='/Github/2013/02/05/install-github-and-jekyll-on-ubuntu'>Read More</a></dd>
       </dl></li>
     
      <li><dl class='lastUpdatedItem'>
-	<dt><span class='lastUpdatedDate'>29 Dec 2011</span>  <a href='/lessons/2011/12/29/jekyll-introduction' class='lastUpdatedTitle'>Jekyll Introduction</a></dt>
-       <dd> This Jekyll introduction will outline specifically what Jekyll is and why you would want to use it. Directly following the intro we&#8217;ll learn exactly how Jekyll does what it does. Overview What is Jekyll? Jekyll is a parsing engine bundled as a ruby gem used to build static websites from dynamic components such as templates, partials, liquid code, markdown, etc. Jekyll is known as &#8220;a simple, blog aware, static site generator&#8221;. Examples This website is...
+       <dt> <a class='lastUpdatedTitle' href='/lessons/2011/12/29/jekyll-introduction'>Jekyll Introduction</a></dt>
+       <dd> <span class='lastUpdatedDate'>29 Dec 2011</span> 
+            This Jekyll introduction will outline specifically what Jekyll is and why you would want to use it. Directly following the intro we&#8217;ll learn exactly how Jekyll does what it does. Overview What is Jekyll? Jekyll is a parsing engine bundled as a ruby gem used to build static websites from dynamic components such as templates, partials, liquid code, markdown, etc. Jekyll is known as &#8220;a simple, blog aware, static site generator&#8221;. Examples This website is...
             <a href='/lessons/2011/12/29/jekyll-introduction'>Read More</a></dd>
       </dl></li>
     
-</ul><hr />
-<h2 id='software_recommendations'>Software Recommendations</h2>
+</ul>
+</div><div class='contentMainBox'>
 
+<div class='contentMainBoxItem' style='margin-top:20px;background-color:#6495ED;color:#ffffff;border-radius: 10px'>
+	<p style='clear:both;font-size:26px;color:#ffffff;padding:5px 10px;'>欢迎来到LAMPNode!</p>
+        <p style='clear:both;font-size:18px;color:#ffffff;padding:0px 10px;'>Focus On LAMP technologies</p>
+	<img width='120px' height='120px' src='/images/gravatar.png' style='float:left;background-color:#cccccc;border:1px solid #555555;padding:5px;margin:0px 5px' />
+	<ul>
+		<li style='font-size:22px;padding-bottom:10px;'>Robert Chain <a href='/atom.xml'><img src='/images/radio_icon.png' /></a></li>
+                <li>Beijing, China</li>
+                <li>Software Engineer</li>
+		<li>http://www.lampnode.com</li>
+                <li>LAMPNode Since Fed, 2013</li>
+                
+	</ul>
+</div>
+<div class='contentMainBoxItem'>
+<h3>软件推荐 | Softwares </h3>
 <ul>
-<li>Mail: Thunderbird</li>
-
-<li>File Management: VisualSVN Server - FileZilla</li>
-
-<li>SSH: PuTTY - WinSCP</li>
-
-<li>Documents Management: Evernote</li>
-
-<li>System: grub4dos | ext2explore</li>
-
-<li>IDE: Eclipse</li>
-
-<li>Server: Tomcat Httpd</li>
+<li> <b>Mail:</b> Thunderbird</li>
+<li> <b>File Management:</b> VisualSVN Server - FileZilla</li>
+<li> <b>SSH: </b>PuTTY - WinSCP</li>
+<li> <b>Documents Management:</b> Evernote</li>
+<li> <b>System:</b> grub4dos | ext2explore</li>
+<li> <b>IDE: </b>Eclipse</li>
+<li> <b>Server:</b> Tomcat Httpd</li>
 </ul>
-<hr />
-<h2 id='posts_list'>Posts List</h2>
-<ul class='posts'>
-  
-    <li><span>11 Feb 2013</span> &raquo; <a href='/Linux/2013/02/11/install-touchpad-indicator-in-ubuntu-1204'>在Ubuntu 12.04上安装配置Touchpad Indicator</a></li>
-  
-    <li><span>11 Feb 2013</span> &raquo; <a href='/Linux/2013/02/11/harden-ssh-access-on-centos-6'>Harden SSH access on CentOS 6</a></li>
-  
-    <li><span>05 Feb 2013</span> &raquo; <a href='/Github/2013/02/05/install-github-and-jekyll-on-ubuntu'>在Ubuntu上安装Github和Jekyll</a></li>
-  
-    <li><span>29 Dec 2011</span> &raquo; <a href='/lessons/2011/12/29/jekyll-introduction'>Jekyll Introduction</a></li>
-  
+</div>
+
+<div class='contentMainBoxItem'>
+<h3>开发工具 | Development</h3>
+<ul>
+	<li><b>Web Design:</b> <a href='/library/colors.html'>Web Colors Dic</a></li>
+	<li><b>Code Management:</b> <a href='/library/github.html'>GitHub Guide</a></li>
 </ul>
+</div>
+
+</div>
 </div>
 
 
@@ -274,7 +283,9 @@ Usage
       </div>
       
       <footer>
-         <div class="footerLogo"><img src="/images/footer-logo.png" /></div>
+         <div class="footerLogo">
+		<img src="/images/lampnode-code.png" width="90px" height="90px" style="background-color:#cccccc;border:1px solid #555555;padding:10px;margin:0px 10px"/>
+	 </div>
          <div class="footerBox">
             	<p class="footBoxItems">
 	    		<ul id="footerNaviList">
