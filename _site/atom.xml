@@ -4,13 +4,195 @@
  <title>LAMPNode</title>
  <link href="http://lampnode.github.com/atom.xml" rel="self"/>
  <link href="http://lampnode.github.com"/>
- <updated>2013-02-12T15:07:14+08:00</updated>
+ <updated>2013-02-12T15:40:46+08:00</updated>
  <id>http://lampnode.github.com</id>
  <author>
    <name>Robert  Chain</name>
    <email>robert.c@lampnode.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Using Rsync with SSH to backup data</title>
+   <link href="http://lampnode.github.com/Linux/2013/02/12/using-rsync-with-ssh-to-backup-data"/>
+   <updated>2013-02-12T00:00:00+08:00</updated>
+   <id>http://lampnode.github.com/Linux/2013/02/12/using-rsync-with-ssh-to-backup-data</id>
+   <content type="html">&lt;p&gt;This document covers using cron, ssh, and rsync to backup data.You will need these packages installed:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;rsync&lt;/li&gt;
+
+&lt;li&gt;openssh&lt;/li&gt;
+
+&lt;li&gt;cron&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id='commands'&gt;commands&lt;/h2&gt;
+
+&lt;h3 id='without_delete_flag'&gt;Without delete flag&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;edwin@easydocs:~$ rsync -avz -e ssh remoteuser@remotehost:/remote/dir /local/dir/ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id='with_delete_flag'&gt;With delete flag&lt;/h3&gt;
+
+&lt;p&gt;By default, rsync will only copy files and directories, but not remove them from the destination copy when they are removed from the source. To keep the copies exact, include the &amp;#8211;delete flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;edwin@easydocs:~$ rsync -ave ssh  --delete remoteuser@remotehost:/remote/dir /local/dir/ &lt;/code&gt;&lt;/pre&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Setup static ip on CentOS 6</title>
+   <link href="http://lampnode.github.com/Linux/2013/02/12/setup-static-ip-on-centos-6"/>
+   <updated>2013-02-12T00:00:00+08:00</updated>
+   <id>http://lampnode.github.com/Linux/2013/02/12/setup-static-ip-on-centos-6</id>
+   <content type="html">&lt;h2 id='test_context'&gt;Test Context&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;CentOs 6.3&lt;/li&gt;
+
+&lt;li&gt;Localhost IP:192.168.0.7&lt;/li&gt;
+
+&lt;li&gt;Gateway: 192.168.0.1&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id='setup'&gt;Setup&lt;/h2&gt;
+
+&lt;h3 id='ifcfgeth0'&gt;ifcfg-eth0&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@edwin] vim /etc/sysconfig/network-scripts/ifcfg-eth0&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The config example is the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;DEVICE=eth0
+NM_CONTROLLED=yes
+ONBOOT=yes
+BOOTPROTO=static
+HWADDR=00:21:85:12:57:06
+TYPE=Ethernet
+UUID=6a129ba5-6430-40cc-b863-882ec2f3d34d
+IPADDR=192.168.0.7
+NETMASK=255.255.255.0
+GATEWAY=192.168.0.1
+USERCTL=no
+DNS1=8.8.8.8
+DNS2=8.8.4.4&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id='resolvconf'&gt;resolv.conf&lt;/h3&gt;
+
+&lt;p&gt;Note:If your have add DNS1 (and DNS2) in the ifcif-eth0; this step could skip.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@edwin]vim /etc/resolv.conf&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The config example is the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;nameserver 8.8.8.8
+nameserver 8.8.4.4&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id='networkoption'&gt;network(Option)&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@edwin]vim /etc/sysconfig/network&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The config example is the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;NETWORKING=yes
+NETWORKING_IPV6=no
+HOSTNAME=CentOS&lt;/code&gt;&lt;/pre&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Minimal Services on CentOS</title>
+   <link href="http://lampnode.github.com/Linux/2013/02/12/minimal-services-on-centos"/>
+   <updated>2013-02-12T00:00:00+08:00</updated>
+   <id>http://lampnode.github.com/Linux/2013/02/12/minimal-services-on-centos</id>
+   <content type="html">&lt;p&gt;This will improve the performance of a system by disabling unneeded services. Another benefit is reduced hardware requirements for your server.&lt;/p&gt;
+
+&lt;h2 id='methodology_of_minimal_services'&gt;Methodology of Minimal Services&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Perform minimal OS installations&lt;/li&gt;
+
+&lt;li&gt;Install additional software as needed after installation&lt;/li&gt;
+
+&lt;li&gt;Minimal installations reduce the number of packages requiring updates&lt;/li&gt;
+
+&lt;li&gt;No graphical environment needed on servers&lt;/li&gt;
+
+&lt;li&gt;Limiting the Number of Running Services&lt;/li&gt;
+
+&lt;li&gt;List of system services&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Here is a list of services(daemons) to help you decide what to axe. Here is another list. After performing a minimal installation, the machine reboots. When you login disable as many services as possible with the following commands:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;chkconfig anacron off
+chkconfig apmd off
+chkconfig atd off
+chkconfig autofs off
+chkconfig cpuspeed off
+chkconfig cups off
+chkconfig cups-config-daemon off
+chkconfig gpm off
+chkconfig isdn off
+chkconfig netfs off
+chkconfig nfslock off
+chkconfig openibd off
+chkconfig pcmcia off
+chkconfig portmap off
+chkconfig rawdevices off
+chkconfig readahead_early off
+chkconfig rpcgssd off
+chkconfig rpcidmapd off
+chkconfig smartd off
+chkconfig xfs off
+chkconfig ip6tables off
+chkconfig avahi-daemon off
+chkconfig firstboot off
+chkconfig yum-updatesd off 
+chkconfig sendmail off
+chkconfig mcstrans off
+chkconfig pcscd off
+chkconfig bluetooth off
+chkconfig hidd off&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The next group of services is more useful to servers in some circumstances.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;xinetd may be needed for some servers&lt;/li&gt;
+
+&lt;li&gt;acpid needed for power button to shut down server gently&lt;/li&gt;
+
+&lt;li&gt;microcode_ctl not needed on AMD machines&lt;/li&gt;
+
+&lt;li&gt;haldaem and messagebus support for plug and play devices&lt;/li&gt;
+
+&lt;li&gt;mdmonitor not needed unless running software RAID&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Evaluate their worth even more closely before disabling them.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;chkconfig xinetd off
+chkconfig acpid off
+chkconfig microcode_ctl off
+chkconfig haldaemon off
+chkconfig messagebus off
+chkconfig mdmonitor off&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id='virtual_terminals'&gt;Virtual Terminals&lt;/h2&gt;
+
+&lt;p&gt;You may also minimize on virtual terminals. The default is six virtual terminals. You can probably do with two. To disable them, edit the /etc/inittab file and comment out the ones that you do not want running like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Run gettys in standard runlevels
+1:2345:respawn:/sbin/mingetty tty1
+2:2345:respawn:/sbin/mingetty tty2
+#3:2345:respawn:/sbin/mingetty tty3
+#4:2345:respawn:/sbin/mingetty tty4
+#5:2345:respawn:/sbin/mingetty tty5
+#6:2345:respawn:/sbin/mingetty tty6&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id='updating_and_rebooting'&gt;Updating and Rebooting&lt;/h2&gt;
+
+&lt;p&gt;On any new install, it is a good idea to run &amp;#8220;yum update&amp;#8221; and then reboot the machine to apply the latest security and software updates. It is a good idea to reboot after the update to make sure that the system comes up properly.&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>在Ubuntu 12.04上安装配置Touchpad Indicator</title>

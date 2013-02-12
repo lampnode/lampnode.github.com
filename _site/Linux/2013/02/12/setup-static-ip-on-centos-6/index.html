@@ -3,8 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>在Ubuntu 12.04上安装配置Touchpad Indicator | LAMPNODE | Focus On LAMP Technologies</title>
-    <meta name="description" content="Install Touchpad Indicator in Ubuntu 12.04">
+    <title>Setup static ip on CentOS 6 | LAMPNODE | Focus On LAMP Technologies</title>
+    <meta name="description" content="">
     <meta name="author" content="Robert  Chain">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -194,13 +194,13 @@
 	<div class="contentMain"> 
 	 
 <div class="page-content-title">
-  <h1>在Ubuntu 12.04上安装配置Touchpad Indicator</h1>
-     <small>Install Touchpad Indicator in Ubuntu 12.04</small> 
+  <h1>Setup static ip on CentOS 6</h1>
+   
 </div>
 
 <div class="page-content-info">
     <h4>Published</h4>
-    <div class="date"><span>11 February 2013</span></div>
+    <div class="date"><span>12 February 2013</span></div>
 
   
     <h4>Tags</h4>
@@ -211,7 +211,7 @@
 
   
      
-    	<li><a href="/tags.html#Ubuntu-ref">Ubuntu <span>2</span></a></li>
+    	<li><a href="/tags.html#CentOs-ref">CentOs <span>4</span></a></li>
     
   
 
@@ -224,30 +224,67 @@
 
 <div class="row">
   <div class="span8">
-    <p>在Thinkpad系列笔记本上安装Ubuntu 系统，必不可少的会遇到Touchpad 的问题，我是比较讨厌Trackpoint 跟它同时使用，所以安装Touchpad-indicator来管理它.</p>
+    <h2 id='test_context'>Test Context</h2>
 
-<h2 id='installation'>Installation</h2>
+<ul>
+<li>CentOs 6.3</li>
 
-<p>安装Touchpad-indicator需要使用的第三方的库：PPA, 安装方法如下</p>
+<li>Localhost IP:192.168.0.7</li>
 
-<pre><code>sudo add-apt-repository ppa:atareao/atareao</code></pre>
+<li>Gateway: 192.168.0.1</li>
+</ul>
 
-<p>然后可以直接安装 touchpad indicator:</p>
+<h2 id='setup'>Setup</h2>
 
-<pre><code>sudo apt-get update &amp;&amp; sudo apt-get install touchpad-indicator</code></pre>
+<h3 id='ifcfgeth0'>ifcfg-eth0</h3>
 
-<h2 id='usage'>Usage</h2>
+<pre><code>[root@edwin] vim /etc/sysconfig/network-scripts/ifcfg-eth0</code></pre>
 
-<p>安装好的Touchpad-indicator会在Applications菜单里，一般是放在 Accessories 这个子菜单里.</p>
+<p>The config example is the following:</p>
+
+<pre><code>DEVICE=eth0
+NM_CONTROLLED=yes
+ONBOOT=yes
+BOOTPROTO=static
+HWADDR=00:21:85:12:57:06
+TYPE=Ethernet
+UUID=6a129ba5-6430-40cc-b863-882ec2f3d34d
+IPADDR=192.168.0.7
+NETMASK=255.255.255.0
+GATEWAY=192.168.0.1
+USERCTL=no
+DNS1=8.8.8.8
+DNS2=8.8.4.4</code></pre>
+
+<h3 id='resolvconf'>resolv.conf</h3>
+
+<p>Note:If your have add DNS1 (and DNS2) in the ifcif-eth0; this step could skip.</p>
+
+<pre><code>[root@edwin]vim /etc/resolv.conf</code></pre>
+
+<p>The config example is the following:</p>
+
+<pre><code>nameserver 8.8.8.8
+nameserver 8.8.4.4</code></pre>
+
+<h3 id='networkoption'>network(Option)</h3>
+
+<pre><code>[root@edwin]vim /etc/sysconfig/network</code></pre>
+
+<p>The config example is the following:</p>
+
+<pre><code>NETWORKING=yes
+NETWORKING_IPV6=no
+HOSTNAME=CentOS</code></pre>
     <hr>
     <div class="pagination">
       <ul>
       
-        <li class="prev"><a href="/Linux/2013/02/11/harden-ssh-access-on-centos-6" title="Harden SSH access on CentOS 6">&larr; Previous</a></li>
+        <li class="prev"><a href="/Linux/2013/02/12/minimal-services-on-centos" title="Minimal Services on CentOS">&larr; Previous</a></li>
       
         <li><a href="/archive.html">Archive</a></li>
       
-        <li class="next"><a href="/Linux/2013/02/12/minimal-services-on-centos" title="Minimal Services on CentOS">Next &rarr;</a></li>
+        <li class="next"><a href="/Linux/2013/02/12/using-rsync-with-ssh-to-backup-data" title="Using Rsync with SSH to backup data">Next &rarr;</a></li>
       
       </ul>
     </div>

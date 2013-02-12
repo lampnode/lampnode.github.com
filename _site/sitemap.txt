@@ -10,6 +10,9 @@ http://lampnode.github.com/pages.html
 http://lampnode.github.com/archive.html
 http://lampnode.github.com/tags.html
 
+http://lampnode.github.com/Linux/2013/02/12/using-rsync-with-ssh-to-backup-data
+http://lampnode.github.com/Linux/2013/02/12/setup-static-ip-on-centos-6
+http://lampnode.github.com/Linux/2013/02/12/minimal-services-on-centos
 http://lampnode.github.com/Linux/2013/02/11/install-touchpad-indicator-in-ubuntu-1204
 http://lampnode.github.com/Linux/2013/02/11/harden-ssh-access-on-centos-6
 http://lampnode.github.com/Github/2013/02/05/install-github-and-jekyll-on-ubuntu

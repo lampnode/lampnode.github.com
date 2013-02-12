@@ -3,8 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>在Ubuntu 12.04上安装配置Touchpad Indicator | LAMPNODE | Focus On LAMP Technologies</title>
-    <meta name="description" content="Install Touchpad Indicator in Ubuntu 12.04">
+    <title>Minimal Services on CentOS | LAMPNODE | Focus On LAMP Technologies</title>
+    <meta name="description" content="">
     <meta name="author" content="Robert  Chain">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -194,13 +194,13 @@
 	<div class="contentMain"> 
 	 
 <div class="page-content-title">
-  <h1>在Ubuntu 12.04上安装配置Touchpad Indicator</h1>
-     <small>Install Touchpad Indicator in Ubuntu 12.04</small> 
+  <h1>Minimal Services on CentOS</h1>
+   
 </div>
 
 <div class="page-content-info">
     <h4>Published</h4>
-    <div class="date"><span>11 February 2013</span></div>
+    <div class="date"><span>12 February 2013</span></div>
 
   
     <h4>Tags</h4>
@@ -211,7 +211,7 @@
 
   
      
-    	<li><a href="/tags.html#Ubuntu-ref">Ubuntu <span>2</span></a></li>
+    	<li><a href="/tags.html#CentOs-ref">CentOs <span>4</span></a></li>
     
   
 
@@ -224,30 +224,103 @@
 
 <div class="row">
   <div class="span8">
-    <p>在Thinkpad系列笔记本上安装Ubuntu 系统，必不可少的会遇到Touchpad 的问题，我是比较讨厌Trackpoint 跟它同时使用，所以安装Touchpad-indicator来管理它.</p>
+    <p>This will improve the performance of a system by disabling unneeded services. Another benefit is reduced hardware requirements for your server.</p>
 
-<h2 id='installation'>Installation</h2>
+<h2 id='methodology_of_minimal_services'>Methodology of Minimal Services</h2>
 
-<p>安装Touchpad-indicator需要使用的第三方的库：PPA, 安装方法如下</p>
+<ul>
+<li>Perform minimal OS installations</li>
 
-<pre><code>sudo add-apt-repository ppa:atareao/atareao</code></pre>
+<li>Install additional software as needed after installation</li>
 
-<p>然后可以直接安装 touchpad indicator:</p>
+<li>Minimal installations reduce the number of packages requiring updates</li>
 
-<pre><code>sudo apt-get update &amp;&amp; sudo apt-get install touchpad-indicator</code></pre>
+<li>No graphical environment needed on servers</li>
 
-<h2 id='usage'>Usage</h2>
+<li>Limiting the Number of Running Services</li>
 
-<p>安装好的Touchpad-indicator会在Applications菜单里，一般是放在 Accessories 这个子菜单里.</p>
+<li>List of system services</li>
+</ul>
+
+<p>Here is a list of services(daemons) to help you decide what to axe. Here is another list. After performing a minimal installation, the machine reboots. When you login disable as many services as possible with the following commands:</p>
+
+<pre><code>chkconfig anacron off
+chkconfig apmd off
+chkconfig atd off
+chkconfig autofs off
+chkconfig cpuspeed off
+chkconfig cups off
+chkconfig cups-config-daemon off
+chkconfig gpm off
+chkconfig isdn off
+chkconfig netfs off
+chkconfig nfslock off
+chkconfig openibd off
+chkconfig pcmcia off
+chkconfig portmap off
+chkconfig rawdevices off
+chkconfig readahead_early off
+chkconfig rpcgssd off
+chkconfig rpcidmapd off
+chkconfig smartd off
+chkconfig xfs off
+chkconfig ip6tables off
+chkconfig avahi-daemon off
+chkconfig firstboot off
+chkconfig yum-updatesd off 
+chkconfig sendmail off
+chkconfig mcstrans off
+chkconfig pcscd off
+chkconfig bluetooth off
+chkconfig hidd off</code></pre>
+
+<p>The next group of services is more useful to servers in some circumstances.</p>
+
+<ul>
+<li>xinetd may be needed for some servers</li>
+
+<li>acpid needed for power button to shut down server gently</li>
+
+<li>microcode_ctl not needed on AMD machines</li>
+
+<li>haldaem and messagebus support for plug and play devices</li>
+
+<li>mdmonitor not needed unless running software RAID</li>
+</ul>
+
+<p>Evaluate their worth even more closely before disabling them.</p>
+
+<pre><code>chkconfig xinetd off
+chkconfig acpid off
+chkconfig microcode_ctl off
+chkconfig haldaemon off
+chkconfig messagebus off
+chkconfig mdmonitor off</code></pre>
+
+<h2 id='virtual_terminals'>Virtual Terminals</h2>
+
+<p>You may also minimize on virtual terminals. The default is six virtual terminals. You can probably do with two. To disable them, edit the /etc/inittab file and comment out the ones that you do not want running like this:</p>
+
+<pre><code># Run gettys in standard runlevels
+1:2345:respawn:/sbin/mingetty tty1
+2:2345:respawn:/sbin/mingetty tty2
+#3:2345:respawn:/sbin/mingetty tty3
+#4:2345:respawn:/sbin/mingetty tty4
+#5:2345:respawn:/sbin/mingetty tty5
+#6:2345:respawn:/sbin/mingetty tty6</code></pre>
+
+<h2 id='updating_and_rebooting'>Updating and Rebooting</h2>
+
+<p>On any new install, it is a good idea to run &#8220;yum update&#8221; and then reboot the machine to apply the latest security and software updates. It is a good idea to reboot after the update to make sure that the system comes up properly.</p>
     <hr>
     <div class="pagination">
       <ul>
       
-        <li class="prev"><a href="/Linux/2013/02/11/harden-ssh-access-on-centos-6" title="Harden SSH access on CentOS 6">&larr; Previous</a></li>
+        <li class="prev"><a href="/Linux/2013/02/11/install-touchpad-indicator-in-ubuntu-1204" title="在Ubuntu 12.04上安装配置Touchpad Indicator">&larr; Previous</a></li>
       
         <li><a href="/archive.html">Archive</a></li>
       
-        <li class="next"><a href="/Linux/2013/02/12/minimal-services-on-centos" title="Minimal Services on CentOS">Next &rarr;</a></li>
+        <li class="next"><a href="/Linux/2013/02/12/setup-static-ip-on-centos-6" title="Setup static ip on CentOS 6">Next &rarr;</a></li>
       
       </ul>
     </div>
