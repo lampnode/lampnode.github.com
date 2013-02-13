@@ -13,6 +13,7 @@ http://lampnode.github.com/pages.html
 http://lampnode.github.com/archive.html
 http://lampnode.github.com/tags.html
 
+http://lampnode.github.com/Development/2013/02/13/managing-software-development-with-subversion
 http://lampnode.github.com/Linux/2013/02/12/using-rsync-with-ssh-to-backup-data
 http://lampnode.github.com/Linux/2013/02/12/setup-static-ip-on-centos-6
 http://lampnode.github.com/Linux/2013/02/12/minimal-services-on-centos

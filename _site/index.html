@@ -167,6 +167,8 @@
      
     	<li><a href="/tags.html#beginner-ref">beginner <span>1</span></a></li>
      
+    	<li><a href="/tags.html#Subversion-ref">Subversion <span>1</span></a></li>
+     
     	<li><a href="/tags.html#tutorial-ref">tutorial <span>1</span></a></li>
     
   
@@ -186,6 +188,10 @@
      
     	<li><a href="/categories.html#Github-ref">
     		Github <span>1</span>
+    	</a></li>
+     
+    	<li><a href="/categories.html#Development-ref">
+    		Development <span>1</span>
     	</a></li>
      
     	<li><a href="/categories.html#Linux-ref">
@@ -215,6 +221,29 @@
     <div class='contentMainBox'>
 <h2>最新日志 | Updated</h2>
 <ul class='lastUpdated'>
+    
+     <li><dl class='lastUpdatedItem'>
+       <dt> <a href='/Development/2013/02/13/managing-software-development-with-subversion' class='lastUpdatedTitle'>使用Subversion管理软件开发代码</a></dt>
+       <dd> <span class='lastUpdatedDate'>13 Feb 2013</span> 
+            Repository Layout
+
+trunk
+
+Trunk是用于进行开发的主干代码存储位置。这里包含的都是最新的，可运行的软件代码（开发模式）。Trunk没有版本号和发布名称。 仅需要保证trunk在任何时候都处于“开发模式”。 其版本号命名规则：X.X.dev(最新主版本号.最新子版本号.dev)
+
+branchs
+
+根据开发计划或者你想冻结新特色的添加时或者进行一些新的技术尝试的时候，就要使用Branches了。Brahches路径包含了trunk在不同发展阶段的副本。可以分为如下2中类型：
+
+Release Branches
+
+根据开发计划，发布软件的一个版本的时候，就要使用Release Branches， Release branches只是你当前trunk的一个副本，是软件开发到已经阶段的里程碑。 其版本号命名规则：X.X.build-(主版本号.子版本号.build-SVN revision版本号)，分支路径命名规则为:X.X.build
+
+Experimental branches
+
+如果想尝试新的技术（如PHP版本升级），可以建议Experimental branches。 其版本号命名规则：X.X.test-(主版本号.子版本号.test-SVN revision版本号);分支路径命名规则为:X.X.test
+            <a href='/Development/2013/02/13/managing-software-development-with-subversion'>Read More</a></dd>
+      </dl></li>
     
      <li><dl class='lastUpdatedItem'>
        <dt> <a href='/Linux/2013/02/12/using-rsync-with-ssh-to-backup-data' class='lastUpdatedTitle'>Using Rsync with SSH to backup data</a></dt>
@@ -263,13 +292,6 @@ Usage
        <dd> <span class='lastUpdatedDate'>11 Feb 2013</span> 
             In a few simple steps, you will be able to diminish risks of unauthorized ssh accesses Your ssh settings can be found in &#8220;/etc/ssh/sshd_config&#8221;, this is where you will have...
             <a href='/Linux/2013/02/11/harden-ssh-access-on-centos-6'>Read More</a></dd>
-      </dl></li>
-    
-     <li><dl class='lastUpdatedItem'>
-       <dt> <a href='/Github/2013/02/05/install-github-and-jekyll-on-ubuntu' class='lastUpdatedTitle'>在Ubuntu上安装Github和Jekyll</a></dt>
-       <dd> <span class='lastUpdatedDate'>05 Feb 2013</span> 
-            Jekyll is a Git compatible static site generator that can be installed on Ubuntu. Installation Install Dependencies $sudo apt-get install git ruby rubygems python-pygments $sudo gem install rdiscount Install Jekyll...
-            <a href='/Github/2013/02/05/install-github-and-jekyll-on-ubuntu'>Read More</a></dd>
       </dl></li>
     
 </ul>
