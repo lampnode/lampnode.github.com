@@ -35,6 +35,17 @@ tagline: Focus On LAMP Technologies
                 
 	</ul>
 </div>
+
+<div class="contentMainBoxItem" >
+<h3>开源项目 | Open Source Projects </h3>
+<ul>
+        <li> <b>Framework:</b> 
+		<a href="http://framework.zend.com/" target="_blank">Zend Framework</a>
+		<a href="http://www.smarty.net/" target="_blank">Smarty</a>
+	</li>
+</ul>
+</div>
+
 <div class="contentMainBoxItem" >
 <h3>软件推荐 | Softwares </h3>
 <ul>
@@ -48,14 +59,17 @@ tagline: Focus On LAMP Technologies
 </ul>
 </div>
 
+
+
 <div class="contentMainBoxItem" >
 <h3>开发速查 | Development Help Sheet</h3>
 <ul>
 	<li><b>Web Design:</b> 
 		<a href="/library/colors.html">Web Colors Sheet</a> | 
-		<a href="http://www.blooberry.com/indexdot/css/propindex/all.htm" target="_blank">CSS Property Index</a> |
+		<a href="/library/css2.html" target="_blank">CSS2</a> |
 		<a href="http://www.elizabethcastro.com/html/extras/xhtml_ref.html" target="_blank">(X)HTML Elements and Attributes</a>
 	</li>
+	<li><b>Programing:</b><a href="/library/jquery.html">Jquery</a></li>
 	<li><b>Code Management:</b> <a href="/library/github.html">GitHub Guide</a></li>
 	<li><b>Editors:</b> <a href="/library/vim.html">VI(M)</a></li> 
 </ul>
