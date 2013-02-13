@@ -1,8 +1,9 @@
 ---
-layout: page
-title: "关于本站"
+layout	: page
+title	: "关于本站"
 description: ""
-group: navigation
+weight	: 20
+group	: navigation
 ---
 {% include JB/setup %}
 

@@ -1,6 +1,8 @@
 ---
-layout: page
-title: HOME
+layout	: page
+title	: "首页"
+weight 	: 1
+group 	: navigation
 tagline: Focus On LAMP Technologies
 ---
 {% include JB/setup %}
