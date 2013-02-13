@@ -49,10 +49,15 @@ tagline: Focus On LAMP Technologies
 </div>
 
 <div class="contentMainBoxItem" >
-<h3>开发工具 | Development</h3>
+<h3>开发速查 | Development Help Sheet</h3>
 <ul>
-	<li><b>Web Design:</b> <a href="/library/colors.html">Web Colors Dic</a></li>
+	<li><b>Web Design:</b> 
+		<a href="/library/colors.html">Web Colors Sheet</a> | 
+		<a href="http://www.blooberry.com/indexdot/css/propindex/all.htm" target="_blank">CSS Property Index</a> |
+		<a href="http://www.elizabethcastro.com/html/extras/xhtml_ref.html" target="_blank">(X)HTML Elements and Attributes</a>
+	</li>
 	<li><b>Code Management:</b> <a href="/library/github.html">GitHub Guide</a></li>
+	<li><b>Editors:</b> <a href="/library/vim.html">VI(M)</a></li> 
 </ul>
 </div>
 

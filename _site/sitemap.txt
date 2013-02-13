@@ -3,6 +3,7 @@ http://lampnode.github.com/index.html
 http://lampnode.github.com/atom.xml
 http://lampnode.github.com/library/colors.html
 http://lampnode.github.com/library/github.html
+http://lampnode.github.com/library/vim.html
 http://lampnode.github.com/about.html
 http://lampnode.github.com/categories.html
 http://lampnode.github.com/sitemap.txt
