@@ -1,10 +1,9 @@
 ---
 layout: page
-title: "Vim"
+title: "Linux Editor: VI help sheet"
 description: ""
 ---
 {% include JB/setup %}
-<h1>Linx Editor : VI(M)</h1>
 <h2>Vim Help Sheet</h2>
 <div class="contentMainBox">
 <h3> Modes and Controls </h3>

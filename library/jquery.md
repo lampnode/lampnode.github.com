@@ -1,11 +1,10 @@
 ---
 layout: page
-title: "Jquery"
+title: "JQuery and Javascript Help Sheet"
 description: ""
 ---
 {% include JB/setup %}
 
-# Jquery & Javascript Help sheet
 
 ## Syntax
 

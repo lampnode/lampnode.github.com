@@ -1,11 +1,10 @@
 ---
 layout: page
-title: "Css2"
+title: "CSS2 Help Sheet"
 description: ""
 ---
 {% include JB/setup %}
 
-#CSS2 Help Sheet
 
 ## Syntax
 ### External style sheet

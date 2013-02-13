@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Colors"
+title: "设计颜色速查"
 description: "Web设计常用的颜色"
 ---
 {% include JB/setup %}
@@ -16,7 +16,6 @@ table tr:hover{ background-color:lightgrey; }
 .colorsTable td{padding:0px 5px;}
 </style>
 
-# Web设计常用颜色词典
 
 ## Named Colors
 
