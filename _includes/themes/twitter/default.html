@@ -14,7 +14,8 @@
     <!-- Le styles -->
     <link href="{{ ASSET_PATH }}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ ASSET_PATH }}/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
-
+    <script  type="text/javascript" src="/scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="/scripts/jquery.tools.js"></script>
     <link rel="shortcut icon" href="/images/favicon.ico">
     <!-- touch icons
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
@@ -64,14 +65,14 @@
       <div class="content">
          <div class="contentNavi">
 	   <div class="contentNaviBox">
-		<p class="contentNaviBoxTitle">文档标签</p>
+		<p class="contentNaviBoxTitle">标签 | Tags</p>
            	<ul class="tag_box inline">
   			{% assign tags_list = site.tags %}
   			{% include JB/tags_list %}
 	   	</ul>
 	  </div>
 	   <div class="contentNaviBox">
-		<p class="contentNaviBoxTitle">文章类别</p>
+		<p class="contentNaviBoxTitle">类别 | Categories</p>
       	      	<ul class="tag_box inline">
   			{% assign categories_list = site.categories %}
                 	{% include JB/categories_list %}
@@ -108,8 +109,8 @@
 				<li> <a href="/atom.xml" title="ATOM" class="siteRss"><img src="/images/atom.png" /></a></li>
 			</ul>
            	</p>
-	   	<p class="footBoxItems">Copyleft {{ site.time | date: '%Y' }} for {{ site.author.name }}, content is available under <a href="http://www.gnu.org/copyleft/fdl.html" class="external ">GNU Free Documentation License 1.3 or later</a>.With help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a> and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a></p>
-    	   	<p class="footBoxItems"><img src="/images/gnu-fdl.png" /></p> 
+	   	<p class="footBoxItems"><img src="/images/gnu-fdl.png"/> Copyleft {{ site.time | date: '%Y' }} for {{ site.author.name }}. Unless otherwise stated, all content are available under <a href="http://www.gnu.org/copyleft/fdl.html" class="external ">GNU Free Documentation License 1.3</a>.</p>
+    	   	<p class="footBoxItems">Powered by Github, With help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a> and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>.</p> 
 	</div>
      </div>     
 </footer>

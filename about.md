@@ -33,11 +33,11 @@ The knowledge of application development of extensive software, network, include
 
 ## About LAMPNode
 
-LAMPNode的读者群应该是工作在LAMP环境下的开发者，当然作者也是一个LAMP开发者。本章主要记录了作者使用的软件以及编程语言过程中的一些使用心得与经验。另外，作者也会将读过的优秀的文章做转载。 学习越深入，越发感觉自己还需要更多的学习。希望我撰写的文章，笔记，以及转载，能让工作在LAMP下开发者得以参考，让您的LAMP工作的更好。如果您在阅读过程中发现我文章的错误，或者您有更好的建议，请致信到robert.c@lampnode.com.
+LAMPNode的读者群应该是工作在LAMP环境下的开发者，当然作者也是一个LAMP开发者。本章主要记录了作者使用的软件以及编程语言过程中的一些使用心得与经验。另外，作者也会将读过的优秀的文章做转载。 学习越深入，越发感觉自己还需要更多的学习。希望我撰写的文章，笔记，以及转载，能让工作在LAMP下开发者得以参考，让您的LAMP工作的更好。如果您在阅读过程中发现我文章的错误，或者您有更好的建议，请致信到<a href="#" ><span class="jt_authorEmail">please enable js</span></a>.
 
 The LAMPNode is aimed at the web developers as written by a developer working on LAMP. The site is for a collection of softwares and program languages that the author used, with methods of installing and configuration that works better on LAMP. The more I learn, the more I realize how far I have to go still. So please refer to these tutorials as my notes and always investigate further, especially when it comes to your LAMP better! We all start somewhere, so here you can see my growth.
 
-If you find mistakes, have suggestions, and or questions please mail me at robert.c@lampnode.com, thank you!
+If you find mistakes, have suggestions, and or questions please mail me at <a href="#"><span class="jt_authorEmail">please enable js</span></a>, thank you!
 
 ### About LAMP
 

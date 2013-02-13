@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Welcome to LAMPNode
+title: HOME
 tagline: Focus On LAMP Technologies
 ---
 {% include JB/setup %}
@@ -8,11 +8,11 @@ tagline: Focus On LAMP Technologies
 <div class="contentMainBox">
 <h2>最新日志 | Updated</h2>
 <ul class="lastUpdated">
-    {% for post in site.posts limit 6 %}
+    {% for post in site.posts limit:6 %}
      <li><dl class="lastUpdatedItem">
        <dt> <a class="lastUpdatedTitle"  href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></dt>
        <dd> <span class="lastUpdatedDate">{{ post.date | date_to_string }}</span> 
-            {{ post.content | strip_html | truncatewords:75}}
+            {{ post.content | strip_html | truncatewords:30 }}
             <a href="{{ post.url }}">Read More</a></dd>
       </dl></li>
     {% endfor %}
@@ -29,6 +29,7 @@ tagline: Focus On LAMP Technologies
 		<li style="font-size:22px;padding-bottom:10px;">Robert Chain <a href="/atom.xml"><img src="/images/radio_icon.png" /></a></li>
                 <li>Beijing, China</li>
                 <li>Software Engineer</li>
+		<li><a href="#" style="color:#ffffff"><span class="jt_authorEmail">please enable js</span></a></li>
 		<li>http://www.lampnode.com</li>
                 <li>LAMPNode Since Fed, 2013</li>
                 
