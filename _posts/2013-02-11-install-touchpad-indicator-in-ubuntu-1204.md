@@ -22,7 +22,13 @@ tags: [Ubuntu]
 
 ## Usage
 
-安装好的Touchpad-indicator会在Applications菜单里，一般是放在 Accessories 这个子菜单里.
+安装好的Touchpad-indicator会在Applications菜单里，一般是放在 Accessories 这个子菜单里.点击touchpad-Indicator的图标，点“首选项”进行一些简单的设置。
 
+### 基本设置
 
+首先是可以为Touchpad-Indicator设置快捷键，默认是关闭状态的。然后是“Actions”动作标签，选择“Disable touchpad when Touchpad-Indicator starts”.
+
+### 自启动设置
+
+在“General options”常规选项，设置“自动启动”和“Show noifications”. 结合前一步设置的“启动Touchpad-Indicator时禁用触摸板”，那么每次系统启动就会自动启动Touchpad-Indicator,并且自动禁用Touchpad.
 
