@@ -3,8 +3,8 @@
 <html> 
  <head>
     <meta charset="utf-8" />
-    <title>Linux Editor: VI help sheet | LAMPNODE | Focus On LAMP Technologies</title>
-    <meta name="description" content="">
+    <title>在Ubuntu上安装Github和Jekyll | LAMPNODE | Focus On LAMP Technologies</title>
+    <meta name="description" content="Install github and jekyll on Ubuntu 12.04 or later">
     <meta name="author" content="Robert  Chain">
     <link rel="alternate" type="application/atom+xml" href="/atom.xml" />
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -224,81 +224,116 @@
 	<section class="contentMain"> 
 	 
 <div class="page-content-title">
-  <h1>Linux Editor: VI help sheet</h1>
-   
+  <h1>在Ubuntu上安装Github和Jekyll</h1>
+     <small>Install Github and jekyll on Ubuntu</small> 
 </div>
-<div class="page-oontent">
-    <h2>Vim Help Sheet</h2><div class='contentMainBox'>
-<h3> Modes and Controls </h3>
-<ul>
-<li>Command Mode: ESC</li>
-<li>Insertion Mode</li>
-</ul>
 
-<h3>Basic commands</h3>
-<ul>
-<li><b>:w</b>Save</li>
-<li><b>:x</b>Save and exit</li>
-<li><b>:q</b>Quit if no changes made</li>
-<li><b>:q!</b>Quit and discard any changes</li>
-<li><b>u</b>Undo last change</li>
-<li><b>U</b>Undow all changes to line</li>
-<li><b>.</b>Repeat last command</li>
-</ul>
+<div class="page-content-info">
+    <h4>Published</h4>
+    <div class="date"><span>05 February 2013</span></div>
 
-<h3>Cursor Navigation</h3>
-<ul>
-<li><b>h or arrow left </b> Cursor left</li>
-<li><b>j or arrow down </b> Cursor down</li>
-<li><b>k or arrow up   </b>Cursor up</li>
-<li><b>l or arrow right</b> Cursor right</li>
-<li><b>w </b>Next word</li>
-<li><b>W </b>	Next blank delimited word</li>
-<li><b>b </b>	Start of word</li>
-<li><b>B </b>	Start of blank delimited word</li>
-<li><b>e </b>	End of word</li>
-<li><b>E </b>	End of blank delimited word</li>
-<li><b>( </b>	Back a sentence</li>
-<li><b>) </b>	Forword a sentence</li>
-<li><b>{ </b>	Back a paragraph</li>
-<li><b>} </b>	Forword a paragraph</li>
-<li><b>0 </b>	Beginning of current line</li>
-<li><b>$ </b>	End of the current line</li>
-<li><b>H </b>   Top of screen</li>
-<li><b>M </b> 	Middle of screen</li>
-<li><b>L </b>   Bottom of screen</li>
-</ul>
-</div><div class='contentMainBox'>
-<h3>Insert Text</h3>
-<ul>
-<li><b>i</b>Insert before cursor</li>
-<li><b>a</b>Append after cursor</li>
-<li><b>I</b>Insert before line</li>
-<li><b>A</b>Append after line</li>
-<li><b>o</b>Add a new line after current line</li>
-<li><b>O</b>Add a new line before current line</li>
-<li><b>r</b>Overwrite one character</li>
-<li><b>R</b>Overwrite many character</li>
-<li><b>:r FILE_NAME </b>Reads file and insert it after this line</li>
-</ul>
+  
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    
 
-<h3>Deleting Text</h3>
-<ul>
-<li><b>x</b>Delete character to right of cursor</li>
-<li><b>X</b>Delete character to left of cursor</li>
-<li><b>D</b>Delete the rest of line</li>
-<li><b>dd or :d</b>Delete the current line</li>
-</ul>
 
-<h3>Searching</h3>
-<ul>
-<li><b>/string</b>Search forword for string</li>
-<li><b>?string</b>Search backword for string</li>
-<li><b>n</b>Go to the next match</li>
-<li><b>N</b>Go to the previous match</li>
-<li><b>:set nu</b>Turn on the line numbers</li>
-</ul>
+  
+     
+    	<li><a href="/tags.html#Ubuntu-ref">Ubuntu <span>2</span></a></li>
+    
+  
+
+
+
+    </ul>
+  
 </div>
+
+
+<div class="row">
+  <div class="span8">
+    <p>Jekyll is a Git compatible static site generator that can be installed on Ubuntu.</p>
+
+<h2 id='installation'>Installation</h2>
+
+<h3 id='install_dependencies'>Install Dependencies</h3>
+
+<pre><code>$sudo apt-get install git ruby rubygems python-pygments
+$sudo gem install rdiscount</code></pre>
+
+<h3 id='install_jekyll'>Install Jekyll</h3>
+
+<p>In order to preview your blog locally you will need to install the Jekyll ruby gem. $sudo gem install jekyll</p>
+
+<h3 id='install_rake'>Install rake</h3>
+
+<pre><code>$sudo gem install rake</code></pre>
+
+<h2 id='usages'>Usages</h2>
+
+<h3 id='start_jekyll'>Start Jekyll</h3>
+
+<pre><code>$cd USERNAME.github.com
+$jekyll --server</code></pre>
+
+<p>Your can access this by http://loclaohost:4000</p>
+
+<h3 id='for_rake'>For Rake</h3>
+
+<h4 id='create_a_new_page'>Create a new page</h4>
+
+<pre><code>$rake page name=&quot;about.md&quot;</code></pre>
+
+<h4 id='create_a_new_post'>Create a new post</h4>
+
+<p>Begin a new post</p>
+
+<pre><code>$rake post title=&quot;Your post title&quot;</code></pre>
+
+<p>The rake task automatically creates a file with properly formatted filename and YAML Front Matter. Make sure to specify your own title. By default, the date is the current date.</p>
+
+<h2 id='commit_to_github'>Commit to GitHub</h2>
+
+<pre><code>$git add .
+$git commit -m &quot;Add some content&quot;
+$git push origin master</code></pre>
+    <hr>
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/lessons/jekyll-introduction" title="Jekyll Introduction">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/Linux/harden-ssh-access-on-centos-6" title="Harden SSH access on CentOS 6">Next &rarr;</a></li>
+      
+      </ul>
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jekyllbootstrap'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
 </div>
 
 

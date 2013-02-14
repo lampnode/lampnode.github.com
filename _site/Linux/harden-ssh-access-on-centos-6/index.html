@@ -3,7 +3,7 @@
 <html> 
  <head>
     <meta charset="utf-8" />
-    <title>Linux Editor: VI help sheet | LAMPNODE | Focus On LAMP Technologies</title>
+    <title>Harden SSH access on CentOS 6 | LAMPNODE | Focus On LAMP Technologies</title>
     <meta name="description" content="">
     <meta name="author" content="Robert  Chain">
     <link rel="alternate" type="application/atom+xml" href="/atom.xml" />
@@ -224,81 +224,167 @@
 	<section class="contentMain"> 
 	 
 <div class="page-content-title">
-  <h1>Linux Editor: VI help sheet</h1>
+  <h1>Harden SSH access on CentOS 6</h1>
    
 </div>
-<div class="page-oontent">
-    <h2>Vim Help Sheet</h2><div class='contentMainBox'>
-<h3> Modes and Controls </h3>
-<ul>
-<li>Command Mode: ESC</li>
-<li>Insertion Mode</li>
-</ul>
 
-<h3>Basic commands</h3>
-<ul>
-<li><b>:w</b>Save</li>
-<li><b>:x</b>Save and exit</li>
-<li><b>:q</b>Quit if no changes made</li>
-<li><b>:q!</b>Quit and discard any changes</li>
-<li><b>u</b>Undo last change</li>
-<li><b>U</b>Undow all changes to line</li>
-<li><b>.</b>Repeat last command</li>
-</ul>
+<div class="page-content-info">
+    <h4>Published</h4>
+    <div class="date"><span>11 February 2013</span></div>
 
-<h3>Cursor Navigation</h3>
-<ul>
-<li><b>h or arrow left </b> Cursor left</li>
-<li><b>j or arrow down </b> Cursor down</li>
-<li><b>k or arrow up   </b>Cursor up</li>
-<li><b>l or arrow right</b> Cursor right</li>
-<li><b>w </b>Next word</li>
-<li><b>W </b>	Next blank delimited word</li>
-<li><b>b </b>	Start of word</li>
-<li><b>B </b>	Start of blank delimited word</li>
-<li><b>e </b>	End of word</li>
-<li><b>E </b>	End of blank delimited word</li>
-<li><b>( </b>	Back a sentence</li>
-<li><b>) </b>	Forword a sentence</li>
-<li><b>{ </b>	Back a paragraph</li>
-<li><b>} </b>	Forword a paragraph</li>
-<li><b>0 </b>	Beginning of current line</li>
-<li><b>$ </b>	End of the current line</li>
-<li><b>H </b>   Top of screen</li>
-<li><b>M </b> 	Middle of screen</li>
-<li><b>L </b>   Bottom of screen</li>
-</ul>
-</div><div class='contentMainBox'>
-<h3>Insert Text</h3>
-<ul>
-<li><b>i</b>Insert before cursor</li>
-<li><b>a</b>Append after cursor</li>
-<li><b>I</b>Insert before line</li>
-<li><b>A</b>Append after line</li>
-<li><b>o</b>Add a new line after current line</li>
-<li><b>O</b>Add a new line before current line</li>
-<li><b>r</b>Overwrite one character</li>
-<li><b>R</b>Overwrite many character</li>
-<li><b>:r FILE_NAME </b>Reads file and insert it after this line</li>
-</ul>
+  
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    
 
-<h3>Deleting Text</h3>
-<ul>
-<li><b>x</b>Delete character to right of cursor</li>
-<li><b>X</b>Delete character to left of cursor</li>
-<li><b>D</b>Delete the rest of line</li>
-<li><b>dd or :d</b>Delete the current line</li>
-</ul>
 
-<h3>Searching</h3>
-<ul>
-<li><b>/string</b>Search forword for string</li>
-<li><b>?string</b>Search backword for string</li>
-<li><b>n</b>Go to the next match</li>
-<li><b>N</b>Go to the previous match</li>
-<li><b>:set nu</b>Turn on the line numbers</li>
-</ul>
+  
+     
+    	<li><a href="/tags.html#CentOs-ref">CentOs <span>4</span></a></li>
+    
+  
+
+
+
+    </ul>
+  
 </div>
+
+
+<div class="row">
+  <div class="span8">
+    <p>In a few simple steps, you will be able to diminish risks of unauthorized ssh accesses Your ssh settings can be found in &#8220;/etc/ssh/sshd_config&#8221;, this is where you will have to modify the configuration settings below.</p>
+
+<p>Note: The config file is NOT &#8220;/etc/ssh/ssh_config&#8221;</p>
+
+<h2 id='change_your_ssh_port'>Change your ssh port</h2>
+
+<h3 id='modify_config'>Modify config</h3>
+
+<p>By default, ssh run on port 22. You will need to change this default value to an arbitrary port number :</p>
+
+<pre><code>[root@server.com]#vim /etc/ssh/sshd_config</code></pre>
+
+<p>This will require ssh connexions to use the 60125 port</p>
+
+<pre><code>Port 60128</code></pre>
+
+<h2 id='setup_iptables'>Setup iptables</h2>
+
+<pre><code>[root@server.com]# vim /etc/sysconfig/iptables</code></pre>
+
+<p>Add the following to this file:</p>
+
+<pre><code>-A INPUT -m state --state NEW -m tcp -p tcp --dport 60128 -j ACCEPT</code></pre>
+
+<p>Restart and check the the iptables:</p>
+
+<pre><code>[root@server.com]# /etc/init.d/iptables restart
+[root@server.com]# iptables --list
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+ACCEPT     all  --  anywhere             anywhere            state RELATED,ESTABLISHED 
+ACCEPT     icmp --  anywhere             anywhere            
+ACCEPT     all  --  anywhere             anywhere            
+ACCEPT     tcp  --  anywhere             anywhere            state NEW tcp dpt:ssh 
+ACCEPT     tcp  --  anywhere             anywhere            state NEW tcp dpt:http 
+ACCEPT     tcp  --  anywhere             anywhere            state NEW tcp dpt:https 
+ACCEPT     tcp  --  anywhere             anywhere            state NEW tcp dpt:60128 
+
+.......</code></pre>
+
+<h2 id='disable_root_login'>Disable root login</h2>
+
+<p>If the hacker still gets to connect to your ssh port, he will need authentication. Obvisously he will try the root account which grant maximum priviledge on the server, so you want to disable direct root ssh access.</p>
+
+<p>Find this line in your /etc/ssh/sshd_config and change its value to &#8220;no&#8221;</p>
+
+<pre><code>PermitRootLogin no</code></pre>
+
+<h2 id='disable_protocol_1'>Disable Protocol 1</h2>
+
+<p>SSH has two protocols it may use, protocol 1 and protocol 2. The older protocol 1 is less secure and should be disabled unless you know that you specifically require it. Look for the following line in the /etc/ssh/sshd_config file, uncomment it and amend as shown:</p>
+
+<pre><code># Protocol 2,1
+Protocol 2</code></pre>
+
+<h2 id='use_publicprivate_keys_for_authentication'>Use Public/Private Keys for Authentication</h2>
+
+<h3 id='clientcreate_publicprivate_key'>Client:Create public/private key</h3>
+
+<p>First, create a public/private key pair on the client that you will use to connect to the server:</p>
+
+<pre><code>[edwin@client]$ ssh-keygen -t rsa</code></pre>
+
+<p>This will create two files in your (hidden) ~/.ssh directory called id_rsa and id_rsa.pub. id_rsa is your private key and id_rsa.pub is your public key. Now set permissions on your private key:</p>
+
+<pre><code>[edwin@client]$ chmod 700 ~/.ssh
+[edwin@client]$ chmod 600 ~/.ssh/id_rsa </code></pre>
+
+<h3 id='serversetup_authorized_keys'>Server:Setup authorized_keys</h3>
+
+<p>Copy the public key (id_rsa.pub) to the server and install it to the authorized_keys list:</p>
+
+<pre><code>[root@server.com]# cat id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</code></pre>
+
+<p>Note: once you have imported the public key, you can delete it from the server.</p>
+
+<p>and finally set file permissions on the server:</p>
+
+<pre><code>[root@server.com]# chmod 700 ~/.ssh
+[root@server.com]# chmod 600 ~/.ssh/authorized_keys</code></pre>
+
+<p>The above permissions are required if StrictModes is set to yes in /etc/ssh/sshd_config (the default).</p>
+
+<h3 id='serversetup_sshd_config'>Server:Setup sshd_config</h3>
+
+<p>Once you have checked you can successfully login to the server using your public/private key pair, you can disable password authentication completely by adding the following setting to your /etc/ssh/sshd_config file:</p>
+
+<p>Disable password authentication forcing use of keys PasswordAuthentication no</p>
+
+<h3 id='serverrestart_sshd_service'>Server:Restart sshd service</h3>
+
+<pre><code>[root@server.com]# /etc/rc.d/init.d/sshd restart</code></pre>
+
+<h3 id='clienttest'>Client:Test</h3>
+
+<pre><code>[edwin@client]$ ssh root@server.com -p 60128</code></pre>
+    <hr>
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/Github/install-github-and-jekyll-on-ubuntu" title="在Ubuntu上安装Github和Jekyll">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/Linux/install-touchpad-indicator-in-ubuntu-1204" title="在Ubuntu 12.04上安装配置Touchpad Indicator">Next &rarr;</a></li>
+      
+      </ul>
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jekyllbootstrap'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
 </div>
 
 

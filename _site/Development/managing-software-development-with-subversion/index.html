@@ -3,7 +3,7 @@
 <html> 
  <head>
     <meta charset="utf-8" />
-    <title>Linux Editor: VI help sheet | LAMPNODE | Focus On LAMP Technologies</title>
+    <title>使用Subversion管理软件开发代码 | LAMPNODE | Focus On LAMP Technologies</title>
     <meta name="description" content="">
     <meta name="author" content="Robert  Chain">
     <link rel="alternate" type="application/atom+xml" href="/atom.xml" />
@@ -224,81 +224,88 @@
 	<section class="contentMain"> 
 	 
 <div class="page-content-title">
-  <h1>Linux Editor: VI help sheet</h1>
-   
+  <h1>使用Subversion管理软件开发代码</h1>
+     <small>Managing Software Development with Subversion</small> 
 </div>
-<div class="page-oontent">
-    <h2>Vim Help Sheet</h2><div class='contentMainBox'>
-<h3> Modes and Controls </h3>
-<ul>
-<li>Command Mode: ESC</li>
-<li>Insertion Mode</li>
-</ul>
 
-<h3>Basic commands</h3>
-<ul>
-<li><b>:w</b>Save</li>
-<li><b>:x</b>Save and exit</li>
-<li><b>:q</b>Quit if no changes made</li>
-<li><b>:q!</b>Quit and discard any changes</li>
-<li><b>u</b>Undo last change</li>
-<li><b>U</b>Undow all changes to line</li>
-<li><b>.</b>Repeat last command</li>
-</ul>
+<div class="page-content-info">
+    <h4>Published</h4>
+    <div class="date"><span>13 February 2013</span></div>
 
-<h3>Cursor Navigation</h3>
-<ul>
-<li><b>h or arrow left </b> Cursor left</li>
-<li><b>j or arrow down </b> Cursor down</li>
-<li><b>k or arrow up   </b>Cursor up</li>
-<li><b>l or arrow right</b> Cursor right</li>
-<li><b>w </b>Next word</li>
-<li><b>W </b>	Next blank delimited word</li>
-<li><b>b </b>	Start of word</li>
-<li><b>B </b>	Start of blank delimited word</li>
-<li><b>e </b>	End of word</li>
-<li><b>E </b>	End of blank delimited word</li>
-<li><b>( </b>	Back a sentence</li>
-<li><b>) </b>	Forword a sentence</li>
-<li><b>{ </b>	Back a paragraph</li>
-<li><b>} </b>	Forword a paragraph</li>
-<li><b>0 </b>	Beginning of current line</li>
-<li><b>$ </b>	End of the current line</li>
-<li><b>H </b>   Top of screen</li>
-<li><b>M </b> 	Middle of screen</li>
-<li><b>L </b>   Bottom of screen</li>
-</ul>
-</div><div class='contentMainBox'>
-<h3>Insert Text</h3>
-<ul>
-<li><b>i</b>Insert before cursor</li>
-<li><b>a</b>Append after cursor</li>
-<li><b>I</b>Insert before line</li>
-<li><b>A</b>Append after line</li>
-<li><b>o</b>Add a new line after current line</li>
-<li><b>O</b>Add a new line before current line</li>
-<li><b>r</b>Overwrite one character</li>
-<li><b>R</b>Overwrite many character</li>
-<li><b>:r FILE_NAME </b>Reads file and insert it after this line</li>
-</ul>
+  
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    
 
-<h3>Deleting Text</h3>
-<ul>
-<li><b>x</b>Delete character to right of cursor</li>
-<li><b>X</b>Delete character to left of cursor</li>
-<li><b>D</b>Delete the rest of line</li>
-<li><b>dd or :d</b>Delete the current line</li>
-</ul>
 
-<h3>Searching</h3>
-<ul>
-<li><b>/string</b>Search forword for string</li>
-<li><b>?string</b>Search backword for string</li>
-<li><b>n</b>Go to the next match</li>
-<li><b>N</b>Go to the previous match</li>
-<li><b>:set nu</b>Turn on the line numbers</li>
-</ul>
+  
+     
+    	<li><a href="/tags.html#Subversion-ref">Subversion <span>1</span></a></li>
+    
+  
+
+
+
+    </ul>
+  
 </div>
+
+
+<div class="row">
+  <div class="span8">
+    <h2 id='repository_layout'>Repository Layout</h2>
+
+<h3 id='trunk'>trunk</h3>
+
+<p>Trunk是用于进行开发的主干代码存储位置。这里包含的都是最新的，可运行的软件代码（开发模式）。Trunk没有版本号和发布名称。 仅需要保证trunk在任何时候都处于“开发模式”。 其版本号命名规则：X.X.dev(最新主版本号.最新子版本号.dev)</p>
+
+<h3 id='branchs'>branchs</h3>
+
+<p>根据开发计划或者你想冻结新特色的添加时或者进行一些新的技术尝试的时候，就要使用Branches了。Brahches路径包含了trunk在不同发展阶段的副本。可以分为如下2中类型：</p>
+
+<h3 id='release_branches'>Release Branches</h3>
+
+<p>根据开发计划，发布软件的一个版本的时候，就要使用Release Branches， Release branches只是你当前trunk的一个副本，是软件开发到已经阶段的里程碑。 其版本号命名规则：X.X.build-(主版本号.子版本号.build-SVN revision版本号)，分支路径命名规则为:X.X.build</p>
+
+<h3 id='experimental_branches'>Experimental branches</h3>
+
+<p>如果想尝试新的技术（如PHP版本升级），可以建议Experimental branches。 其版本号命名规则：X.X.test-(主版本号.子版本号.test-SVN revision版本号);分支路径命名规则为:X.X.test</p>
+    <hr>
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/Linux/using-rsync-with-ssh-to-backup-data" title="Using Rsync with SSH to backup data">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next disabled"><a>Next &rarr;</a>
+      
+      </ul>
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jekyllbootstrap'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
 </div>
 
 

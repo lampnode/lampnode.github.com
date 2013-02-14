@@ -3,7 +3,7 @@
 <html> 
  <head>
     <meta charset="utf-8" />
-    <title>Linux Editor: VI help sheet | LAMPNODE | Focus On LAMP Technologies</title>
+    <title>Minimal Services on CentOS | LAMPNODE | Focus On LAMP Technologies</title>
     <meta name="description" content="">
     <meta name="author" content="Robert  Chain">
     <link rel="alternate" type="application/atom+xml" href="/atom.xml" />
@@ -224,81 +224,159 @@
 	<section class="contentMain"> 
 	 
 <div class="page-content-title">
-  <h1>Linux Editor: VI help sheet</h1>
+  <h1>Minimal Services on CentOS</h1>
    
 </div>
-<div class="page-oontent">
-    <h2>Vim Help Sheet</h2><div class='contentMainBox'>
-<h3> Modes and Controls </h3>
-<ul>
-<li>Command Mode: ESC</li>
-<li>Insertion Mode</li>
-</ul>
 
-<h3>Basic commands</h3>
-<ul>
-<li><b>:w</b>Save</li>
-<li><b>:x</b>Save and exit</li>
-<li><b>:q</b>Quit if no changes made</li>
-<li><b>:q!</b>Quit and discard any changes</li>
-<li><b>u</b>Undo last change</li>
-<li><b>U</b>Undow all changes to line</li>
-<li><b>.</b>Repeat last command</li>
-</ul>
+<div class="page-content-info">
+    <h4>Published</h4>
+    <div class="date"><span>12 February 2013</span></div>
 
-<h3>Cursor Navigation</h3>
-<ul>
-<li><b>h or arrow left </b> Cursor left</li>
-<li><b>j or arrow down </b> Cursor down</li>
-<li><b>k or arrow up   </b>Cursor up</li>
-<li><b>l or arrow right</b> Cursor right</li>
-<li><b>w </b>Next word</li>
-<li><b>W </b>	Next blank delimited word</li>
-<li><b>b </b>	Start of word</li>
-<li><b>B </b>	Start of blank delimited word</li>
-<li><b>e </b>	End of word</li>
-<li><b>E </b>	End of blank delimited word</li>
-<li><b>( </b>	Back a sentence</li>
-<li><b>) </b>	Forword a sentence</li>
-<li><b>{ </b>	Back a paragraph</li>
-<li><b>} </b>	Forword a paragraph</li>
-<li><b>0 </b>	Beginning of current line</li>
-<li><b>$ </b>	End of the current line</li>
-<li><b>H </b>   Top of screen</li>
-<li><b>M </b> 	Middle of screen</li>
-<li><b>L </b>   Bottom of screen</li>
-</ul>
-</div><div class='contentMainBox'>
-<h3>Insert Text</h3>
-<ul>
-<li><b>i</b>Insert before cursor</li>
-<li><b>a</b>Append after cursor</li>
-<li><b>I</b>Insert before line</li>
-<li><b>A</b>Append after line</li>
-<li><b>o</b>Add a new line after current line</li>
-<li><b>O</b>Add a new line before current line</li>
-<li><b>r</b>Overwrite one character</li>
-<li><b>R</b>Overwrite many character</li>
-<li><b>:r FILE_NAME </b>Reads file and insert it after this line</li>
-</ul>
+  
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    
 
-<h3>Deleting Text</h3>
-<ul>
-<li><b>x</b>Delete character to right of cursor</li>
-<li><b>X</b>Delete character to left of cursor</li>
-<li><b>D</b>Delete the rest of line</li>
-<li><b>dd or :d</b>Delete the current line</li>
-</ul>
 
-<h3>Searching</h3>
-<ul>
-<li><b>/string</b>Search forword for string</li>
-<li><b>?string</b>Search backword for string</li>
-<li><b>n</b>Go to the next match</li>
-<li><b>N</b>Go to the previous match</li>
-<li><b>:set nu</b>Turn on the line numbers</li>
-</ul>
+  
+     
+    	<li><a href="/tags.html#CentOs-ref">CentOs <span>4</span></a></li>
+    
+  
+
+
+
+    </ul>
+  
 </div>
+
+
+<div class="row">
+  <div class="span8">
+    <p>This will improve the performance of a system by disabling unneeded services. Another benefit is reduced hardware requirements for your server.</p>
+
+<h2 id='methodology_of_minimal_services'>Methodology of Minimal Services</h2>
+
+<ul>
+<li>Perform minimal OS installations</li>
+
+<li>Install additional software as needed after installation</li>
+
+<li>Minimal installations reduce the number of packages requiring updates</li>
+
+<li>No graphical environment needed on servers</li>
+
+<li>Limiting the Number of Running Services</li>
+
+<li>List of system services</li>
+</ul>
+
+<p>Here is a list of services(daemons) to help you decide what to axe. Here is another list. After performing a minimal installation, the machine reboots. When you login disable as many services as possible with the following commands:</p>
+
+<pre><code>chkconfig anacron off
+chkconfig apmd off
+chkconfig atd off
+chkconfig autofs off
+chkconfig cpuspeed off
+chkconfig cups off
+chkconfig cups-config-daemon off
+chkconfig gpm off
+chkconfig isdn off
+chkconfig netfs off
+chkconfig nfslock off
+chkconfig openibd off
+chkconfig pcmcia off
+chkconfig portmap off
+chkconfig rawdevices off
+chkconfig readahead_early off
+chkconfig rpcgssd off
+chkconfig rpcidmapd off
+chkconfig smartd off
+chkconfig xfs off
+chkconfig ip6tables off
+chkconfig avahi-daemon off
+chkconfig firstboot off
+chkconfig yum-updatesd off 
+chkconfig sendmail off
+chkconfig mcstrans off
+chkconfig pcscd off
+chkconfig bluetooth off
+chkconfig hidd off</code></pre>
+
+<p>The next group of services is more useful to servers in some circumstances.</p>
+
+<ul>
+<li>xinetd may be needed for some servers</li>
+
+<li>acpid needed for power button to shut down server gently</li>
+
+<li>microcode_ctl not needed on AMD machines</li>
+
+<li>haldaem and messagebus support for plug and play devices</li>
+
+<li>mdmonitor not needed unless running software RAID</li>
+</ul>
+
+<p>Evaluate their worth even more closely before disabling them.</p>
+
+<pre><code>chkconfig xinetd off
+chkconfig acpid off
+chkconfig microcode_ctl off
+chkconfig haldaemon off
+chkconfig messagebus off
+chkconfig mdmonitor off</code></pre>
+
+<h2 id='virtual_terminals'>Virtual Terminals</h2>
+
+<p>You may also minimize on virtual terminals. The default is six virtual terminals. You can probably do with two. To disable them, edit the /etc/inittab file and comment out the ones that you do not want running like this:</p>
+
+<pre><code># Run gettys in standard runlevels
+1:2345:respawn:/sbin/mingetty tty1
+2:2345:respawn:/sbin/mingetty tty2
+#3:2345:respawn:/sbin/mingetty tty3
+#4:2345:respawn:/sbin/mingetty tty4
+#5:2345:respawn:/sbin/mingetty tty5
+#6:2345:respawn:/sbin/mingetty tty6</code></pre>
+
+<h2 id='updating_and_rebooting'>Updating and Rebooting</h2>
+
+<p>On any new install, it is a good idea to run &#8220;yum update&#8221; and then reboot the machine to apply the latest security and software updates. It is a good idea to reboot after the update to make sure that the system comes up properly.</p>
+    <hr>
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/Linux/install-touchpad-indicator-in-ubuntu-1204" title="在Ubuntu 12.04上安装配置Touchpad Indicator">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/Linux/setup-static-ip-on-centos-6" title="Setup static ip on CentOS 6">Next &rarr;</a></li>
+      
+      </ul>
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jekyllbootstrap'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
 </div>
 
 
