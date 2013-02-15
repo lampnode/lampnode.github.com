@@ -15,9 +15,11 @@ In software development, Git is a distributed revision control and source code m
 ## Simple Guide For github
 
 ### Checkout an existed repository
+	
 	$git clone USERNAME@github.com:/path/to/repository
 
 ### Add and commit
+	
 	$git add <filename> # or git add .
 	$git commit -m "Commit message"
 
