@@ -92,6 +92,8 @@ footer{clear:both;border:0px;margin:10px auto;padding:0px;width:980px;}
 .page-content-title h1{color:#000000;padding:10px 0px;margin:0px;}
 .page-content-title small{color:#555555;float:left;clear:both;font-size:22px;padding:0px 0px 5px 0px;}
 
+.page-content-info{padding:10px 0px;}
+
 /* Page header tweaks */
 .page-header {
   background-color: #f5f5f5;
@@ -102,8 +104,18 @@ footer{clear:both;border:0px;margin:10px auto;padding:0px;width:980px;}
 .sideNav{list-style:none;}
 .sideNav .active{color:#990066;}
 
-/* tag_box ======================================================== */
 
+/* post page */
+.postDate, .postTags{clear:both;overflow:hidden;padding:0px;margin:0px;height:auto;}
+.postTags li, .postDate li{float:left;list-style:none;padding:0px 5px;}
+.postTagsTitle, .postDateTitle{font-weight:bold;}
+.postTags li a span{
+        vertical-align:super;
+        font-size:0.8em;
+}
+
+
+/* tag_box */
 .tag_box {
 	list-style:none;
 	margin:0;
