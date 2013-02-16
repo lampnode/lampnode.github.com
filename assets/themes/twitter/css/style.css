@@ -8,6 +8,8 @@ html, body {
   background-repeat: repeat-x;
   background-position: 0 40px;
 }
+.brand{font-family:'Arial'}
+.nav li a{ font-family:'Microsoft YaHei','Tahoma', 'Arial', 'Helvetica', 'STHeiti';font-size:16px;}
 
 .topbar .btn {
   border: 0;
@@ -16,16 +18,19 @@ html, body {
 h1{padding:5px 0px 5px 10px; margin:5px 0px;
         color:#000000;
         border-radius:5px;
+	font-family:'Microsoft YaHei','Tahoma', 'Arial', 'Helvetica', 'STHeiti';
 }
 h2{padding:5px 0px 5px 10px; margin:20px 0px 10px 0px ;
         background:#046D8B;
         color:#ffffff;
         border-radius:5px;
+	 font-family:'Microsoft YaHei','Tahoma', 'Arial', 'Helvetica', 'STHeiti';
 }
 h3{padding:5px 0px 5px 10px; margin:5px 0px;
         background:#FFE4C4;
         color:#0000;
         border-radius:5px;
+	 font-family:'Microsoft YaHei','Tahoma', 'Arial', 'Helvetica', 'STHeiti';
 }
 
 .navbar {
@@ -47,7 +52,7 @@ h3{padding:5px 0px 5px 10px; margin:5px 0px;
 }
 .siteRss img{padding:0px 10px;border-left:1px solid #cccccc; margin:0;}
 .contentNaviBox{margin:auto;padding:0px 0px 10px 0px;border:0}
-.contentNaviBox .contentNaviBoxTitle{font-size:16px;padding:5px;margin:5px;border-bottom:2px solid #cccccc;}
+.contentNaviBox .contentNaviBoxTitle{font-family:'Microsoft YaHei','Tahoma', 'Arial', 'Helvetica', 'STHeiti';font-size:16px;padding:5px;margin:5px;border-bottom:2px solid #cccccc;}
 .contentMain{background-color:#ffffff;float:left;border:1px solid #cccccc;width:760px;margin:0px 0px 0px 5px;padding:0px 10px;
 	-webkit-border-radius: 10px;
         -moz-border-radius: 10px;
