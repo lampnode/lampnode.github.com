@@ -13,14 +13,22 @@ group	: navigation
 
 ------
 
+<div style="float:right;width:230px;">
+<img src="/images/gravatar.png" width="200px" height="200px" style="padding:10px;border:1px solid #cccccc;margin:10px;" />
+<b style="padding:10px;margin:10px;font-size:14px;">学而不思则罔 思而不学则殆</b>
+</div>
+
+
 #### Position 
 
 - PHP Engineer  
 - Red Hat Certified Engineer
 
-#### Summary
+#### Contact
 
-<img src="/images/gravatar.png" width="200px" height="200px" style="float:right;padding:10px;border:1px solid #cccccc;margin:10px;" />
+* Email:<a href="#"><span class="jt_authorEmail">please enable js</span></a>
+
+#### Summary
 
 Work 8 many years in IT domain experience, include development of web application software(PHP), linux software(JAVA). Successful project development, software architecture and Linux administrative experience(CentOs, Ubuntu). 
 
@@ -28,8 +36,8 @@ The knowledge of application development of extensive software, network, include
 
 
 #### Specialties
-- Software development :PHP5, SQL, Javascript, XHTML, XML, CSS , JAVA
-- Operating system: DOS, windows 95/98/NT/2000/XP/2003, linux(RedHat, Ubuntu, CentOs)
+- Software development :PHP5, SQL, Javascript, XHTML, XML, CSS, JAVA
+- Operating System: Windows, linux(RedHat, Ubuntu, CentOs)
 
 
 ## About LAMPNode
