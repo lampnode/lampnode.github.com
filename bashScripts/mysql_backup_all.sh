@@ -2,8 +2,8 @@
  
 #
 # CREATE MYSQL BACKUP
-# Author:Edwin Chain
-# Mail:edwin.chain@gmail.com
+# Author:Robert Chain
+# Mail:robert.c@lampnode.com
 #
 
 ##
