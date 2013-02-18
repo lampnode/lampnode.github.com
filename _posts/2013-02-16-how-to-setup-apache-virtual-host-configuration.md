@@ -13,14 +13,31 @@ tags: [ Httpd ]
 
 ## 设置步骤
 
-### 配置
+### 网站部署结构
+
+#### IP访问
+
+针对IP访问要预留出一个设置，便于其访问，一般使用默认即可,所以 "/var/www/html"保留即可.
+
+#### 域名访问
+
+服务器上的主要服务基本上都是基于域名访问的，如果使用IP不是一个明智的方法。所以，良好的部署基于域名访问的网站是不可或却的服务器部署策略。部署的主要注意事项：
+
+
+* 网站应放在非系统硬盘上，便于备份与系统应急恢复
+* 网站应该具有统一的目录结构
+* 网站的管理用户避免使用ROOT
+
+
+
+### 虚拟机配置
 
 打开文件 /etc/httpd/conf/httpd.conf, 搜索 VirtualHost example, 在其后面根据你的需求增加如下代码:
 
 {% highlight bash %}
 
 	<VirtualHost *:80>
-	    ServerAdmin edwin.chain@gmail.com
+	    #ServerAdmin your.mail@domain.com
 	    DocumentRoot "/your/doc/base/path"
 	    ServerName www.yourdomain.com
 	    ServerAlias yourdomain.com yourdomain.org

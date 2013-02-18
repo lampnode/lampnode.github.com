@@ -57,4 +57,6 @@ Markdown 标记区块引用是使用类似 email 中用 > 的引用方式。如�
 	2.  McHale
 	3.  Parish
 
+** 中文列表抽风问题: ** 用 markdown 写带中文的列表时发现 jekyll 生成的网页中有的可以正常显示，有的则不行。折腾半天，发现如果列表项中含有英文字母等非中文字符，就可以正确显示，纯中文的那些打死也不行。
 
+上网查后得知原来是 jeklly 默认 markdown 引擎 maruku 的问题，将引擎改为 rdiscount 即可。做法是修改 _config.yml 文件，在 pygments: true 上面添加一行 markdown: rdiscount
