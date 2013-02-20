@@ -1,3 +1,29 @@
+<script src="/scripts/jquery.tableofcontents.min.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function(){ 
+    $("#postToc").tableOfContents(
+      $("#postWrapper"),      // Scoped to div#wrapper
+      {
+        startLevel: 2,    // H2 and up
+        depth:      3,    // H2 through H4,
+      }
+    ); 
+  });
+</script>
+
+<style type="text/css" media="screen">
+h1, h2, h3, h4, h5 { position: relative;}
+		
+#postToc {
+	padding-left: 30px;
+}
+ol { list-style: upper-alpha;}
+ol ol { list-style: decimal;}
+ol ol ol { list-style: lower-roman;}
+ol ol ol ol { list-style: lower-alpha;}
+</style>
+
 <div class="page-content-title">
   <h1>{{ page.title }}</h1>
    {% if page.tagline %}  <small>{{ page.tagline }}</small> {% endif %}
@@ -8,8 +34,7 @@
 	<li class="postDateTitle">Published:</li>
 	<li>{{ page.date | date_to_long_string }}</li>
    </li>
-
-  {% unless page.tags == empty %}
+   {% unless page.tags == empty %}
     <ul class="postTags">
     	<li class="postTagsTitle">Tags:</li>
     	{% assign tags_list = page.tags %}
@@ -20,8 +45,9 @@
 
 
 <div class="row">
-  <div class="span8">
-    {{ content }}
+  <div class="span8" id="postWrapper">
+        <ol id="postToc" ></ol>
+	{{ content }}
     <hr>
     <div class="pagination">
       <ul>
