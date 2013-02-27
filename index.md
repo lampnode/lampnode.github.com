@@ -64,14 +64,15 @@ tagline: Focus On LAMP Technologies
 <div class="contentMainBoxItem" >
 <h3>开发速查 | Development Help Sheet</h3>
 <ul>
-	<li><b>Web Design:</b> 
+	<li><b>网站设计:</b> 
 		<a href="/library/colors.html">Web Colors Sheet</a> | 
 		<a href="/library/css2.html" target="_blank">CSS2</a> |
 		<a href="http://www.elizabethcastro.com/html/extras/xhtml_ref.html" target="_blank">(X)HTML Elements and Attributes</a>
 	</li>
-	<li><b>Programing:</b><a href="/library/jquery.html">Jquery</a></li>
-	<li><b>Code Management:</b> <a href="/library/github.html">GitHub Guide</a></li>
-	<li><b>Editors:</b> <a href="/library/vim.html">VI(M)</a></li> 
+	<li><b>编程语言:</b><a href="/library/jquery.html">Jquery</a></li>
+	<li><b>开发管理:</b> <a href="/library/github.html">GitHub Guide</a></li>
+	<li><b>代码编辑器:</b> <a href="/library/vim.html">VI(M)</a></li> 
+	<li><b>博客管理:</b><a href="/library/jekyll.html">Jekyll</a></li>
 </ul>
 </div>
 
