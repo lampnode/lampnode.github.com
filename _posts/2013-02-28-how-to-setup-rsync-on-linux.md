@@ -107,3 +107,7 @@ With delete(Warnin:When using this parameter, it is recommended to use absolute 
 Specify the local directory path to prevent empty the current directory)
 	
 	[root@client ~]# rsync -avz --delete admin@192.168.1.105::backup /www
+
+##### 联合SSH
+
+参看[使用Rsync经SSH备份数据](/Linux/using-rsync-with-ssh-to-backup-data/) 
