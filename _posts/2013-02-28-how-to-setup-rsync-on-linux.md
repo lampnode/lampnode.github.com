@@ -98,8 +98,42 @@ rsync默认使用的是873端口，需要设置防火墙
 
 #### 用法
 
+##### 命令格式
+	rsync [OPTION]... SRC DEST
+	rsync [OPTION]... SRC [USER@]HOST:DEST
+	rsync [OPTION]... [USER@]HOST:SRC DEST
+	rsync [OPTION]... [USER@]HOST::SRC DEST
+	rsync [OPTION]... SRC [USER@]HOST::DEST	
+	rsync [OPTION]... rsync://[USER@]HOST[:PORT]/SRC [DEST]
+
+对应于以上六种命令格式，rsync有六种不同的工作模式：
+
+* 拷贝本地文件。当SRC和DES路径信息都不包含有单个冒号":"分隔符时就启动这种工作模式。如：rsync -a /data /backup
+* 使用一个远程shell程序(如rsh、ssh)来实现将本地机器的内容拷贝到远程机器。当DST路径地址包含单个冒号":"分隔符时启动该模式。如：rsync -avz *.c foo:src
+* 使用一个远程shell程序(如rsh、ssh)来实现将远程机器的内容拷贝到本地机器。当SRC地址路径包含单个冒号":"分隔符时启动该模式。如：rsync -avz foo:src/bar /data
+* 从远程rsync服务器中拷贝文件到本地机。当SRC路径信息包含"::"分隔符时启动该模式。如：rsync -av root@172.16.78.192::www /databack
+* 从本地机器拷贝文件到远程rsync服务器中。当DST路径信息包含"::"分隔符时启动该模式。如：rsync -av /databack root@172.16.78.192::www
+* 列远程机的文件列表。这类似于rsync传输，不过只要在命令中省略掉本地机信息即可。如：rsync -v rsync://172.16.78.192/www
+
+##### 主要参数
+
+* -z, --compress 对备份的文件在传输时进行压缩处理
+* -v, --verbose 详细模式输出 
+* -q, --quiet 精简输出模式 
+* -c, --checksum 打开校验开关，强制对文件传输进行校验 
+* -a, --archive 归档模式，表示以递归方式传输文件，并保持所有文件属性，等于-rlptgoD 
+* --existing 仅仅更新那些已经存在于DST的文件，而不备份那些新创建的文件 
+* --delete 删除那些DST中SRC没有的文件 
+* --delete-excluded 同样删除接收端那些被该选项指定排除的文件 
+* --delete-after 传输结束以后再删除 
+* --config=FILE 指定其他的配置文件，不使用默认的rsyncd.conf文件 
+* --port=PORT 指定其他的rsync服务端口  
+* --password-file=FILE 从FILE中得到密码 
+
 #####  例子1
 	[root@client ~]# rsync -avz admin@192.168.1.105::backup /www
+
+
 
 ##### 例子2
 

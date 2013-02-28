@@ -10,6 +10,8 @@ tags: [CentOs]
 
 ## 系统要求
 
+在常驻模式（daemon mode）下，rsync默认监听TCP端口873。SSH情况下，rsync用户端执行程式必须同时在本地和远程机器上安装。
+
 需要安装这些软件包：
 
 - rsync
