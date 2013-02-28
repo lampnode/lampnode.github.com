@@ -45,6 +45,9 @@ In order to update your local repository to the newest commit, you should execut
 
 	$git pull
 
+### 撤销本地所有修改与服务器一致
+
+	$git reset --hard origin/master
 
 ### 忽略配置 git ignore
 
