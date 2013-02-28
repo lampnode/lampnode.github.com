@@ -85,6 +85,23 @@ CentOS 6默认源是没有DenyHosts安装包的, 所以我们需要添加fedora�
 
 DenyHosts的黑名单为/etc/hosts.deny, 白名单/etc/hosts.allow.
 
+
+如果你想把某个ip或者ip段放入白名单，可以使用下列命令，这样就可以避免把自己的ip阻止了
+	
+默认的设置:\
+
+	[root@local ~]# more /var/lib/denyhosts/allowed-hosts	
+	# We mustn't block localhost
+	127.0.0.1
+
+增加多个Ip到allowed-hosts
+	
+	[root@local ~]# echo "192.168.0.*" >> /var/lib/denyhosts/allowed-hosts 
+	[root@local ~]# more /var/lib/denyhosts/allowed-hosts 
+	# We mustn't block localhost
+	127.0.0.1
+	192.168.0.*
+
 ## 深入配置
 
 如果需要深入配置DenyHosts, 需要修改的文件为/etc/denyhosts.conf 修改完后需要重启DenyHosts才可以运行新的配置.
