@@ -19,8 +19,12 @@ tags: [SQL]
 
 #### 创建数据库
 
+
 	mysql> CREATE DATABASE mydatabase;
 
+Custom character-set
+
+	mysql>CREATE DATABASE `mydatabase` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci
 #### 使用指定数据库
 
 	mysql> USE mydatabase;
