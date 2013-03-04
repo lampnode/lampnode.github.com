@@ -48,6 +48,14 @@ ol ol ol ol { list-style: lower-alpha;}
   <div class="span8" id="postWrapper">
         <ol id="postToc" ></ol>
 	{{ content }}
+     <!-- Show all of articles in same category -->
+        <h2>相关文章</h2>
+        <ul>
+        {% for post in site.categories.[page.category] %}
+                <li><span>[ {{ post.date | date: "%B %e, %Y" }} ]</span> <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></li>
+        {% endfor %}
+	</ul>
+      <!-- End show -->
     <hr>
     <div class="pagination">
       <ul>
