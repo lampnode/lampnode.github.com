@@ -24,6 +24,18 @@
     <link href="{{ ASSET_PATH }}/css/style.css" rel="stylesheet" >
     <script  src="/scripts/jquery.min.js"></script>
     <script  src="/scripts/jquery.tools.js"></script>
+    
+    <script src="/scripts/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script>
+    <script language="javascript">
+	$.fn.tagcloud.defaults = {
+    		size: {start: 0.9, end: 2, unit: 'em'},
+      		color: {start: '#e77471', end: '#f62817'}
+	};
+ 
+	$(function () {
+    		$('#tag_cloud a').tagcloud();
+	});
+    </script>
     <link rel="shortcut icon" href="/images/favicon.ico">
     <!-- touch icons
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
@@ -89,10 +101,11 @@
            </div> 
 	   <div class="contentNaviBox">
 		<p class="contentNaviBoxTitle">标签 | Tags</p>
-           	<ul class="tag_box inline">
-  			{% assign tags_list = site.tags %}
-  			{% include JB/tags_list %}
-	   	</ul>
+	  	<div id='tag_cloud' style="padding:5px;">
+			{% for tag in site.tags %}
+				<a href="/tags.html#{{ tag[0] }}-ref" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>
+			{% endfor %}
+		</div>
 	  </div>
 	  <div class="contentNaviBox">
 	  	<p class="contentNaviBoxTitle">链接 | Links</p> 
