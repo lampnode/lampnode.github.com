@@ -21,6 +21,7 @@ h1{padding:5px 0px 5px 10px; margin:5px 0px;
 	font-family:'Microsoft YaHei','Tahoma', 'Arial', 'Helvetica', 'STHeiti';
 }
 h2{padding:5px 0px 5px 10px; margin:1.5em 0em 1em 0em;
+	clear:both;
         background:#046D8B;
         color:#ffffff;
         border-radius:5px;
@@ -67,6 +68,8 @@ h6{padding:5px 0px; margin:5px 0px;}
 .contentMainBoxItem{width:98%;clear:both;border:0;height:auto;overflow:hidden;padding:10px 1%;margin:0px;}
 .contentMainBoxItem ul{list-style:none;padding:5px;margin:0px;}
 .contentMainBoxItem ul li{list-style:none;}
+.imgContent{padding:5px;margin:10px;float:right;border:1px solid #cccccc;border-radius:5px;}
+
 /*For laster updated*/
 .lastUpdated{padding:0px;margin-left:5px;}
 .lastUpdated li{padding:5px 0px;list-style:none;margin:0px;}
