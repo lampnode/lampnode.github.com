@@ -63,7 +63,7 @@
           </ul>
 
 	<ul class="nav pull-right">
-            <li class="sharing">	
+	       <li class="sharing">	
 	 	<!-- Baidu Button BEGIN -->
 		<div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
     			<a class="bds_tsina"></a>
@@ -83,7 +83,7 @@
 		</script>
 		<!-- Baidu Button END --> 
 		</li>
-            <li class="divider-vertical"></li>
+            	<li class="divider-vertical"></li>
 	</ul>
 	</nav>
       </div>
@@ -92,15 +92,27 @@
    <div class="container">
       <div class="content">
          <section class="contentNavi">
+	  <div class="contentNaviBox">
+                        <form action="http://www.google.com/search" style="padding:5px;" target="google_window">
+                                <label for="g_search" class="hidden"></label>
+                                <input id="g_search" style="width:100px;float:left;" type="text"  placeholder="Search.." name="q" />
+                                <input type="submit" style="float:left;" name='btnG' style="edisplay:none" id="dsearchsubmiti" value="Go" />
+                                <input type="hidden" name="ie" value="UTF-8" />
+                                <input type="hidden" name="oe" value="UTF-8" />
+                                <input type="hidden" name="hl" value="zh-CN" />
+                                <input type="hidden" name="domains" value="www.lampnode.com" />
+                                <input type="hidden" name="sitesearch" value="www.lampnode.com" />
+                         </form>
+	   </div>
 	   <div class="contentNaviBox">
-                <p class="contentNaviBoxTitle">类别 | Categories</p>
+                <p class="contentNaviBoxTitle"><a href="/categories.html">类别</a> | Categories</p>
                 <ul class="tag_box inline">
                         {% assign categories_list = site.categories %}
                         {% include JB/categories_list %}
                 </ul>
            </div> 
 	   <div class="contentNaviBox">
-		<p class="contentNaviBoxTitle">标签 | Tags</p>
+		<p class="contentNaviBoxTitle"><a href="/tags.html">标签</a> | Tags</p>
 	  	<div id='tag_cloud' style="padding:5px;">
 			{% for tag in site.tags %}
 				<a href="/tags.html#{{ tag[0] }}-ref" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>
