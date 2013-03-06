@@ -40,7 +40,7 @@ rsync是类unix系统下的数据镜像备份工具。它的特性如下：
 
 	service rsync
 	{
-	disable = yes
+	disable = no #原为yes,这里修改为no
 	socket_type = stream
 	wait = no
 	user = root
@@ -57,25 +57,77 @@ rsync是类unix系统下的数据镜像备份工具。它的特性如下：
 
 rsync默认使用的是873端口，需要设置防火墙
 
-	[root@server ~]#  telnet 127.0.0.1 873
-	Trying 127.0.0.1...
-	telnet: connect to address 127.0.0.1: Connection refused
-	[root@server ~]# iptables -A INPUT -s 192.168.0.0/255.255.255.0 -p tcp -m tcp --dport 873 -j ACCEPT
-	[root@server ~]# iptables -A INPUT -p tcp -m tcp --dport 873 -j DROP
+{% highlight bash %}
+
+[root@server]# iptables --list
+Chain INPUT (policy DROP)
+target     prot opt source               destination         
+ACCEPT     all  --  anywhere             anywhere            
+ACCEPT     tcp  --  anywhere             anywhere            tcp dpt:ssh 
+ACCEPT     tcp  --  anywhere             anywhere            tcp dpt:http 
+ACCEPT     tcp  --  anywhere             anywhere            tcp dpt:https 
+ACCEPT     icmp --  anywhere             anywhere            icmp echo-request 
+ACCEPT     all  --  anywhere             anywhere            state RELATED,ESTABLISHED 
+
+Chain FORWARD (policy DROP)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination         
+
+[root@server]# iptables -A INPUT -p tcp --dport 873 -j ACCEPT
+
+[root@server]# iptables --list
+Chain INPUT (policy DROP)
+target     prot opt source               destination         
+ACCEPT     all  --  anywhere             anywhere            
+ACCEPT     tcp  --  anywhere             anywhere            tcp dpt:ssh 
+ACCEPT     tcp  --  anywhere             anywhere            tcp dpt:http 
+ACCEPT     tcp  --  anywhere             anywhere            tcp dpt:https 
+ACCEPT     icmp --  anywhere             anywhere            icmp echo-request 
+ACCEPT     all  --  anywhere             anywhere            state RELATED,ESTABLISHED 
+ACCEPT     tcp  --  anywhere             anywhere            tcp dpt:rsync 
+
+Chain FORWARD (policy DROP)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination
+
+[root@server]# /etc/init.d/iptables save
+iptables: Saving firewall rules to /etc/sysconfig/iptables:[  OK  ] 
+{% endhighlight %}
+
 
 #### 设置 rsyncd.conf
 
 	[root@server ~]# vi /etc/rsyncd.conf
 
-设置样例如下:	
-		[backup]
-		path = /www
-		auth users = admin
-		uid = root
-		gid = root
-		secrets file = /etc/rsyncd.secrets
-		read only = no
-		list = yes
+设置样例如下:
+
+{% highlight bash %}
+
+# Global setup
+hosts allow=192.168.0.102 192.168.0.100  
+hosts deny=*
+log file = /var/log/rsyncd.log
+uid = root
+gid = root
+
+# Module setup
+[itemA]
+path = /var/ftp/itemA
+auth users = admin
+secrets file = /etc/rsyncd.secrets
+read only= yes
+
+[itemB]
+path = /var/ftp/itemB
+auth users = admin
+secrets file = /etc/rsyncd.secrets
+read only= yes
+
+{% endhighlight %}
 
 #### 设置 rsyncd.secrets
 
@@ -145,3 +197,69 @@ Specify the local directory path to prevent empty the current directory)
 ##### 联合SSH
 
 参看[使用Rsync经SSH备份数据](/Linux/using-rsync-with-ssh-to-backup-data/) 
+
+## 常见错误分析
+
+###### 问题
+
+	@ERROR: chroot failed
+	rsync error: error starting client-server protocol (code 5) at main.c(1522) [receiver=3.0.3]
+
+原因：
+服务器端的目录不存在或无权限。创建目录并修正权限可解决问题。
+
+###### 问题
+
+	@ERROR: auth failed on module tee
+	rsync error: error starting client-server protocol (code 5) at main.c(1522) [receiver=3.0.3]
+
+原因：
+服务器端该模块（tee）需要验证用户名密码，但客户端没有提供正确的用户名密码，认证失败。提供正确的用户名密码解决此问题。
+
+###### 问题
+
+	@ERROR: Unknown module ‘tee_nonexists’
+	rsync error: error starting client-server protocol (code 5) at main.c(1522) [receiver=3.0.3]
+
+
+原因：
+服务器不存在指定模块。提供正确的模块名或在服务器端修改成你要的模块以解决问题。
+
+###### 问题
+
+	password file must not be other-accessible
+	continuing without password file
+	Password:
+
+原因：
+这是因为rsyncd.pwd rsyncd.secrets的权限不对，应该设置为600。如：chmod 600 rsyncd.pwd
+
+###### 问题
+
+	rsync: failed to connect to 218.107.243.2: No route to host (113)
+	rsync error: error in socket IO (code 10) at clientserver.c(104) [receiver=2.6.9]
+
+原因：
+对方没开机、防火墙阻挡、通过的网络上有防火墙阻挡，都有可能。关闭防火墙，其实就是把tcp udp的873端口打开。
+
+###### 问题
+
+	rsync error: error starting client-server protocol (code 5) at main.c(1524) [Receiver=3.0.7]
+
+原因：
+/etc/rsyncd.conf配置文件内容有错误。请正确核对配置文件。
+
+###### 问题
+
+	rsync: chown "" failed: Invalid argument (22)
+
+原因：
+权限无法复制。去掉同步权限的参数即可。(这种情况多见于Linux向Windows的时候)
+
+###### 问题
+
+	@ERROR: daemon security issue -- contact admin
+	rsync error: error starting client-server protocol (code 5) at main.c(1530) [sender=3.0.6]
+
+原因：
+同步的目录里面有软连接文件，需要服务器端的/etc/rsyncd.conf打开use chroot = yes。掠过软连接文件。
