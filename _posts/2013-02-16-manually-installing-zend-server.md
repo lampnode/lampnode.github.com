@@ -4,47 +4,47 @@ title: "手动安装 Zend Server"
 tagline: "Manually Installing Zend Server"
 description: ""
 category: Linux 
-tags: [ Zend Server ]
+tags: [ ZendServer, CentOs, Ubuntu, PHP ]
 ---
 {% include JB/setup %}
 
-Install Zend Server, the first thing you have to do is to setup the repository for downloading the Zend Server package.
  
- 
-## Ubuntu
+## 安装 
+### Ubuntu
 
-### To setup the environment
 
-Define a repository by opening the following file: /etc/apt/sources.list and adding the line:
+#### 设置软件源
+
+在文件" /etc/apt/sources.list" 增加如下一行:
 
 	deb http://repos.zend.com/zend-server/deb server non-free
 
 
-Add Zend's repository public key by running:
+导入 Zend repository的 public key:
 
 	# wget http://repos.zend.com/zend.key -O- |sudo apt-key add -
 
-To synchronize with Zend's repository run:
+同步软件源:
 
 	# sudo apt-get update
 
 
-### To install
+#### 安装
 
-#### Install Zend Server CE
+##### Install Zend Server CE
 
-	# sudo apt-get install zend-server-php-5.2
+	# sudo apt-get install zend-server-php-5.x
 
-#### Install Zend Server
-Once the repository is set up, run the appropriate command according to PHP support you require (5.2 ,5.3  5.4):
+##### Install Zend Server
 
-	# sudo apt-get install zend-server-php-5.2
 
-## CentOs/RHEL/Fedora
+	# sudo apt-get install zend-server-php-5.x
 
-### To setup the environment:
+### CentOs/RHEL/Fedora
 
-Set up your Zend Server repository by creating:/etc/yum.repos.d/zend.repo and adding the following content:
+### 设置YUM源
+
+创建文件"/etc/yum.repos.d/zend.repo",并添加如下内容:
 
 	[Zend]
 	name=Zend Server
@@ -60,31 +60,23 @@ Set up your Zend Server repository by creating:/etc/yum.repos.d/zend.repo and ad
 	gpgcheck=1
 	gpgkey=http://repos.zend.com/zend.key
 
-Now you can use 'yum' to handle installations or any other tool that supports the RPM packaging format.
 
-###To install
+#### 安装
 
-#### Install Zend Server CE
+##### Zend Server CE
 
-Once the environment is setup, run the appropriate command according to the product version and PHP support you require: To install Zend Server Community Edition with PHP 5.2 run:
- 
-	yum install zend-server-ce-php-5.2
- 
-To install Zend Server Community Edition with PHP 5.3 run:
- 
- 	yum install zend-server-ce-php-5.3
+	yum install zend-server-ce-php-5.x
 
-#### Install Zend Server  
+##### Install Zend Server  
 
-Once the environment is setup, run the appropriate command according to the PHP version support you require (5.2 or 5.3):
 
-	# yum install zend-server-php-<PHP Version>
+	# yum install zend-server-php-x
 
-To clean your packages cache and ensure retrieval of updates from the web, run:
+##### 清理软件包
 
 	# yum clean all
 
-## Login Web administration interface
+## 设置管理界面
 
 After installing, a completion notification will appear, with a notice that the servers have started. To access the Administration Interface (Web) open your browser at:
  
@@ -97,8 +89,9 @@ or
 Upon initial log in, you will be prompted to define your password.
 
 
-## Post Installation Configuration
+## 安装后配置
 
+### 系统环境配置
 To add the install/path/bin directory to your $PATH environment variable for all users:
 
 Log in as root or use sudo to execute the following commands.Using a text editor, open /etc/profile.  Add the following lines to the end of the file
@@ -115,3 +108,8 @@ Save the file.In order for this to take effect, close and reopen your shell or r
 	source /etc/profile
 
 You can now run the PHP binary provided by Zend Server without typing its full path.
+
+### 虚拟主机设置
+
+参看 [如何配置Apache虚拟机](/Apache/how-to-setup-apache-virtual-host-configuration/)
+

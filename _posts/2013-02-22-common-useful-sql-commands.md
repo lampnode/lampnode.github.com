@@ -4,7 +4,7 @@ title: "常用的SQL语句"
 tagline: "Common Useful SQL Commands"
 description: ""
 category: MySQL
-tags: [SQL]
+tags: [ SQL, MySQL ]
 ---
 {% include JB/setup %}
 
@@ -102,7 +102,67 @@ Custom character-set
 
 这将删除特定的记录从表中。要小心，到指定的记录要明确，以避免删除比你预计的更多的记录。如果每一条记录都有一个唯一的主键，使用它.
 
-### 修改character set
+### 管理字符集
+
+#### 查看MySQL数据表（table）的MySQL字符集
+##### 使用 table status查询
+例如查询cms数据库里的systems_user表：
+
+{% highlight bash %}
+mysql>show table status from cms like '%systems_user%'; 
++-----------------+--------+---------+------------+----+-----------------+-----------+
+| Name            | Engine | Version | Row_format | Rows  | Collation    | ...       |
++-----------------+--------+---------+------------+----+-----------------+-----------+
+| ec_systems_user | MyISAM |      10 | Dynamic    | 5  | utf8_general_ci | ...       |   
++-----------------+--------+---------+------------+----+-----------------+-----------+
+1 row in set
+{% endhighlight %}
+
+##### 使用select语句查询
+
+{% highlight bash %}
+mysql> SELECT table_name,Engine,table_rows,Avg_row_length,Data_length,
+  	Index_length,Auto_increment,table_collation
+	FROM information_schema.tables
+	WHERE Table_Schema='myDatabase';
++--------------------+--------+------------+----------------+-------------+--------------+----------------+-----------------+
+| table_name         | Engine | table_rows | Avg_row_length | Data_length | Index_length | Auto_increment | table_collation |
++--------------------+--------+------------+----------------+-------------+--------------+----------------+-----------------+
+| archives_articles  | MyISAM |         20 |           1113 |       22260 |         3072 |            133 | utf8_general_ci |
+| archives_catalog   | MyISAM |         11 |             29 |         328 |         3072 |            125 | utf8_general_ci |
+| config_viewparams  | MyISAM |          1 |             24 |          24 |         2048 | NULL           | utf8_general_ci |
+| navigation_item    | MyISAM |          8 |             21 |         172 |         3072 |            140 | utf8_general_ci |
+| page_article       | MyISAM |          5 |             39 |         196 |         2048 |             11 | utf8_general_ci |
+| page_catalog       | MyISAM |          1 |             68 |          68 |         2048 |              8 | utf8_general_ci |
+| systems_log        | MyISAM |          1 |             56 |          56 |         2048 |              6 | utf8_general_ci |
+| systems_permission | MyISAM |          0 |              0 |           0 |         1024 |              1 | utf8_general_ci |
+| systems_role       | MyISAM |          4 |             29 |         116 |         2048 | NULL           | utf8_general_ci |
+| systems_user       | MyISAM |          5 |            177 |         888 |         4096 |              6 | utf8_general_ci |
++--------------------+--------+------------+----------------+-------------+--------------+----------------+-----------------+
+10 rows in set 
+{% endhighlight %}
+
+#### 查看MySQL数据列（column）的MySQL字符集。
+
+{% highlight bash %}
+
+mysql> show full columns from ec_systems_user;
++--------------+------------------+-----------------+-------------------------+
+| Field        | Type             | Collation       | .......                 |
++--------------+------------------+-------------------------------------------+
+| userId       | int(11) unsigned |                 | .......                 |
+| email        | varchar(50)      | utf8_general_ci | .......                 |
+| password     | varchar(255)     | utf8_general_ci | .......                 |
+| username     | varchar(50)      | utf8_general_ci | .......                 |
+| roleName     | varchar(20)      | utf8_general_ci | .......                 | 
+| isLocked     | int(1)           | NULL            | .......                 |
+| registerTime | datetime         | NULL            | .......                 |
++--------------+------------------+-----------------+------+-----+---------+--+
+7 rows in set
+
+{% endhighlight %}
+
+#### 修改表的字符集
 
 	ALTER TABLE db_name.table_name CHARACTER SET utf8 COLLATE utf8_unicode_ci
 
