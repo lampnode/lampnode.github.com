@@ -81,7 +81,7 @@ h6{padding:5px 0px; margin:5px 0px;}
 }
 .lastUpdatedItem {border:1px solid #cccccc;padding:0px 3px;margin:0px;}
 .lastUpdatedItem dt{;padding:5px;line-height:1.5em;}
-.lastUpdatedItem dd{line-height:1.5em;}
+.lastUpdatedItem dd{line-height:1.5em; word-wrap:break-word }
 .lastUpdatedTitle{font-size:16px;padding:5px;}
 
 footer{clear:both;border:0px;margin:10px auto;padding:0px;width:980px;}
