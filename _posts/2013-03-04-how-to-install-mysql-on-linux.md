@@ -4,7 +4,7 @@ title: "在Linux上安装配置MySQL"
 tagline: "How to install MySQL on Linux"
 description: ""
 category: MySQL
-tags: [ MySQL Linux ]
+tags: [ MySQL, Linux ]
 ---
 {% include JB/setup %}
 

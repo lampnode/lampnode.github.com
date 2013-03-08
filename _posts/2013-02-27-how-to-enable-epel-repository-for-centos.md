@@ -4,7 +4,7 @@ title: "在CentOS上如何启用 EPEL Repository"
 tagline: "How to Enable EPEL Repository for CentOS"
 description: ""
 category: Linux 
-tags: [ CentOs YUM ]
+tags: [ CentOs, YUM ]
 ---
 {% include JB/setup %}
 
