@@ -58,3 +58,38 @@ user=root
 
 ## 执行脚本
 <script src="https://gist.github.com/lampnode/5113701.js"></script>
+
+## mysqldump命令选项
+mysqldump工具有大量的选项，部分选项如下表：
+　　
+### --add-drop-table
+
+这个选项将会在每一个表的前面加上DROP TABLE IF EXISTS语句，这样可以保证导回MySQL数据库的时候不会出错，因为每次导回的时候，都会首先检查表是否存在，存在就删除
+
+### --add-locks
+
+这个选项会在INSERT语句中捆上一个LOCK TABLE和UNLOCK TABLE语句。这就防止在这些记录被再次导入数据库时其他用户对表进行的操作
+
+### -c or - complete_insert
+
+这个选项使得mysqldump命令给每一个产生INSERT语句加上列(field)的名字。当把数据导出导另外一个数据库时这个选项很有用。
+
+### -f or -force 
+
+使用这个选项，即使有错误发生，仍然继续导出
+　　
+### --full 
+
+这个选项把附加信息也加到CREATE TABLE的语句中
+　　
+### -l or -lock-tables 
+
+使用这个选项，导出表的时候服务器将会给表加锁。
+　　
+### -t or -no-create- info
+
+这个选项使的mysqldump命令不创建CREATE TABLE语句，这个选项在您只需要数据而不需要DDL(数据库定义语句)时很方便。
+　　
+### -d or -no-data 
+
+这个选项使的mysqldump命令不创建INSERT语句。在您只需要DDL语句时，可以使用这个选项。
