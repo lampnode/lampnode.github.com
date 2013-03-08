@@ -13,9 +13,10 @@ tags: [Iptables,Security]
 
 iptables 是与 Linux 内核集成的 IP 信息包过滤系统。如果 Linux 系统连接到因特网或 LAN、服务器或连接 LAN 和因特网的代理服务器， 则该系统有利于在 Linux 系统上更好地控制 IP 信息包过滤和防火墙配置。
 
-## 下载
+## 代码
 
-<a href="/bashScripts/iptables_setup.sh">Iptables-init-script</a>
+<script src="https://gist.github.com/lampnode/5113668.js"></script>
+
 
 ## 使用方法 Usage
 使用Root用户登录，修改权限,保证可以执行：
