@@ -1,0 +1,63 @@
+---
+layout: post
+title: "如何在CentOS中安装与配置Vsftp"
+tagline: "How to install and configure vsftp on CentOs"
+description: ""
+category: Linux 
+tags: [ FTP, Linux, CentOs ]
+---
+{% include JB/setup %}
+
+## 安装 
+
+使用chkconfig --list 来查看是否装有vsftpd服务；使用yum命令直接安装：
+	
+	yum -y install vsftpd 
+
+然后为它创建日志文件：
+
+	touch /var/log/vsftpd.log 
+
+这样简单的两个命令就完成了vsftp的安装，但是如果你现在想这样ftp://your_ip来访问的话，那还不行，还需要配置权限！ 
+
+## 启动与配置自启动
+
+启动ftp服务：
+
+	service vsftpd start
+	chkconfig --level 2345 vsftpd on
+
+## 配置vsftp服务 
+
+编辑/etc/vsftpd/vsftpd.conf文件，配置vsftp服务： 
+
+	#vim /etc/vsftpd/vsftpd.conf 
+
+### 基本设置
+
+	anonymous_enable=NO #设定不允许匿名访问 
+	local_enable=YES #设定本地用户可以访问。注：如使用虚拟宿主用户，在该项目设定为NO的情况下所有虚拟用户将无法访问。 
+	chroot_list_enable=YES #使用户不能离开主目录 
+	xferlog_file=/var/log/vsftpd.log #设定vsftpd的服务日志保存路径。注意，该文件默认不存在。必须要手动touch出来 
+	ascii_upload_enable=YES #允许使用ASCII模式上传 
+	ascii_download_enable=YES #设定支持ASCII模式的上传和下载功能。 
+	pam_service_name=vsftpd #PAM认证文件名。PAM将根据/etc/pam.d/vsftpd进行认证 
+
+### 修改默认目录
+默认配置下，匿名用户登录 vsftpd 服务后的根目录是 /var/ftp/；假设要把 vsftpd 服务的登录根目录调整为 /vae/www/html，可加入如下三行：
+
+	local_root=/var/www/html
+
+任何一个用户ftp登录到这个服务器上都会chroot到/var/www/html目录下。
+
+## 用户管理
+
+### 添加用户
+
+	 # useradd ftpuser
+   	 # passwd ftpuser
+	
+### 设置用户权限 
+禁止用户登录ssh,并改变其登录目录
+
+	#usermod -s /sbin/nologin -d /var/ftp/ftpuser1  ftpuser
