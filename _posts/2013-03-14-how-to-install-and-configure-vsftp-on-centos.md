@@ -50,14 +50,32 @@ tags: [ FTP, Linux, CentOs ]
 
 任何一个用户ftp登录到这个服务器上都会chroot到/var/www/html目录下。
 
+## 防火墙设置
+
+### Add rules
+
+	iptables -A INPUT -p tcp --sport 1024:65535 --dport 21 -m state --state NEW,ESTABLISHED -j ACCEPT
+	iptables -A OUTPUT -p tcp --sport 21 --dport 1024:65535 -m state --state ESTABLISHED -j ACCEPT
+	iptables -A OUTPUT -p tcp --sport 20 --dport 1024:65535 -m state --state ESTABLISHED,RELATED -j ACCEPT
+	iptables -A INPUT -p tcp --sport 1024:65535 --dport 20 -m state --state ESTABLISHED -j ACCEPT
+
+### 修改iptables-config
+
+	vi /etc/sysconfig/iptables-config
+
+增加如下项目
+	
+	IPTABLES_MODULES="ip_conntrack_ftp"
+
 ## 用户管理
 
 ### 添加用户
+假设设置用户ftpuser,这里要求用户只能用ftp登录，禁止ssh登录，同时修改其默认登录目录到 /var/www
 
-	 # useradd ftpuser
-   	 # passwd ftpuser
+	 #useradd ftpuser -r -m -g ftp -d /var/www/ -s /sbin/nologin
+	 #passwd ftpuser
 	
-### 设置用户权限 
-禁止用户登录ssh,并改变其登录目录
+### 修改用户目录
 
-	#usermod -s /sbin/nologin -d /var/ftp/ftpuser1  ftpuser
+	#usermod  -d /var/www/  ftpuser
+

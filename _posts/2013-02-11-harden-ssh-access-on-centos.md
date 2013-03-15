@@ -1,9 +1,10 @@
 ---
 layout: post
-title: "Harden SSH access on CentOS 6"
+title: "增强CentOs的SSH安全配置"
+tagline: "Harden SSH access on CentOS 6"
 description: ""
 category: Linux 
-tags: [CentOs]
+tags: [CentOs, Linux, Security ]
 ---
 {% include JB/setup %}
 
@@ -24,6 +25,8 @@ This will require ssh connexions to use the 60125 port
 	Port 60128
  
 ## Setup iptables
+
+设置防火墙的时候，务必确认当前ssh端口可以登录，否则会造成ssh无法登录。
  
 	[root@server.com]# vim /etc/sysconfig/iptables
  
