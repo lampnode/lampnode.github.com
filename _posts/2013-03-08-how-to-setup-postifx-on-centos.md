@@ -7,6 +7,9 @@ category: Linux
 tags: [CentOs, Postfix ]
 ---
 {% include JB/setup %}
+## 基本知识
+
+
 
 ## Install
 
@@ -28,29 +31,53 @@ postfix是CentOS常用的邮件服务器软件。以下配置示例假设要配�
 
 	[root@server]# vim /etc/postfix/main.cf
 
-#### myhostname
+#### 主机名称设定
+
+主机名称设定包含myhostname与mydomain两个参数的设置，这个非常重要，而且最好与DNS的相关配置相对应。
+
+##### myhostname
 
 myhostname参数是指系统的主机名称（如我的服务器主机名称是mail.centos.bz）
 
 	myhostname = mail.server.com
 
-#### mydomain
+##### mydomain
 mydomain参数是指email服务器的域名，请确保为正式域名
 
 	mydomain = server.com
 
-#### myorigin
+#### 发送来源的主机名称设定
+
 myorigin参数指定本地发送邮件中来源和传递显示的域名。在我们的例子中是我的域名。我们的邮件
 地址是user@server.com而不是user@mail.server.com。
 
 	myorigin = $mydomain
 
-#### inet_interfaces
+当设定为 
+
+	myorigin = $myhostname
+
+我们的邮件地址是user@mail.server.com而不是user@server.com。
+
+#### 收件的主机名称设定
+
+mydestination参数指定哪些邮件地址允许在本地发送邮件。这是一组被信任的允许通过服务器发送或传递邮件的IP地址
+用户试图通过发送从此处未列出的IP地址的原始服务器的邮件将被拒绝
+
+        mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain
+
+这里添加了$mydomain
+
+#### Relay 基础设置
+
+这里包含inet_interfaces mynetworks_style mynetworks relay_domains等参数
+
+##### inet_interfaces
 inet_interfaces参数设置网络接口以便Postfix能接收到邮件。
 
 	inet_interfaces = all
 
-#### inet_protocols
+##### inet_protocols
 注意ipv4的大小写.
 
 	inet_protocols = ipv4
@@ -64,31 +91,27 @@ inet_interfaces参数设置网络接口以便Postfix能接收到邮件。
 		not supported by protocol
         postdrop: warning: inet_protocols: configuring for IPv4 support only
 
-
-#### mydestination
-
-mydestination参数指定哪些邮件地址允许在本地发送邮件。这是一组被信任的允许通过服务器发送或传递邮件的IP地址。
-用户试图通过发送从此处未列出的IP地址的原始服务器的邮件将被拒绝
-
-	mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain
-
-这里添加了$mydomain
-
-#### mynetworks
+##### mynetworks
 
 mynetworks参数指定受信任SMTP的列表，具体的说，受信任的SMTP客户端允许通过Postfix传递邮件。
 
 	mynetworks =  127.0.0.0/8
 
+**请注意:**如果你没有设定 mynetworks 的话，一定要将 mynetworks_style 设定为 host, 不然你的 IP 所在的子域的 IP 会被自动的认为是合法的.
+
+##### Relay_domains
+
 relay_domains是系统传递邮件的目的域名列表。如果留空，我们保证了我们的邮件服务器不对不信任的网络开放。
 
 	relay_domains =
 
-#### home_mailbox
+#### 可选设置
+
+##### home_mailbox
 
 	home_mailbox = Maildir/
 
-#### mail_spool_directory
+##### mail_spool_directory
 
 设置mail_spool_directory，/data是之前挂载的数据盘(尽量避免使用系统磁盘)，mail目录需要通过mkdir命令创建
 
