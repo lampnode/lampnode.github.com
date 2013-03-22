@@ -2,7 +2,6 @@
 layout	: page
 title	: "关于本站"
 description: ""
-weight	: 20
 group	: navigation
 ---
 {% include JB/setup %}
