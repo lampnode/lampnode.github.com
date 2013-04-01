@@ -9,11 +9,16 @@ tags: [CentOs, Postfix ]
 {% include JB/setup %}
 ## 基本知识
 
+在设置Postfix之前，需要对[Mail server的基础知识](/Linux/the-basics-of-the-mail-server/)进行一些了解。
+
 
 
 ## Install
 
-postfix是CentOS常用的邮件服务器软件。以下配置示例假设要配置的域名是server.com，邮件服务器主机名是mail.server.com
+postfix是CentOS常用的邮件服务器软件。以下配置示例假设要配置的域名是server.com，邮件服务器主机名是mail.server.com(域名server.com需要增加一条MX记录，指向mail.server.com)
+
+	server.com      MX preference = 5, mail exchanger = mail.server.com
+
 
 ### 安装相关软件包
 
@@ -29,7 +34,13 @@ postfix是CentOS常用的邮件服务器软件。以下配置示例假设要配�
 	
 ### 配置 postfix
 
+Postfix的配置项目比较多，不过基本配置或者说必须设定的配置，有如下几项:主机名称设定,发送来源的主机名称设定,收件的主机名称设定,Relay 基础设置等。
+
+使用编辑器，打开Postfix的主配置文件:
+
 	[root@server]# vim /etc/postfix/main.cf
+
+所需修改参数如下:
 
 #### 主机名称设定
 
@@ -37,11 +48,12 @@ postfix是CentOS常用的邮件服务器软件。以下配置示例假设要配�
 
 ##### myhostname
 
-myhostname参数是指系统的主机名称（如我的服务器主机名称是mail.centos.bz）
+myhostname参数是指系统的主机名称（如我的服务器主机名称是mail.server.com）
 
 	myhostname = mail.server.com
 
 ##### mydomain
+
 mydomain参数是指email服务器的域名，请确保为正式域名
 
 	mydomain = server.com
@@ -73,11 +85,13 @@ mydestination参数指定哪些邮件地址允许在本地发送邮件。这是�
 这里包含inet_interfaces mynetworks_style mynetworks relay_domains等参数
 
 ##### inet_interfaces
+
 inet_interfaces参数设置网络接口以便Postfix能接收到邮件。
 
 	inet_interfaces = all
 
 ##### inet_protocols
+
 注意ipv4的大小写.
 
 	inet_protocols = ipv4
