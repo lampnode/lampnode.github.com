@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "CentOs"
+title: "CentOs安装后配置指南"
 description: "CentOS Post Install Configuration"
 ---
 {% include JB/setup %}
@@ -11,8 +11,9 @@ description: "CentOS Post Install Configuration"
 
 1. Change the default root password to secure the system
 2. Checking the status of SeLinux
-3. [Harden SSH access](/Linux/harden-ssh-access-on-centos/)
-4. [Installing and Configuring Logwatch](/Linux/how-to-installing-and-configuring-logwatch-on-linux/)
+3. [Setup the hostname](/Linux/how-to-change-the-server-hostname-on-centos/)
+4. [Harden SSH access](/Linux/harden-ssh-access-on-centos/)
+5. [Installing and Configuring Logwatch](/Linux/how-to-installing-and-configuring-logwatch-on-linux/)
 
 ### Mail
 
@@ -20,7 +21,11 @@ description: "CentOS Post Install Configuration"
 
 ### Networking
 
-1. [Setup the hostname](/Linux/how-to-change-the-server-hostname-on-centos/)
+1. Check /etc/sysconfig/network-scripts/
+2. Check /etc/sysconfig/network
+3. Check /etc/resolv.conf, use google’s dns servers 8.8.8.8 and 8.8.4.4
+
+
 
 ### Security
 
