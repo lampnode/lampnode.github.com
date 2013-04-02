@@ -30,6 +30,7 @@ Linux提供了几百条命令，虽然这些命令的功能不同，但它们的
 
 - [netstat](/commands/netstat.html) 命令用于显示各种网络相关信息
 - [nslookup](/commands/nslookup.html) 查询域名的解析情况的常用工具
+- [iptables](/commands/iptables.html) 防火墙设置
 
 #### 文件管理
 
