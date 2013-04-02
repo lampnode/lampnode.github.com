@@ -42,9 +42,13 @@ tags: [ ZendServer, CentOs, Ubuntu, PHP ]
 
 ### CentOs/RHEL/Fedora
 
-### 设置YUM源
+#### 设置YUM源
 
-创建文件"/etc/yum.repos.d/zend.repo",并添加如下内容:
+创建文件"/etc/yum.repos.d/zend.repo",
+	
+	vim /etc/yum.repos.d/zend.repo
+	
+并添加如下内容:
 
 	[Zend]
 	name=Zend Server
@@ -66,6 +70,11 @@ tags: [ ZendServer, CentOs, Ubuntu, PHP ]
 ##### Zend Server CE
 
 	yum install zend-server-ce-php-5.x
+
+例如
+
+	yum install zend-server-ce-php-5.2
+
 
 ##### Install Zend Server  
 
@@ -99,6 +108,11 @@ Log in as root or use sudo to execute the following commands.Using a text editor
 	
 	PATH=$PATH:/install/path/bin
 	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:install/path/lib
+
+例如:
+
+	PATH=$PATH:/usr/local/zend//bin
+	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/zend/lib
 
 
 Replace install_path with your Zend Server installation path.

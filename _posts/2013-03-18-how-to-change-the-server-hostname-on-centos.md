@@ -8,16 +8,17 @@ tags: [Linux, CentOs ]
 ---
 {% include JB/setup %}
 
+主机的命名虽然不是什么大问题，不过还需要有些规律比较好，尤其是具有发信功能的生产主机。
+
 ## 方法1
 
-使用 “Hostname command”.
+使用"hostname"命令
 
-Enter the following command into the console:
+在终端输入以下命令(Enter the following command into the console):
 
 	hostname my.server.com
 
-Once you enter the above command, the server hostname will be automatically changed.
-
+再次查看hostname，将发生变化。不过这种方法重启后会无效.
 ## 方法2
 
 修改network配置文件

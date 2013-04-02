@@ -80,6 +80,16 @@ Starting mysqld:                                           [  OK  ]
 	[root@server]# mysqladmin -uroot password 'fu09wf((3'
 
 
+***注意***
+
+有时候，执行mysqladmin的时候会报一个类似的错误:
+
+	Host is not allowed to connect to this MySQL server
+
+这时候，需要使用MySQL提供的shell来设置密码
+
+	mysql -h 127.0.0.1 -u root
+
 ####  使用MYSQL提供的shell
 
 {% highlight bash %}

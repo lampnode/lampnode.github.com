@@ -5,6 +5,8 @@ description: "CentOS Post Install Configuration"
 ---
 {% include JB/setup %}
 
+本文档主要用于安装好CentOS后，根据不同的需求，对服务器进行特定的配置。
+
 ## General Post Configuration
 
 ### Basic
@@ -17,14 +19,14 @@ description: "CentOS Post Install Configuration"
 
 ### Mail
 
-- [Install and setup postifx](/Linux/how-to-setup-postifx-on-centos/)
+- [Install and setup postifx](/Linux/how-to-setup-postfix-on-centos/)
 
 ### Networking
 
 1. Check /etc/sysconfig/network-scripts/
 2. Check /etc/sysconfig/network
 3. Check /etc/resolv.conf, use google’s dns servers 8.8.8.8 and 8.8.4.4
-
+4. Check /etc/hosts
 
 
 ### Security
@@ -41,6 +43,16 @@ description: "CentOS Post Install Configuration"
 
 - [Manually Installing Zend Server](/Linux/manually-installing-zend-server/)
 
+### For data Server
+
+- [Install MySQL server and post configuration](/MySQL/how-to-install-mysql-on-linux/)
+
 ### For File Server
 
 - [Install and configure vsftp](/Linux/how-to-install-and-configure-vsftp-on-centos/)
+
+## YUM
+
+Clear yum packages
+
+	yum clean all
