@@ -8,13 +8,13 @@ tags: [ MySQL, Linux]
 ---
 {% include JB/setup %}
 
-预设的MySQL服务器只能让本机联机，其他人如果想要从别的机器连到MySQL服务器需要更改如下设置。
+预设的MySQL服务器只能让本机联机，其他服务器如果想要连到MySQL服务器需要更改如下设置。
 
 ## 步骤
 
 ###  查看/编辑my.cnf
 
-使用vim打开 /etc/my.cnf:
+默认情况下，这个文件是不需要修改的，但是为了保险期间，还是需要查看一下。使用vim打开 /etc/my.cnf:
 
 	# vim /etc/my.cnf
 
@@ -44,48 +44,105 @@ tags: [ MySQL, Linux]
 
 ### 重启mysql
 
-# /etc/init.d/mysql restart
+	/etc/init.d/mysql restart
 
 
 ### 设置远程访问IP
 
-这里假设需要用户(ruser)在主机192.168.0.8连接本数据库foo.
+这里假设:
+
+- 数据库服务器 IP为192.168.0.7
+- 设置用户(ruser)在主机192.168.0.8允许连接本数据库foo.
 
 #### 创建数据库与授权用户
+
+在数据库服务器上执行如下命令:
 
 	mysql> CREATE DATABASE foo;
 	mysql> GRANT ALL ON foo.* TO ruser@'192.168.0.8' IDENTIFIED BY 'PASSWORD';
 
-#### 对当前已经存在的数据库进行用户授权
+或者， 对当前已经存在的数据库进行用户授权
 
 	mysql> update db set Host='192.168.0.8' where Db='edb';
 	mysql> update user set Host='192.168.0.8' where user='ruser';
 
 
-
-### 设置防火墙
+#### 设置防火墙
 
 需要设置iptables,开放3306端口
 
-#### 对所有访问开放3306
+只针对192.168.0.8开放3306端口
 
-	iptables -A INPUT -i eth0 -p tcp --dport 3306 -j ACCEPT
-
-#### 只针对192.168.0.122开放3306端口
+	iptables -A INPUT -i eth0 -s 192.168.0.8  -p tcp --dport 3306 -j ACCEPT
 
 
-	iptables -A INPUT -i eth0 -s 192.168.0.122  -p tcp --dport 3306 -j ACCEPT
+或者，针对网段 192.168.0.0/24开放3306
 
+	iptables -A INPUT -i eth0 -s 192.168.0.0/24 -p tcp --dport 3306 -j ACCEPT
 
-#### 针对网段 192.168.1.0/24开放3306
+或者，对所有访问开放3306
 
-	iptables -A INPUT -i eth0 -s 192.168.1.0/24 -p tcp --dport 3306 -j ACCEPT
+        iptables -A INPUT -i eth0 -p tcp --dport 3306 -j ACCEPT
 
-#### 保存设置
+##### 列出规则
+
+{% highlight bash %}
+[root@localhost ~]# iptables -L
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+.......
+ACCEPT     tcp  --  anywhere             anywhere            state NEW tcp dpt:ssh 
+ACCEPT     tcp  --  192.168.0.8          anywhere            state NEW tcp dpt:mysql 
+ACCEPT     tcp  --  anywhere             anywhere            state NEW tcp dpt:http 
+.......
+REJECT     all  --  anywhere             anywhere            reject-with icmp-host-prohibited 
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination         
+REJECT     all  --  anywhere             anywhere            reject-with icmp-host-prohibited 
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination  
+{% endhighlight %}
+
+##### 保存设置
 
 	service iptables save
 
 ### 测试
 
-$ mysql -u webadmin –h 65.55.55.2 –p
+#### 使用允许范围内主机尝试连接
 
+{% highlight bash %}
+robert@clientX:~$ mysql -u ruser -p -h 192.168.0.7
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 4
+Server version: 5.1.67 Source distribution
+
+Copyright (c) 2000, 2012, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| foo                |
+| test               |
++--------------------+
+3 rows in set (0.01 sec)
+{% endhighlight %}
+
+#### 使用非允许范围内主机尝试连接
+
+{% highlight bash %}
+robert@clientX:~$mysql -u ruser -p -h 192.168.0.7
+Enter password: ******
+ERROR 2003 (HY000): Can't connect to MySQL server on '192.168.0.7' (10065)
+{% endhighlight %}
