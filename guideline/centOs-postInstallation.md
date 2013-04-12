@@ -42,6 +42,7 @@ description: "CentOS Post Install Configuration"
 ### For Web Server
 
 - [Manually Installing Zend Server](/Linux/manually-installing-zend-server/)
+- [Install Apache PHP stack on CentOS 6](/Linux/how-to-install--apache-php-stack-on-centos-6/)
 
 ### For data Server
 
@@ -50,6 +51,10 @@ description: "CentOS Post Install Configuration"
 ### For File Server
 
 - [Install and configure vsftp](/Linux/how-to-install-and-configure-vsftp-on-centos/)
+
+### For Subversion
+
+- [Install and setup svn on CentOs](/Linux/howto-install-and-setup-svn-on-centos/)
 
 ## YUM
 

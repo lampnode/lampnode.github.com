@@ -8,6 +8,7 @@ tags: [ ZendServer, CentOs, Ubuntu, PHP ]
 ---
 {% include JB/setup %}
 
+本文档，只适合Zend server 5.x
  
 ## 安装 
 ### Ubuntu
@@ -123,7 +124,21 @@ Save the file.In order for this to take effect, close and reopen your shell or r
 
 You can now run the PHP binary provided by Zend Server without typing its full path.
 
+## 卸载 Zend Server
+
+### 步骤 
+
+To uninstall run:
+
+	zendctl.sh stop
+And then:
+
+	yum remove -y 'deployment-daemon-zend-server' && yum remove -y '*zend*'
+
+如果想禁止zend的源的话，需要移除zend.repo
+
 ### 虚拟主机设置
 
 参看 [如何配置Apache虚拟机](/Apache/how-to-setup-apache-virtual-host-configuration/)
+
 
