@@ -139,6 +139,11 @@ Add the flollowing information after the tag named location
 #   </LimitExcept>
 </Location>
 {% endhighlight %} 
+方法A倒是简单，不过在linux下，迁出代码库的时候，会报类似如下的错误:
+	
+	 SSL handshake failed: SSL error: A TLS warning alert has been received.
+
+这是svn客户端对服务器的自签名不识别的缘故，所以，还是推荐使用第二种方法。
 
 #### Method B
  
