@@ -8,18 +8,21 @@ tags: [ Linux, PHP, Security ]
 ---
 {% include JB/setup %}
 
-## 环境
+PHP的安全设置，主要是修改 php.ini(一般位于/etc/php.ini)中的相关参数。主要参数如下:
 
-- php.ini 位于/etc/php.ini
+## 必须设置参数
 
+### 禁止expose_php
 
-## 禁止expose_php
+默认为 
 
- 	$vim /etc/php.ini
+	expose_php=On
+
+修改为 
 
 	expose_php=Off
 
-如何不禁止的话，通过使用curl命令，可以暴露服务器信息:
+如果不禁止的话，通过使用curl命令，可以暴露服务器信息:
 
 	$ curl -I http://www.cyberciti.biz/index.php
 
@@ -34,7 +37,7 @@ tags: [ Linux, PHP, Security ]
 	Vary: Accept-Encoding
 	X-Galaxy: Andromeda-2
 
-## 记录所有PHP错误
+### PHP错误信息设置
 
 关闭显示错误
 
@@ -45,36 +48,63 @@ tags: [ Linux, PHP, Security ]
 	log_errors=On
 	error_log=/var/log/httpd/php_scripts_error.log
 
-## 禁止远端代码执行
+### 禁止远端代码执行
 
 	allow_url_fopen=Off
 	allow_url_include=Off
 
-## 启动sql安全模式
+### 启动sql安全模式
 
 	sql.safe_mode=On
 	magic_quotes_gpc=Off
 
 
-## 控制post大小
+### 设置 Session path
+
+        session.save_path="/var/lib/php/session"
+        ; Set the temporary directory used for storing files when doing file upload
+        upload_tmp_dir="/var/lib/php/session"
+
+### 设置open_basedir
+
+#### 方法1
+
+在php.ini里直接设置
+
+
+	open_basedir = /home/users/you/public_html:/tmp
+
+#### 方法2
+
+在httpd.conf中设置
+
+	
+
+### 关闭magic_quotes_gpc
+
+	magic_quotes_gpc = 0 
+
+### 禁止高危PHP函数
+
+	disable_functions = show_source, system, shell_exec, passthru, exec, phpinfo, popen, proc_open
+
+### 限制文件与路径的访问权限
+
+Apache不能使用root来执行，例如我们使用apache这个用户/组来执行web文件，所以:
+
+	# chown -R apache:apache /var/www/html/
+
+其中 /var/www/html是DocumentRoot的子目录, 其中的文件的权限是0444(只读):
+
+	chmod -R 0444 /var/www/html/
+
+其子目录的权限设置为 0445
+
+	#find /var/www/html/ -type d -print0 | xargs -0 -I {} chmod 0445 {}	
+
+## 可选设置
+
+### 控制post大小
 
 	post_max_size=1K
 
-## 禁止高危PHP函数
-
-	disable_functions =exec,passthru,shell_exec,system,proc_open,popen,curl_exec,curl_multi_exec,parse_ini_file,show_source
-
-## 设置 Session path
-
-	session.save_path="/var/lib/php/session"
-	; Set the temporary directory used for storing files when doing file upload
-	upload_tmp_dir="/var/lib/php/session"
-
-## 找出后门程序
-
-可以使用Unix/Linux grep命令，搜索c99或r57外壳：
-
-	# grep -iR 'c99' /var/www/html/
-	# grep -iR 'r57' /var/www/html/
-	# find /var/www/html/ -name \*.php -type f -print0 | xargs -0 grep c99
-	# grep -RPn "(passthru|shell_exec|system|base64_decode|fopen|fclose|eval)" /var/www/html/
