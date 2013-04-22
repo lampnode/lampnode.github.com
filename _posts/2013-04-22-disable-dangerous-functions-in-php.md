@@ -53,8 +53,6 @@ PHP shell_exec() 於 Linux 預設會使用 sh 來執行程式
 
 	void passthru ( string command [, int &return_var] )
 
-
-
 ### popen()
 
 打开进程文件指针，打开一个指向进程的管道，该进程由派生给定的 command 命令执行而产生。
@@ -82,7 +80,6 @@ proc_open（）是类似对POPEN（）的，但提供了更大程度的程序执
 	array parse_ini_file ( string $filename [, bool $process_sections = false [, int $scanner_mode = INI_SCANNER_NORMAL ]] )
 
 
-
 ### show_source()
 
 对文件进行语法高亮显示。此函数是该函数的别名： highlight_file().
@@ -94,15 +91,39 @@ proc_open（）是类似对POPEN（）的，但提供了更大程度的程序执
 
 ### symlink()
 
-创建一个符号链接
+创建一个符号链接,参考[PHP.net-symlink](http://php.net/manual/en/function.symlink.php),关于软链接与硬连接，参考[Understanding Linux symbolic and hard links](/Linux/understanding-linux-symbolic-and-hard-links/)
 
 #### 语法
 
 	bool symlink ( string $target , string $link )
 
+#### PHP符号链接绕过open_basedir安全限制漏洞
+
+PHP的open_basedir功能可以禁止脚本访问所配置的基础目录以外的文件。这个检查是在处理文件的PHP函数在实际的打开调用发生之前执行的。
+攻击者可以使用symlink()函数来发动攻击。PHP的symlink()函数要保证符号链接操作的来源和目标都是open_basedir和safe_mode限制所允许的，但攻击者可以使用mkdir()、unlink()及至少两个符号链接将链接指向任意文件。
+
+	mkdir("a/a/a/a/a/a");
+   	symlink("a/a/a/a/a/a", "dummy");
+   	symlink("dummy/../../../../../../", "xxx");
+   	unlink("dummy");
+   	symlink(".", "dummy");
+
 ## 禁止方法
 
 ### 搜索代码，确认存在哪些高风险函数在使用
+
+	find . | grep "php$" | xargs grep -s "eval(" >> /tmp/review.txt
+	find . | grep "php$" | xargs grep -s "fopen(" >> /tmp/review.txt 
+	find . | grep "php$" | xargs grep -s "passthru(" >> /tmp/review.txt 
+	find . | grep "php$" | xargs grep -s "exec(" >> /tmp/review.txt 
+	find . | grep "php$" | xargs grep -s "proc_" >> /tmp/review.txt 
+	find . | grep "php$" | xargs grep -s "dl(" >> /tmp/review.txt 
+	find . | grep "php$" | xargs grep -s "require($" >> /tmp/review.txt
+	find . | grep "php$" | xargs grep -s "require_once($" >> /tmp/review.txt
+	find . | grep "php$" | xargs grep -s "include($" >> /tmp/review.txt 
+	find . | grep "php$" | xargs grep -s "include_once($" >> /tmp/review.txt 
+	find . | grep "php$" | xargs grep -s "include($" >> /tmp/review.txt 
+	find . | grep "php$" | xargs grep -s "query(" >> /tmp/review.txt
 
 ### 设置php.ini
 
