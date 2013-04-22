@@ -36,7 +36,7 @@ description: "CentOS Post Install Configuration"
 - [Install and setup ClamAV](/Linux/how-to-setup-clamav-on-linux/)
 - [Use rkhunter to protect the server](/Linux/howto-use-rkhunter-to-protect-the-server/)
 - [Use chkrootkit to protect the server](/Linux/howto-use-chkrootkit-to-protect-the-server/)
-
+- [PHP security configuration on CentOs](/PHP/php-security-configuration-on-server/)
 ## Optional configtuation
 
 ### For Web Server
