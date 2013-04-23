@@ -6,7 +6,9 @@ group: navigation
 ---
 {% include JB/setup %}
 
-## 基础命令
+本文档的目的是快速查询常用命令的使用方法。这里列举的命令以及使用方法不会包含一个基本使用方法与解释。
+
+## 命令基础
 
 Linux提供了几百条命令，虽然这些命令的功能不同，但它们的使用方式和规则都是统一的。Linux命令的一般格式是： 
 
@@ -34,12 +36,14 @@ Linux提供了几百条命令，虽然这些命令的功能不同，但它们的
 
 #### 文件管理
 
-- [cd](/commands/cd.html)
-- [pwd](/commands/pwd.html)
-- [ls](/commands/ls.html)
+- [cd](/commands/cd.html)  变换工作目录
+- [ls](/commands/ls.html) 显示文件与目录信息
+- [chattr and lschattr](/commands/chattr.html) 改变与查看文件、目录属性
 
+#### 查找命令
 
-
+- [find](/commands/find.html) 是最常见和最强大的查找命令，你可以用它找到任何你想找的文件
+- [grep](/commands/grep.html) 全面搜索正则表达式并把行打印出来的文本搜索工具
 ## Bash编程
 
 Bash 是一个为GNU計劃编写的Unix shell。它的名字是一系列缩写：Bourne-Again SHell. Bash也是Linux下最床用的shell之一。
