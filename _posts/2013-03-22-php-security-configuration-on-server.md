@@ -93,7 +93,13 @@ PHP的安全设置，主要是修改 php.ini(一般位于/etc/php.ini)中的相�
 
 在httpd.conf中设置
 
-	
+      	<Directory "/var/www/html/www.ccsenet.org/public_html">
+        	Options Indexes FollowSymLinks
+                AllowOverride All
+                Order allow,deny
+                Allow from all
+		php_admin_value open_basedir .:/tmp/:/var/www/html/www.ccsenet.org/
+        </Directory>	
 
 ### 关闭magic_quotes_gpc
 
@@ -117,12 +123,13 @@ Apache不能使用root来执行，例如我们使用apache这个用户/组来执
 
 	chmod -R 0444 /var/www/html/
 
-然后调整其子目录的权限，可以设置为 0445
+<STRIKE> 然后调整其子目录的权限，可以设置为 0445 </STRIKE> 
 
 	#cd /var/www/html
 	#find . -type d -print0 | xargs -0 -I {} chmod 0445 {}	
 
-或者
+<STRIKE> 或者</STRIKE>
+ 
 	#cd /var/www/html
 	#find . -type d -exec chmod 0445 {} \;
 
