@@ -14,8 +14,9 @@ description: "CentOS Post Install Configuration"
 1. Change the default root password to secure the system
 2. Checking the status of SeLinux
 3. [Setup the hostname](/Linux/how-to-change-the-server-hostname-on-centos/)
-4. [Harden SSH access](/Linux/harden-ssh-access-on-centos/)
-5. [Installing and Configuring Logwatch](/Linux/how-to-installing-and-configuring-logwatch-on-linux/)
+4  [Howto configure sudo on CentOS](/Linux/howto-configure-sudo-on-centos/)
+5. [Harden SSH access](/Linux/harden-ssh-access-on-centos/)
+6. [Installing and Configuring Logwatch](/Linux/how-to-installing-and-configuring-logwatch-on-linux/)
 
 ### Mail
 
