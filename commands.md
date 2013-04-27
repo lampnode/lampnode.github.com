@@ -26,8 +26,8 @@ Linux提供了几百条命令，虽然这些命令的功能不同，但它们的
 ### 分类
 #### 用户管理
 
-- [useradd](/commands/useradd.html) 添加一个用户到系统中
-
+- [useradd/usermod/userdel/passwd](/commands/userManagment.html) 系统用户以及其密码管理
+- [groupadd/groupmod/groupdel/gpasswd](commands/groupManagement.html) 系统用户的属组管理
 #### 网络管理
 
 - [netstat](/commands/netstat.html) 命令用于显示各种网络相关信息
