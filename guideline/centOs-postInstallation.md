@@ -38,6 +38,8 @@ description: "CentOS Post Install Configuration"
 - [Use rkhunter to protect the server](/Linux/howto-use-rkhunter-to-protect-the-server/)
 - [Use chkrootkit to protect the server](/Linux/howto-use-chkrootkit-to-protect-the-server/)
 - [PHP security configuration on CentOs](/PHP/php-security-configuration-on-server/)
+- [Secure your Apache Configuration](/Linux/secure-your-apache-configuration/)
+
 ## Optional configtuation
 
 ### For Web Server

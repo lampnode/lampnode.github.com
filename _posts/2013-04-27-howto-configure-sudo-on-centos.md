@@ -24,31 +24,35 @@ Sudo是一款开源安全工具，它能允许管理员给予某些用户或组�
 
 ## 设置步骤
 
-### Step1: 使用visudo修改sudo的配置文件
+### 使用visudo修改sudo的配置文件
+
+使用visudo修改sudo的配置文件比较安全，如果错误，还会有报错信息。
 
 	[root@localhost ~]# visudo
 
 #### root权限转移用户
 
-在文件的末尾加上
+在文件的末尾,或者" root ALL=(ALL)      ALL " 后加上
 
 	# For user can use all root privilege
- 	cent   		 ALL=(ALL)      ALL
-	edwin            ALL=(ALL)      NOPASSWD: ALL
+ 	edwin  		 ALL=(ALL)      ALL
+	cent             ALL=(ALL)      NOPASSWD: ALL
 
 
-其中，cent用户可以使用sudo执行root命令，需要输入密码; edwin 则不需要输入密码。
+其中，edwin用户可以使用sudo执行root命令，需要输入密码; cent 则不需要输入密码。
 
-#### 设置一些命令不允许。
+#### 可选设置
+
+##### 设置一些命令不允许。
 
 	# Add aliase for the kind of shutdown commands
 	Cmnd_Alias SHUTDOWN = /sbin/halt, /sbin/shutdown, \
 	/sbin/poweroff, /sbin/reboot, /sbin/init
 
 	# add commands in aliase 'SHUTDOWN' are not allowed 
-	cent	ALL=(ALL)	ALL, !SHUTDOWN
+	edwin	ALL=(ALL)	ALL, !SHUTDOWN
 
-#### 一些以root权限的命令传送到用户组
+##### 一些以root权限的命令传送到用户组
 
 	# Add aliase for the kind of user management comamnds
 	Cmnd_Alias USERMGR = /usr/sbin/useradd, /usr/sbin/userdel, /usr/sbin/usermod, \
@@ -58,7 +62,7 @@ Sudo是一款开源安全工具，它能允许管理员给予某些用户或组�
 	%usermgr	ALL=(ALL)	USERMGR
 
 
-#### 转移指定命令给指定用户
+##### 转移指定命令给指定用户
 
 在root ALL=(ALL) ALL 之后增加或者行尾增加如下内容:
 
@@ -73,11 +77,83 @@ Sudo是一款开源安全工具，它能允许管理员给予某些用户或组�
 
 ### 测试
 
-	edwin@localhost ~]$ cd /home/
-	edwin@localhost home]$ ls
-	lice  edwin  jack  jeffrey  tomson
-	[edwin@localhost home]$ sudo cd jeffrey/
-	sudo: cd: command not found
-	[edwin@localhost home]$ rm -rf jeffrey/
-	rm: cannot remove 'jeffrey': Permission denied
-	[edwin@localhost home]$ sudo rm -rf jeffrey
+	[edwin@ ~]$ sudo fdisk -l
+	
+	We trust you have received the usual lecture from the local System
+	Administrator. It usually boils down to these three things:
+
+	    #1) Respect the privacy of others.
+	    #2) Think before you type.
+	    #3) With great power comes great responsibility.
+
+	[sudo] password for edwin: 
+
+	Disk /dev/xvda: 21.5 GB, 21474836480 bytes
+	255 heads, 63 sectors/track, 2610 cylinders
+	Units = cylinders of 16065 * 512 = 8225280 bytes
+	Sector size (logical/physical): 512 bytes / 512 bytes
+	I/O size (minimum/optimal): 512 bytes / 512 bytes
+	Disk identifier: 0x00000000
+
+	    Device Boot      Start         End      Blocks   Id  System
+	/dev/xvda1   *           1        2550    20480000   83  Linux
+	/dev/xvda2            2550        2611      490496   82  Linux swap / Solaris
+
+
+** 注意: **在第一次使用的时候，会有如上提示。
+
+## 日志设置
+
+### 登录root账户,修改sudo的配置文件
+
+	[edwin@ ~]$ su - root
+	Password: 
+	[root@ ~]# visudo  
+
+使用visudo比较安全，修改如下内容(在最后一行加入):
+
+	# For log
+	Defaults syslog=local1
+
+### 修改系统日志配置文件
+
+	[root@ ~]# vi /etc/rsyslog.conf 
+	
+在大约42行，增加如下内容
+
+	# The authpriv file has restricted access.
+ 	local1.*	/var/log/sudo.log #需要增加的内容
+	authpriv.*	/var/log/secure
+
+### 创建sudo.log
+
+	[root@ ~]# touch /var/log/sudo.log
+
+### 重启日志服务
+
+	[root@ ~]# /etc/init.d/rsyslog restart
+	Shutting down system logger:                               [  OK  ]
+	Starting system logger:                                    [  OK  ]
+
+### 测试	
+
+	[root@ ~]# exit
+	logout
+	[edwin@ ~]$ sudo fdisk -l
+	[sudo] password for edwin: 
+
+	Disk /dev/xvda: 21.5 GB, 21474836480 bytes
+	255 heads, 63 sectors/track, 2610 cylinders
+	Units = cylinders of 16065 * 512 = 8225280 bytes
+	Sector size (logical/physical): 512 bytes / 512 bytes
+	I/O size (minimum/optimal): 512 bytes / 512 bytes
+	Disk identifier: 0x00000000
+
+    	Device Boot      Start         End      Blocks   Id  System
+	/dev/xvda1   *           1        2550    20480000   83  Linux
+	/dev/xvda2            2550        2611      490496   82  Linux swap / Solaris
+
+	[edwin@ ~]$ sudo cat /var/log/sudo.log 
+	Apr 28 11:37:51 lo sudo:    edwin : TTY=pts/1 ; PWD=/home/edwin ; USER=root ; COMMAND=/sbin/fdisk -l
+	Apr 28 11:38:02 lo sudo:    edwin : TTY=pts/1 ; PWD=/home/edwin ; USER=root ; COMMAND=/bin/cat /var/log/sudo.log
+

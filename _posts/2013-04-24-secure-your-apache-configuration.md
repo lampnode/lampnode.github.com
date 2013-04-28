@@ -25,10 +25,33 @@ tags: [ Apache, Linux ]
 
 ## 确保Apache是运行在它自己的用户帐户和组
 
-安装后的apache默认以以nobody用户身份运行
+安装后的apache默认以以nobody用户身份运行,这是不安全的，需要你增加一个用户(组)来给apache作为用户使用。
+我们使用 webservices作为apache运行的用户（组),设置步骤如下:
 
-	User apache
-	Group apache
+### 添加用户与组
+
+	#groupadd webservices
+	#useradd webservices -g webservices -d /dev/null -s /sbin/nologin
+	useradd: warning: the home directory already exists.
+	Not copying any file from skel directory into it.
+	
+	#tail /etc/passwd
+	......
+	webservices:x:501:501::/dev/null:/sbin/nologin	
+
+### 修改apache的配置文件
+
+
+	User webservices
+	Group webservices
+
+### 设置web目录权限
+
+	#chmod -R webservice:webservice /var/www/html	
+
+### 重启服务器
+
+	$/etc/init.d/httpd restart
 
 ## 确保Web根目录以外的文件没有访问权限
 
