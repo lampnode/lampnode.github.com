@@ -73,6 +73,8 @@ useradd命令用来建立用户帐号和创建用户的起始目录，使用权�
 
 #### 添加一个用户，使用现有的组
 
+##### 创建新的用户，添加primary group
+
 	[root@localhost home]# useradd tomson -g tom
 	[root@localhost home]# tail /etc/passwd
 	......
@@ -84,6 +86,45 @@ useradd命令用来建立用户帐号和创建用户的起始目录，使用权�
 	dr-xr-xr-x. 25 root   root  4096 Apr 27 08:26 ..
 	drwx------   4 tom    tom   4096 Apr 27 13:32 tom
 	drwx------   4 tomson tom   4096 Apr 27 13:35 tomson
+
+##### 修改存在用户，添加到现有的组
+
+** 注意: ** -a 代表 append， 也就是 将用户(tomson)添加到 用户组 webmaster 中，而不必离开 其他用户组
+
+	[root@localhost ~]# usermod -a -G webmaster tomson
+	[root@localhost ~]# usermod -a -G coders tomson
+	[root@localhost ~]# cat /etc/group
+	...
+	tom:x:501:
+	webmaster:x:503:tomson
+	students:x:491:
+	coders:x:506:jeffrey,tomson
+	...
+
+如果不加-a参数，结果如下:
+	
+	[root@localhost ~]# usermod  -G students tomson
+	[root@localhost ~]# cat /etc/group
+	...	
+	tom:x:501:
+	webmaster:x:503:
+	students:x:491:tomson
+	coders:x:506:jeffrey
+	...
+	
+可见，上一步的操作已经无效，tomson的组(附加组)发生了变化，我们再看一下groups命令的结果:
+
+	[root@localhost ~]# groups tomson
+	tomson : tom students
+
+这里tomson的组有两个，其中tom是 primary group;记录在了/etc/passwd, students，记录在/etc/group里.
+
+*** -g与-G的区别: ***
+
+* -g用户所属组，-G 用户附加组
+* -g 设置的是用户的primary group。 这些信息记录在/etc/passwd中。事实上系统确认一个用户的primary group的时候是根据/etc/passwd，而跟/etc/group无关。 因此，"useradd -g"仅仅修改/etc/passwd，而不会修改/etc/group
+* 加 "-G" 参数会把修改记录在/etc/group
+* 一个用户只能且必须属于一个g，可以属于多个G
 
 #### 添加一个用户，主目录放在/var,并限制其登录
 

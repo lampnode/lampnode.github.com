@@ -24,15 +24,18 @@ Linux提供了几百条命令，虽然这些命令的功能不同，但它们的
 - Linux操作系统的联机帮助对每个命令的准确语法都做了说明，可以使用命令man来获取相应命令的联机说明，如" man ls"。
 
 ### 分类
+
 #### 用户管理
 
 - [useradd/usermod/userdel/passwd](/commands/userManagment.html) 系统用户以及其密码管理
 - [groupadd/groupmod/groupdel/gpasswd](commands/groupManagement.html) 系统用户的属组管理
+
 #### 网络管理
 
 - [netstat](/commands/netstat.html) 命令用于显示各种网络相关信息
 - [nslookup](/commands/nslookup.html) 查询域名的解析情况的常用工具
 - [iptables](/commands/iptables.html) 防火墙设置
+- [ssh/scp](/commands/ssh.html) 强大的SSH组件
 
 #### 文件管理
 
