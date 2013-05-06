@@ -320,21 +320,6 @@ user=root
 
 这样以来，在进入mysql的shell或者使用mysqldump命令的时候，就可以省略密码输入。
 
-### 修改预设值
+### 修改预设值,优化配置
 
-修改/etc/my.cnf的相关设置，如下:
-{% highlight bash %}
-query_cache_size=1024M
-
-tmp_table_size=512M
-max_heap_table_size = 32M
-
-log-slow-queries=/var/lib/mysql/slowquery.log
-long_query_time=2
-
-max_connections=1000
-max_connect_errors = 1844674407370954751
-connect_timeout = 20
-
-{% endhighlight %}
-
+参看[MySQL:Configutaion优化和调优指南](/MySQL/mysqlconfigutaion-optimization-and-tuning-guide/)

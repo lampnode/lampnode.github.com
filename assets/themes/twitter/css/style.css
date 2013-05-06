@@ -78,6 +78,10 @@ h6{padding:5px 0px; margin:5px 0px; font-size:1em;}
 .contentMainBoxItem ul li{list-style:none;}
 .imgContent{padding:5px;margin:10px;float:right;border:1px solid #cccccc;border-radius:5px;}
 
+.contentMainBoxItemSub {width:46%;border:0;height:300px;overflow:hidden;float:left;padding:5px 1% 10px 1%;margin:10px 1%;background-color:#E6E6FA
+;border-radius:5px;}
+.contentMainBoxItemSub h3{margin:0px;}
+
 /*For laster updated*/
 .lastUpdated{padding:0px;margin-left:5px;}
 .lastUpdated li{padding:5px 0px;list-style:none;margin:0px;}

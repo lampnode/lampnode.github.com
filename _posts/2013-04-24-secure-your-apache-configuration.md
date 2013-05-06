@@ -167,9 +167,37 @@ ModSecurity是一个入侵侦测与防护引擎，它主要是用于Web 应用�
 
 ### 安装
 
-#### YUM
+#### YUM install
 
 	#yum install mod_security
+
+#### post-installation
+
+##### 文件夹权限
+
+如果是自定义用户执行httpd进程，需要修改如下目录的权限到自定义用户
+
+	/var/lib/mod_security/
+
+##### 解除上传限制
+
+如果服务器需要上传比较大的文件，需要修改/etc/apache2/conf.d/modsecurity.conf的相关参数。
+
+
+修改
+
+	SecRule MULTIPART_UNMATCHED_BOUNDARY "!@eq 0" \
+        "id:'200003',phase:2,t:none,log,deny,msg:'Multipart parser detected a possible unmatched boundary.'"
+
+为(去掉了处理策略中的deny):
+
+	SecRule MULTIPART_UNMATCHED_BOUNDARY "!@eq 0" \
+    	"id:'200003',phase:2,t:none,log,msg:'Multipart parser detected a possible unmatched boundary.'"
+
+否则会有如下报错:
+
+	ModSecurity: Warning. Match of "eq 0" against "MULTIPART_UNMATCHED_BOUNDARY" required. 
+	[file "/etc/apache2/conf.d/modsecurity.conf"] [line "60"] [msg "Multipart parser detected a possible unmatched boundary."]
 
 #### reboot 
 
