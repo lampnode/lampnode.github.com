@@ -4,7 +4,7 @@ title: "使用Rsync经SSH备份数据"
 tagline: "Using Rsync with SSH to backup data"
 description: ""
 category: Linux 
-tags: [CentOs]
+tags: [CentOs, rsync]
 ---
 {% include JB/setup %}
 
@@ -71,21 +71,50 @@ rsync.key.pub
 ### rsync + ssh + No Password + Crontab 
 
 #### 创建执行脚本
-
 脚本文件为 /home/edwin/crontabScript/rsync.sh,内容如下
-	
+
+##### 当不含有Exclude Files
+{% highlight bash %}
+#!/bin/bash
+RSYNC=/usr/bin/rsync
+SSH=/usr/bin/ssh
+KEY=/your/path/to/rsync.key
+USER=edwin
+HOST=192.168.0.22
+SSH_PORT=22
+REMOTE_DIR=/your/path/to/remote_dir
+LOCAL_DIR=/your/path/to/local_dir
+
+# rsync+ssh+crontab command
+$RSYNC -avz -e "$SSH -i $KEY -p $SSH_PORT" $USER@$HOST:$REMOTE_DIR $LOCAL_DIR
+{% endhighlight %}
+
+
+##### 当含有Exclude Files	
 {% highlight bash %}
 #!/bin/bash 
-RSYNC=/sw/bin/rsync 
-SSH=/usr/bin/ssh 
+RSYNC=/usr/bin/rsync
+SSH=/usr/bin/ssh
 KEY=/your/path/to/rsync.key
-USER=robert 
-HOST=remote.server
-REMOTE_DIR=/home/robert/backup/ 
-LOCAL_DIR=/Users/robert/backup/ 
+EXCLUDE_FILE=/your/path/to/exclude.txt
+USER=edwin
+HOST=192.168.0.22
+SSH_PORT=22
+REMOTE_DIR=/your/path/to/remote_dir
+LOCAL_DIR=/your/path/to/local_dir
 
 # rsync+ssh+crontab command 
-$RSYNC -avz -e "$SSH -i $KEY"  $USER@$HOST:$REMOTE_DIR $LOCAL_DIR 
+$RSYNC -avz -e "$SSH -i $KEY -p $SSH_PORT" --exclude-from "$EXCLUDE_FILE"  $USER@$HOST:$REMOTE_DIR $LOCAL_DIR 
+{% endhighlight %}
+
+Exclude file 文件格式如下:
+
+{% highlight bash %}
+
+sources
+public_html/database.*
+downloads/test/*
+
 {% endhighlight %}
 
 #### 设置crontab
