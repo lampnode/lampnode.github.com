@@ -11,10 +11,13 @@ tags: [ FTP, Linux, CentOs ]
 ## 安装 
 
 使用chkconfig --list 来查看是否装有vsftpd服务；使用yum命令直接安装：
-	
+
+### YUM安装	
 	yum -y install vsftpd 
 
-然后为它创建日志文件：
+### 可选设置
+
+修改默认的日志文件:创建日志文件：
 
 	touch /var/log/vsftpd.log 
 
@@ -33,7 +36,43 @@ tags: [ FTP, Linux, CentOs ]
 
 	#vim /etc/vsftpd/vsftpd.conf 
 
-### 基本设置
+### 配置样例
+功能:支持匿名访问(Read Only)，同时本地用户可以管理ftp文件
+
+	anonymous_enable=YES		#匿名用户设置
+	local_enable=YES		#支持本地用户(必须)		
+	write_enable=YES		#支持本地用户(必须)
+	local_umask=022			
+	anon_upload_enable=NO		#匿名用户设置
+	anon_mkdir_write_enable=NO	#匿名用户设置
+	dirmessage_enable=YES		
+	xferlog_enable=YES		#日志
+	connect_from_port_20=YES	
+	#chown_uploads=YES
+	#chown_username=whoever
+	xferlog_file=/var/log/xferlog	#日志
+	xferlog_std_format=YES		#日志
+	#idle_session_timeout=600
+	#data_connection_timeout=120
+	#nopriv_user=ftpsecure
+	#async_abor_enable=YES
+	ascii_upload_enable=YES
+	ascii_download_enable=YES
+	#deny_email_enable=YES
+	#banned_email_file=/etc/vsftpd/banned_emails
+	
+	#Chroot相关设置，注意/etc/vsftpd/chroot_list是否存在,否则会报错
+	chroot_local_user=YES		
+	chroot_list_enable=YES
+	chroot_list_file=/etc/vsftpd/chroot_list
+	
+	
+	listen=YES
+	pam_service_name=vsftpd
+	userlist_enable=YES
+	tcp_wrappers=YES
+
+### 设置说明
 
 	anonymous_enable=NO #设定不允许匿名访问 
 	local_enable=YES #设定本地用户可以访问。注：如使用虚拟宿主用户，在该项目设定为NO的情况下所有虚拟用户将无法访问。 
