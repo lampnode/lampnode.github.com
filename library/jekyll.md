@@ -12,6 +12,26 @@ description: "Jekyll的使用指南"
 
 jekyll是一个简单的免费的Blog生成工具，jekyll通过生成静态网页的来组织内容，不需要数据库支持。它可以配合第三方服务,例如disqus(http://www.disqus.com)。最关键的是jekyll可以免费部署在Github上，而且可以绑定自己的域名。
 
+## 启用jekyll server
+
+在Workspace的根目录下，输入如下命令:
+
+	$jekyll server -w
+
+## 创建新的日志
+
+在Workspace的根目录下,执行如下命令
+
+	$rake post title="Zend Server CE setup error on windows"
+
+## 提交编辑内容
+
+在Workspace的根目录下,执行如下命令
+
+	$ git add *
+	$ git status
+ 	$ git commit -m "new posts"
+	$ git push origin master
 
 ##Pygments配置代码高亮
 
