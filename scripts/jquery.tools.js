@@ -1,6 +1,6 @@
 $(document).ready(function(){
   $('.jt_authorEmail').html(function(){
-	var e = "robert.c";
+	var e = "robert.qian";
 	var a = "@";
 	var d = "lampnode";
 	var c = ".com";

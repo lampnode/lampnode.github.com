@@ -8,7 +8,7 @@ group	: navigation
 
 ## 关于作者 | About Me
 
-### Robert L. Chain
+### Robert  Qian
 
 ------
 
@@ -69,10 +69,10 @@ PHP is a widely-used general-purpose scripting language that is especially suite
 
 ---
 
-<img src="/images/Linux_logo.gif" style="padding:10px;margin:10px;border:1px solid grey;" />
+<img src="/images/Linux_logo.gif" style="padding:10px;margin:10px;border:1px solid grey;float:left" />
 
-<img src="/images/Apache-logo.png" style="margin:10px;padding:10px;border:1px solid grey;" />
+<img src="/images/Apache-logo.png" style="margin:10px;padding:10px;border:1px solid grey;;float:left" />
 
-<img src="/images/Mysql_logo.jpg" style="margin:10px;padding:10px;border:1px solid grey;" />
+<img src="/images/Mysql_logo.jpg" style="margin:10px;padding:10px;border:1px solid grey;;float:left" />
 
-<img src="/images/Php-logo.gif" style="margin:10px;padding:10px;border:1px solid grey;" />
+<img src="/images/Php-logo.gif" style="margin:10px;padding:10px;border:1px solid grey;;float:left" />
