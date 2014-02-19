@@ -12,6 +12,10 @@ description: "Jekyll的使用指南"
 
 jekyll是一个简单的免费的Blog生成工具，jekyll通过生成静态网页的来组织内容，不需要数据库支持。它可以配合第三方服务,例如disqus(http://www.disqus.com)。最关键的是jekyll可以免费部署在Github上，而且可以绑定自己的域名。
 
+## Install jekyll and git
+
+[Install Github and jekyll on Ubuntu](/github/install-github-and-jekyll-on-ubuntu/)
+
 ## 启用jekyll server
 
 在Workspace的根目录下，输入如下命令:
