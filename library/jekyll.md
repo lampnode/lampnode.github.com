@@ -22,13 +22,12 @@ jekyll是一个简单的免费的Blog生成工具，jekyll通过生成静态网�
 
 	$jekyll --server
 
-## 创建新的日志
+可以访问http://localhost:4000 查看内容
 
-在Workspace的根目录下,执行如下命令
+## Git 基本用途
 
-	$rake post title="Zend Server CE setup error on windows"
 
-## 提交编辑内容
+### 提交编辑内容
 
 在Workspace的根目录下,执行如下命令
 
@@ -37,13 +36,25 @@ jekyll是一个简单的免费的Blog生成工具，jekyll通过生成静态网�
  	$ git commit -m "new posts"
 	$ git push origin master
 
-##Pygments配置代码高亮
+### 更新本地内容到最新
 
-### 修改_config.yml
+	$git pull
+
+## 编写日志用法
+
+### 创建新的日志
+
+在Workspace的根目录下,执行如下命令
+
+        $rake post title="Zend Server CE setup error on windows"
+
+### Pygments配置代码高亮
+
+#### 修改_config.yml
 
 设置pygments: true
 
-### 选择一种喜欢的代码高亮样式
+#### 选择一种喜欢的代码高亮样式
 
 Pygments提供了多种样式，比如’native’, ‘emacs’, ‘vs’等等，可以在Pygments Demo中选择某种语言的例子，体验不同的样式。
 
@@ -54,14 +65,14 @@ Pygments提供了多种样式，比如’native’, ‘emacs’, ‘vs’等等�
 	['monokai', 'manni', 'rrt', 'perldoc', 'borland', 'colorful', 'default', 'murphy', 'vs', 'trac', 'tango', 'fruity', 'autumn', 'bw', 'emacs', 'vim', 'pastie', 'friendly', 'native']
 {% endhighlight %}
 
-### 选择一种样式，应用在Jekyll中
+#### 选择一种样式，应用在Jekyll中
 
 	cd /dev/projects/zyzhang.github.com/assets/themes/abel/css
 	pygmentize -S native -f html > pygments.css, “native”是样式名，“html”是formatter
 
 在layout中引用刚刚加的pygments.css
 
-### 使用方法
+#### 使用方法
 
 在代码前添加:
 
