@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "how to add NetworkManager plugin for VPN on CentOs 6"
-tagline: "how to add NetworkManager plugin for VPN on CentOs 6"
+title: "How to add NetworkManager plugin for VPN on CentOs 6"
+tagline: "How to add NetworkManager plugin for VPN on CentOs 6"
 description: ""
 category: Linux 
 tags: [CentOs, VPN]

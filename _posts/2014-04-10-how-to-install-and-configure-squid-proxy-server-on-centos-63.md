@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "how to install and configure squid proxy server on centos 6.3"
-tagline: "how to install and configure squid proxy server on centos 6.3"
+title: "How to install and configure squid proxy server on centos 6.3"
+tagline: "How to install and configure squid proxy server on centos 6.3"
 description: ""
 category: Linux 
 tags: [CentOs, Squid]
