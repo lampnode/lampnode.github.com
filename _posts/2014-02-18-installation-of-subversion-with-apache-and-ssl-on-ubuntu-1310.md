@@ -11,14 +11,21 @@ tags: [ Ubuntu, Subversion ]
 Direct access to the subversion server is not safe, so the encryption processing is the most basic security strategy
 
 ## Condiation
-Ubuntu 13.10
+
+System:Ubuntu 13.10
 
 ## Steps
 
 
 ### insall and config svn 
 
-See [HowTo install and setup svn on CentOs](/linux/howto-install-and-setup-svn-on-centos)
+#### Install subversion and related packages
+
+	$sudo apt-get install subversion libapache2-svn apache2
+
+#### Configure the subversion repository
+
+Please refer to [HowTo install and setup svn on CentOs](/linux/howto-install-and-setup-svn-on-centos)
 
 ### enable ssl
 

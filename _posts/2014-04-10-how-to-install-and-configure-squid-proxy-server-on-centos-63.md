@@ -15,22 +15,31 @@ The following steps is to insall and configure the Squid.
 
 ## Installation
 
-### local network
+### Local network
 
-	Network:192.168.0.0/16
-	Proxy Server:192.168.0.3
+	LAN Network:192.168.0.0/16
+	Proxy Server:192.168.0.3(hostname:srv.example.com)
 
-### install by yum
+### Install squid  by yum
 
 	#yum install squid -y
 
 ## Configuration
 
+### Create cache path
+
+	#mkdir -p /var/cache/squid
+	#chown squid:squid -R /var/cache/squid
+
+
+### Setup config file
+
 	#vim /etc/squid/squid.conf
 
 
 ### ACL
-
+	
+	# Setup acl
 	acl manager proto cache_object
 	acl localhost src 127.0.0.1/32 ::1
 	acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
@@ -95,9 +104,9 @@ refresh_pattern .               0       20%     4320
 	fqdncache_size                  1024
 
 
-### hostname
+### hostname(if need)
 
-	visible_hostname srv.hxstong.org
+	visible_hostname srv.example.com
 
 ## Post setup
 

@@ -13,11 +13,13 @@ Jekyll is a Git compatible static site generator that can be installed on Ubuntu
 ## Installation
 
 ### Install Dependencies
-	$sudo apt-get install git ruby rubygems python-pygments
+
+	$sudo apt-get install git ruby ruby-dev rubygems python-pygments
 	$sudo gem install rdiscount
 
 ### Install Jekyll
 In order to preview your blog locally you will  need to install the Jekyll ruby gem.
+
 	$sudo gem install jekyll
 
 ### Install rake
@@ -26,6 +28,7 @@ In order to preview your blog locally you will  need to install the Jekyll ruby 
 ## Usages
 
 ### Start Jekyll
+
 	$cd USERNAME.github.com
 	$jekyll --server
 

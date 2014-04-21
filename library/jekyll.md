@@ -16,11 +16,20 @@ jekyll是一个简单的免费的Blog生成工具，jekyll通过生成静态网�
 
 [Install Github and jekyll on Ubuntu](/github/install-github-and-jekyll-on-ubuntu/)
 
+## Clone blog from github by ssh
+
+	$mkdir lampnode.github.com
+	$cd lampnode.github.com
+	$git clone git@github.com:lampnode/lampnode.github.com.git .
+
 ## 启用jekyll server
 
 在Workspace的根目录下，输入如下命令:
 
 	$jekyll --server
+
+OR
+	$jekyll server -w
 
 可以访问http://localhost:4000 查看内容
 
