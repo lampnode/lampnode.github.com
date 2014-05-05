@@ -9,6 +9,9 @@ tags: [Linux, Ubuntu]
 {% include JB/setup %}
 
 The purpose of this document is guide you to setup a static IP address on Ubuntu 14.04.
+However, this change will result in NetworkManager is not working properly, even related VPN connection.
+
+If only to modify the nameserver, please refer to [Howto setup nameserver on Ubuntu 14.04 by resolvconf](/linux/howto-setup-nameserver-on-ubuntu-1404-by-resolvconf/).
 
 ## Step 1
 

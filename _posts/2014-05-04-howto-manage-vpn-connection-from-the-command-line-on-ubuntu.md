@@ -11,6 +11,12 @@ tags: [ Linux, Ubuntu, VPN ]
 The purpose of this document is to explain how to connect/disconnect VPN from the command line on Ubuntu. if you want 
 to interact with NetworkManager from the command line you can use the "nmcli" command.
 
+Please note, you must ensure that the NetworkManager can work normally under the premise before you will follow this setting.
+The following guides will result in NetworkManager is not working properly.
+
+ - [Setup static IP address on Ubuntu](/linux/howto-setup-static-ip-address-on-ubuntu-1404/)
+
+
 ## Abount nmcli
 
 nmcli is a command-line tool for controlling NetworkManager and getting its status.  It is not meant as a replacement 
@@ -84,5 +90,19 @@ Then starting the VPN connection with sudo nmcli con up id ConnectionName should
 
 	 nmcli dev wifi
 
+### To connect to a wifi network
+
+	nmcli dev wifi connect <name> password <password>
+
+### To disconnect an interface
+
+	nmcli dev disconnect iface eth0
+
+### To list all of network devices and their state
+
+	$ sudo nmcli dev
+	......
+	DEVICE     TYPE              STATE        
+	eth0       802-3-ethernet    connected 
 
 
