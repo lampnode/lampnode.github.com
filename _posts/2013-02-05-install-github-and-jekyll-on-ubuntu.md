@@ -14,7 +14,7 @@ Jekyll is a Git compatible static site generator that can be installed on Ubuntu
 
 ### Install Dependencies
 
-	$sudo apt-get install git ruby ruby-dev rubygems python-pygments
+	$sudo apt-get install git ruby ruby-dev python-pygments
 	$sudo gem install rdiscount
 
 ### Install Jekyll
@@ -22,8 +22,23 @@ In order to preview your blog locally you will  need to install the Jekyll ruby 
 
 	$sudo gem install jekyll
 
-### Install rake
+### Install Rake
+
 	$sudo gem install rake
+
+### Install JavaScript Runtime(For Ubuntu 14.04 or later)
+
+	$sudo apt-get install nodejs	
+
+if you don't install nodejs, when you boot jekyll server, the system will report the following errror information:
+
+	/var/lib/gems/1.9.1/gems/execjs-2.0.2/lib/execjs/runtimes.rb:51:in `autodetect': 
+	Could not find a JavaScript runtime. See.....
+
+### setup Global config
+
+	$git config --global user.name lampnode
+  	$git config --global user.email robert@example.com	
 
 ## Usages
 
@@ -31,6 +46,10 @@ In order to preview your blog locally you will  need to install the Jekyll ruby 
 
 	$cd USERNAME.github.com
 	$jekyll --server
+
+or
+
+	$jekyll server -w
 
 Your can access this by http://loclaohost:4000
 
