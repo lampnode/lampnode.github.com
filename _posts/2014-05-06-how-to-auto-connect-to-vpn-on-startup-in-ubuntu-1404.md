@@ -8,7 +8,10 @@ tags: [ Linux, Ubuntu, VPN ]
 ---
 {% include JB/setup %}
 
-The purpose of this document is to guide you to manage the VPN connection by  update-rc.d.
+~~The purpose of this document is to guide you to manage the VPN connection by  update-rc.d.~~
+(It is not work well by update-rc.d on Ubuntu 14.04, if you manage vpn connection by update-rc.d, that will cause the system can not be shutdown and startup  normally )
+
+The purpose of this document is to guide you to manage the VPN connection by command line script.
 We will use a bash script to run at startup that checks to see if connected to VPN every 5s,
 and if not it tries to connect. 
 
@@ -104,50 +107,44 @@ ECHO="/bin/echo";
 while [ "true" ]
 do
     VPNCON=$($NMCLI con status uuid "$VPN_UUID" | $GREP VPN.VPN-STATE | $AWK '{print $2}');
+
     if [[ $VPNCON != "5" ]]; then
-        $ECHO "Disconnected, trying to reconnect...";
         $SLEEP 1;
         $NMCLI con up uuid "$VPN_UUID";
-    else
-        $ECHO "Already connected !"
     fi
+
     $SLEEP $SLEEP_TIME;
 done
 {% endhighlight %}
 
-Then, create a script named autovpn and save it in /etc/init.d by doing the following:
+~~then, create a script named autovpn and save it in /etc/init.d by doing the following:~~
 
-	$sudo vim /etc/init.d/autovpn
+~~$sudo vim /etc/init.d/autovpn~~
 
-Add the following to this file:
+~~Add the following to this file:~~
 
-{% highlight java %}
-#!/bin/sh -e  
-#  
-# rc.local  
-#  
-# This script is executed at the end of each multiuser runlevel.  
-# Make sure that the script will "exit 0" on success or any other  
-# value on error.  
-#  
-# In order to enable or disable this script just change the execution  
-# bits.  
-#  
-# By default this script does nothing.  
+~~#!/bin/sh -e~~  
 
-if [ -x /root/vpn/autovpn.sh ]; then
-     /root/vpn/autovpn.sh
-fi
+~~if [ -x /root/vpn/autovpn.sh ]; then~~
+~~     /root/vpn/autovpn.sh~~
+~~fi~~
 
-exit 0
+~~exit 0~~
 
-{% endhighlight %}
+~~Step 5 Add it as system service~~
 
-### Step 5 Add it as system service
+~~Now we want to add autovpn as a service that starts when the computer starts, so we run:~~
 
-Now we want to add autovpn as a service that starts when the computer starts, so we run:
+~~$sudo update-rc.d autovpn defaults~~
 
-	$sudo update-rc.d autovpn defaults
+### Step 5 Enable Auto connect
+
+	$sudo vim /etc/profile
+
+Add the following to the end of this file:
+
+	bash /root/vpn/autovpn.sh &
+
 
 Reboot the computer, the script will launch and automatically check if it's connected to VPN every 5 seconds, 
 and if it isn't will try to establish the connection! 
