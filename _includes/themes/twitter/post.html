@@ -50,7 +50,7 @@ ol ol ol ol { list-style: lower-alpha;}
         <ol id="postToc" ></ol>
 	{{ content }}
      <!-- Show all of articles in same category -->
-        <h2>相关文章</h2>
+        <h2>Related articles</h2>
         <ul>
         {% for post in site.related_posts %}
                 <li><span>[ {{ post.date | date: "%B %e, %Y" }} ]</span> <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></li>
