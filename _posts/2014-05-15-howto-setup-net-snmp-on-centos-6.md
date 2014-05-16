@@ -8,7 +8,11 @@ tags: [Linux, CentOS, SNMP ]
 ---
 {% include JB/setup %}
 
-The purpose of this document is guide you how to install and setup snmp(snmpwalk) on CentOS.
+The purpose of this document is guide you how to install and setup snmp(snmpwalk) on CentOS 6.
+
+## System Requirement
+
+	OS: CentOs 5.3 or later
 
 ## Installation
 
@@ -32,6 +36,7 @@ Add the following line to the end of this file:
 
 NOTE: 
 
+ - Use different community or authentication strings(Default is public), if possible.
  - The "rocommunity" means this is a read-only access, remote accessing can only obtain 
 information from your server, and can not make any settings on the server.
  - The "lampnode" is equivalent to the accessing password
@@ -58,6 +63,13 @@ We will create a account(snmpuser, pass), and the password encryption method is 
 NOTE: Before you use net-snmp-config, you should stop SNMP service. After adding the new user entry to the Tables, 
 The v3 agent can now be accessed by the new user.
 
+Disable SNMP v1 and SNMP v2c:commented out com2sec and group, in e.g:
+
+        #com2sec notConfigUser  default       public
+
+        #group   notConfigGroup v1           notConfigUser
+        #group   notConfigGroup v2c           notConfigUser
+
 ### View and access
 
 #### Add a new "view" named all after systemview
@@ -83,6 +95,8 @@ To:
 
 	syslocation  "Server -- Lampnode office"
 	syscontact   robert@lampnode.com
+
+#### Enable snmpd 	
 
 Then, you should start the SNMP, and configurate this service.
 
