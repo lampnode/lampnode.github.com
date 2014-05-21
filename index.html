@@ -5,7 +5,7 @@ tagline: Focus On LAMP Technologies
 {% include JB/setup %}
 
 <div class="contentMainBox">
-<h3>最新日志 | Updated</h3>
+<h3>Latest log</h3>
 
 <ul class="lastUpdated">
     {% for post in paginator.posts %}
@@ -22,24 +22,24 @@ tagline: Focus On LAMP Technologies
 
 <div id="pagination">
         <div class="pagenavi" style="padding:10px 5px;">
-                <span class="page_number">第{{paginator.page}}页/共{{paginator.total_pages}}页</span>
-        <a href="/">第一页</a>
+                <span class="page_number">Page:{{paginator.page}}/Total:{{paginator.total_pages}} | </span>
+        <a href="/">First</a> | 
         {% if paginator.previous_page %}
                 {% if paginator.previous_page == 1 %}
-                        <a href="/" class="current"><<前一页</a>
+                        <a href="/" class="current">Previous</a>
                 {% else %}
-                        <a href="/page{{paginator.previous_page}}"><<前一页</a>
+                        <a href="/page{{paginator.previous_page}}">Previous</a>
                 {% endif %}
         {% else %}
-                <span><<前一页</span>
+                <span>Previous</span>
         {% endif %}
-
+		| 
         {% if paginator.next_page %}
-                <a href="/page{{paginator.next_page}}">后一页>></a>
+                <a href="/page{{paginator.next_page}}">Next</a>
         {% else %}
-                <span>后一页>></span>
+                <span>Next</span>
         {% endif %}
-                <a href="/page{{paginator.total_pages}}">最后一页</a>
+                | <a href="/page{{paginator.total_pages}}">Last</a>
         </div>
 </div>
 
@@ -48,7 +48,7 @@ tagline: Focus On LAMP Technologies
 <div class="contentMainBox">
 
 <div class="contentMainBoxItem" style="margin-top:20px;background-color:#6495ED;color:#ffffff;border-radius: 10px">
-	<p style="clear:both;font-size:26px;color:#ffffff;padding:5px 10px;">欢迎来到LAMPNode!</p>
+	<p style="clear:both;font-size:26px;color:#ffffff;padding:5px 10px;">Welcome to LAMPNode!</p>
         <p style="clear:both;font-size:18px;color:#cccccc;padding:0px 10px;">Focus On LAMP technologies</p>
 	<img src="/images/gravatar_120.png" width="120px" height="120px" style="float:left;background-color:#cccccc;border:1px solid #555555;padding:5px;margin:0px 5px"/>
 	<ul>
@@ -65,7 +65,7 @@ tagline: Focus On LAMP Technologies
 <div class="contentMainBoxItem" >
 
 <div class="contentMainBoxItemSub" >
-<h3>运维指南 | Maintenance </h3>
+<h3>Operation and Maintenance </h3>
 <ul>
         <li> <b>CentOS:</b>
                 <a href="/guideline/centOs-postInstallation.html" target="_blank">Post Installation</a>
@@ -76,18 +76,18 @@ tagline: Focus On LAMP Technologies
 	
 	<li><b>Database:</b>
                 <a href="/tags.html#MySQL-ref" target="_blank">Mysql configuration</a>
-		| <a href="/mysql/mysql-automatic-backup-script/" target="_blank"> Mysql自动备份脚本 </a>
+		| <a href="/mysql/mysql-automatic-backup-script/" target="_blank"> Mysql backup script </a>
          </li>
 
 	<li><b>Web Security:</b>
                 <a href="/tags.html#Security-ref" target="_blank">Web Security configuration</a>
-		| <a href="/linux/iptables-init-script/" target="_blank">IPTABLES初始化脚本</a>
+		| <a href="/linux/iptables-init-script/" target="_blank">IPTABLES init script</a>
         </li>
 </ul>
 </div>
 
 <div class="contentMainBoxItemSub" >
-<h3>开源项目 | Open Source </h3>
+<h3>Open Source Projects </h3>
 <ul>
         <li> <b>PHP Framework:</b> 
 		<a href="http://framework.zend.com/" target="_blank">Zend Framework</a>
@@ -97,7 +97,7 @@ tagline: Focus On LAMP Technologies
 </div>
 
 <div class="contentMainBoxItemSub" >
-<h3>软件推荐 | Softwares </h3>
+<h3>Recommended Softwares </h3>
 <ul>
 	<li> <b>Mail:</b><a href="http://www.mozilla.org/thunderbird" target="_blank">Thunderbird</a></li>
 	<li> <b>Files:</b><a href="http://www.visualsvn.com/server/" target="_blank">VisualSVN Server</a> 
@@ -111,17 +111,17 @@ tagline: Focus On LAMP Technologies
 </div>
 
 <div class="contentMainBoxItemSub" >
-<h3>开发速查 | Help Sheets</h3>
+<h3>Help Sheets</h3>
 <ul>
-	<li><b>网站设计:</b> 
+	<li><b>Web Design:</b> 
 		<a href="/library/colors.html">Web Colors Sheet</a> | 
 		<a href="/library/css2.html" target="_blank">CSS2</a> |
 		<a href="http://www.elizabethcastro.com/html/extras/xhtml_ref.html" target="_blank">(X)HTML Elements and Attributes</a>
 	</li>
-	<li><b>编程语言:</b><a href="/library/jquery.html">Jquery</a></li>
-	<li><b>开发管理:</b> <a href="/library/github.html">GitHub Guide</a></li>
-	<li><b>代码编辑器:</b> <a href="/library/vim.html">VI(M)</a></li> 
-	<li><b>博客管理:</b><a href="/library/jekyll.html">Jekyll</a></li>
+	<li><b>Programing:</b><a href="/library/jquery.html">Jquery</a></li>
+	<li><b>Development:</b> <a href="/library/github.html">GitHub Guide</a></li>
+	<li><b>Code Editors:</b> <a href="/library/vim.html">VI(M)</a></li> 
+	<li><b>Blog:</b><a href="/library/jekyll.html">Jekyll</a></li>
 </ul>
 </div>
 </div>

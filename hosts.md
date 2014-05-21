@@ -1,7 +1,7 @@
 ---
 layout: page
-title: "Linux主机"
-description: "美国流程主机介绍"
+title: "Linux Hosts"
+description: "Linux Host, clound Server"
 group: navigation
 ---
 {% include JB/setup %}

@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Linux命令"
+title: "Linux commands"
 description: "Linux常用命令集锦"
 group: navigation
 ---
