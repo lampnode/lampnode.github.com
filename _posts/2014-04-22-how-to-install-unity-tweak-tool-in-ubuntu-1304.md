@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "如何在 Ubuntu13.04 安装与配置 Unity Tweak tool"
+title: "Howto install Unity Tweak tool in ubuntu 13.04"
 tagline: "How to install Unity Tweak tool in ubuntu 13.04"
 description: ""
 category: Linux 

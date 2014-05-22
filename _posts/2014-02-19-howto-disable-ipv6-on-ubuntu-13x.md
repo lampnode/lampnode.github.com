@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "在Ubuntu上如何禁止IPv6"
+title: "Howto disable IPv6 on Ubuntu 13.x"
 tagline: "Howto disable IPv6 on Ubuntu 13.x"
 description: ""
 category: Ubuntu 
