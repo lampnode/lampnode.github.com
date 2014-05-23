@@ -13,6 +13,7 @@ tags: [ FTP, Linux, CentOs ]
 使用chkconfig --list 来查看是否装有vsftpd服务；使用yum命令直接安装：
 
 ### YUM安装	
+
 	yum -y install vsftpd 
 
 ### 可选设置
@@ -83,6 +84,7 @@ tags: [ FTP, Linux, CentOs ]
 	pam_service_name=vsftpd #PAM认证文件名。PAM将根据/etc/pam.d/vsftpd进行认证 
 
 ### 修改默认目录
+
 默认配置下，匿名用户登录 vsftpd 服务后的根目录是 /var/ftp/；假设要把 vsftpd 服务的登录根目录调整为 /vae/www/html，可加入如下三行：
 
 	local_root=/var/www/html
@@ -109,6 +111,7 @@ tags: [ FTP, Linux, CentOs ]
 ## 用户管理
 
 ### 添加用户
+
 假设设置用户ftpuser,这里要求用户只能用ftp登录，禁止ssh登录，同时修改其默认登录目录到 /var/www
 
 	 #useradd ftpuser -r -m -g ftp -d /var/www/ -s /sbin/nologin
@@ -117,4 +120,18 @@ tags: [ FTP, Linux, CentOs ]
 ### 修改用户目录
 
 	#usermod  -d /var/www/  ftpuser
+
+## Debug
+
+### Error A
+
+	vsftpd 500 OOPS: cannot change directory:/home/ftp/%user%
+
+try change some lines in file "/etc/sysconfig/iptables-config"
+
+	IPTABLES_MODULES="ip_conntrack_netbios_ns ip_conntrack_ftp ip_nat_ftp"
+
+then restart iptables: 
+	
+	#service iptables restart
 

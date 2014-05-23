@@ -1,11 +1,11 @@
 ---
 layout: page
-title: "CentOs安装后配置指南"
+title: "CentOS Post Install Configuration Guide"
 description: "CentOS Post Install Configuration"
 ---
 {% include JB/setup %}
 
-本文档主要用于安装好CentOS后，根据不同的需求，对服务器进行特定的配置。
+The purpose of this document is to guide you how to post confiuration for CentOS, depending on the needs of the server-specific configuration.
 
 ## General Post Configuration
 
@@ -53,11 +53,11 @@ description: "CentOS Post Install Configuration"
 
 ### For File Server
 
-- [Install and configure vsftp](/mysql/how-to-install-and-configure-vsftp-on-centos/)
+- [Install and configure vsftp](/linux/how-to-install-and-configure-vsftp-on-centos/)
 
 ### For Subversion
 
-- [Install and setup svn on CentOs](/msyql/howto-install-and-setup-svn-on-centos/)
+- [Install and setup svn on CentOs](/linux/howto-install-and-setup-svn-on-centos/)
 
 ## YUM
 

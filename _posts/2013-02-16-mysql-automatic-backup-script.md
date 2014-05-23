@@ -1,29 +1,34 @@
 ---
 layout: post
-title: "Mysql自动备份脚本"
+title: "Mysql automatic backup script"
 tagline: "Mysql automatic backup script"
 description: ""
 category: MySQL
-tags: [MySQL]
+tags: [ MySQL, Linux ]
 ---
 {% include JB/setup %}
 
-Mysql数据库备份的方式很多，如果是小数据库的话可以考虑用mysqldump命令备份.
+There are many ways to complate the bakup task for mySQL database. If your database is small, use mysqldump is a good choice.
 
-## 特征
+The mysqldump is a backup program originally written by Igor Romanenko. It can be used to dump a database or a collection of databases for backup. The dump 
+typically contains SQL statements to create the table, populate it, or both.
 
-- 使用mysqldump对目标数据库执行全部备份任务
-- 备份内容直接实现压缩
-- 备份支持crond
+## Features
 
-## 使用方法
+- Implement a backup of all databases (not including database mysql)
+- SQL files will be compressed in real time by gzip
+- Support crond
 
-### 设置my.cnf
-在当前用户创建my.cnf配置文件
+## Usage
+
+### Store your mysql password in .my.cnf
+
+Store your password in an option file, you can list your password in the [client] and [mysqldump] section of the .my.cnf file in your home directory:
 
 	[robert@server ~]$vim ~/.my.cnf
 
-添加如下内容:
+Content example:
+
 {% highlight bash %}
 [client]
 pass=ROOT_PASSWD
@@ -33,63 +38,72 @@ pass=ROOT_PASSWD
 user=root
 {% endhighlight %}
 
-### 安装ssh脚本
+*** NOTE ***: It will not work well if you do not quote your password when the password contains characters such as "=" or ";". The mysql will report the following error:
 
-#### 下载脚本文件
+	MySQL ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
 
-为了便于管理，所有的crond脚本可以都放在一个目录下，如:
+To keep the password safe, the file should not be accessible to anyone but yourself. To ensure this, set the file access mode to 400 or 600. For example:
+
+	[robert@server ~]$chmod 600 .my.cnf
+
+### Setup bash script
+
+#### Download the script
+
+In order to facilitate the management, all the crond script are placed in a directory, such as:
 	
-	[robert@server ~]#cd ~	
+	[robert@server ~]#cd ~
 	[robert@server ~]#mkdir ~/crondScripts
 
-下载并解压脚本文件
+Download and unzip the script file:
 
 	[robert@server ~]# wget https://gist.github.com/lampnode/5113701/download -O mysql_backup_all.tar.gz
 	[robert@server ~]# tar -xzvf mysql_backup_all.tar.gz
 
-在解压目录里找到脚本文件，将脚本文件放到指定目录去，如~/crondScripts
+Find the script file in upzip directory, and move this script file to the "crondScripts" directory. 
 
-#### 设置参数
+#### setting params
 
 ##### EC_USER_DIR
 
-指定备份目标目录,默认是/opt/site-bak
+To specify the backup destination directory, the default is "/opt/site-bak". Note this directory permissions.
 
-
-## 执行脚本
+## script content
+ 
 <script src="https://gist.github.com/lampnode/5113701.js"></script>
 
-## mysqldump命令选项
-mysqldump工具有大量的选项，部分选项如下表：
+## About mysqldump
+
+mysqldump offer a lot of options, the options are often used in the following table:
 　　
-### --add-drop-table
+#### --add-drop-table
 
-这个选项将会在每一个表的前面加上DROP TABLE IF EXISTS语句，这样可以保证导回MySQL数据库的时候不会出错，因为每次导回的时候，都会首先检查表是否存在，存在就删除
+dd a DROP TABLE statement before each CREATE TABLE statement.
 
-### --add-locks
+#### --add-locks
 
-这个选项会在INSERT语句中捆上一个LOCK TABLE和UNLOCK TABLE语句。这就防止在这些记录被再次导入数据库时其他用户对表进行的操作
+Surround each table dump with LOCK TABLES and UNLOCK TABLES statements. This results in faster inserts when the dump file is reloaded.
 
-### -c or - complete_insert
+#### -c or - complete_insert
 
-这个选项使得mysqldump命令给每一个产生INSERT语句加上列(field)的名字。当把数据导出导另外一个数据库时这个选项很有用。
+Use complete INSERT statements that include column names.
 
-### -f or -force 
+#### -f or -force 
 
-使用这个选项，即使有错误发生，仍然继续导出
+continue even if an SQL error occurs during a table dump. One use for this option is to cause mysqldump to continue executing even when it 
+encounters a view that has become invalid because the definition refers to a table that has been dropped. Without --force, 
+mysqldump exits with an error message. With --force, mysqldump prints the error message, but it also writes an SQL comment 
+containing the view definition to the dump output and continues executing.
+
 　　
-### --full 
+#### -l or -lock-tables 
 
-这个选项把附加信息也加到CREATE TABLE的语句中
+For each dumped database, lock all tables to be dumped before dumping them. The tables are locked with READ LOCAL to permit concurrent 
+inserts in the case of MyISAM tables. 
 　　
-### -l or -lock-tables 
-
-使用这个选项，导出表的时候服务器将会给表加锁。
 　　
-### -t or -no-create- info
+#### -d or -no-data 
 
-这个选项使的mysqldump命令不创建CREATE TABLE语句，这个选项在您只需要数据而不需要DDL(数据库定义语句)时很方便。
-　　
-### -d or -no-data 
+Do not write any table row information (that is, do not dump table contents). This is useful if you want to dump only the CREATE TABLE statement for the table (for example, to create an empty copy of the table by loading the dump file).
 
-这个选项使的mysqldump命令不创建INSERT语句。在您只需要DDL语句时，可以使用这个选项。
+

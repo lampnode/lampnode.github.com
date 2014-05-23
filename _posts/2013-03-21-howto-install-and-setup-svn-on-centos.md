@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "如何在CentOs上安装SVN"
+title: "HowTo install and setup svn on CentOs"
 tagline: "HowTo install and setup svn on CentOs"
 description: ""
 category: Linux
@@ -11,13 +11,14 @@ tags: [ Subversion, Linux, CentOs ]
 ## Preparation
 
 - Env：CentOS 5.6/RHEL 5.6
-- software：httpd mod_dav_svn mod_ssl subversion
+- Softwares：httpd mod_dav_svn mod_ssl subversion
 
 ## Install packages
 
-	[root@edwin~]# yum install -y mod_dav_svn mod_ssl subversion
+	#yum install -y mod_dav_svn mod_ssl subversion
  
 If you wish to confirm the version you have, run the following command, which will list the available protocols.
+
 {% highlight bash %} 
 [root@edwin~]# svn --version 
 svn, version 1.6.11 (r934486)
@@ -41,85 +42,88 @@ The following repository access (RA) modules are available:
  
 ## Setup
 
-### Create subversion's pathes
+### Create subversion`s pathes
 
-Once subversion is installed, we’ll need a directory on which to store the repositories. we are using /opt/subversion. That directory will hold four things: some subversion stylesheets for web display, the repositories themselves, SSL keys and the config files.
-{% highlight bash %} 
-[root@edwin~]# mkdir /opt/subversion
-[root@edwin~]# mkdir /opt/subversion/repos
-[root@edwin~]# mkdir /opt/subversion/config
-[root@edwin~]# mkdir /opt/subversion/styles
-[root@edwin~]# mkdir /opt/subversion/keys
-{% endhighlight %} 
+Once subversion is installed, we’ll need a directory on which to store the repositories. we are using "/opt/subversion". That directory 
+will hold four things: some subversion stylesheets for web display, the repositories themselves, SSL keys and the config files.
+
+	# mkdir /opt/subversion
+	# mkdir /opt/subversion/repos
+	# mkdir /opt/subversion/config
+	# mkdir /opt/subversion/styles
+	# mkdir /opt/subversion/keys
+
 **Note：** /repos is root patch of repository.
 
-### Add styles for SVN's web browser
+### Add styles for SVN`s web browser
  
-	[root@edwin~]# cp /usr/share/doc/subversion-XXX/tools/xslt/svnindex* /opt/subversion/styles
+	# cp /usr/share/doc/subversion-XXX/tools/xslt/svnindex* /opt/subversion/styles
  
 Create the first repo, named test
  
-	[root@edwin~]# mkdir /opt/subversion/repos/test
-	[root@edwin~]# svnadmin create /opt/subversion/repos/test
+	# mkdir /opt/subversion/repos/test
+	# svnadmin create /opt/subversion/repos/test
  
-Modify the permission of repos And since we’ll be accessing this via apache, g
-ive permissions to the group. 
+Modify the permission of repos And since we’ll be accessing this via apache, give permissions to the group. 
 
-	[root@edwin~]# chgrp apache -R /opt/subversion/repos
-	[root@edwin~]# chmod g+w -R /opt/subversion/repos
+	# chgrp apache -R /opt/subversion/repos
+	# chmod g+w -R /opt/subversion/repos
  
 ### Create users
 
 create user db file named users，and add the first svn account named mysvnuser
  
-	[root@edwin~]# cd /opt/subversion/config
-	[root@edwin~]# htpasswd -cm users mysvnuser
+	# cd /opt/subversion/config
+	# htpasswd -cm users mysvnuser
  
 Add another account named secoundsvnuser
  
-	[root@edwin~]# htpasswd -m users secondsvnuser
+	# htpasswd -m users secondsvnuser
  
 Create auth file named authz.conf
  
-	[root@edwin~]# vim authz.conf
+	# vim authz.conf
  
 Add the fllowing content to this file:
+
 {% highlight bash %} 
 [groups]
 todos = user1, user2
 proj = user1
  
-[/]
+[repoA:/]
 @todos = r
- 
-[/myproj]
+* =  
+
+[reposB:/]
 @proj = rw
+*=
+
 {% endhighlight %} 
 
 ### Create a self-signed certification
+
 We’ll now create a self-signed SSL certificate.
-{% highlight bash %} 
-[root@edwin~]# cd /opt/subversion/keys
-[root@edwin~]# openssl genrsa -des3 -rand file1:file1 -out svn.key 1024
-[root@edwin~]# openssl rsa -in svn.key -out svn.pem
-[root@edwin~]# openssl req -new -key svn.pem -out svn.csr
-[root@edwin~]# openssl x509 -req -days 365 -in svn.csr -signkey svn.pem -out svn.crt
-{% endhighlight %} 
+
+	# cd /opt/subversion/keys
+	# openssl genrsa -des3 -rand file1:file1 -out svn.key 1024
+	# openssl rsa -in svn.key -out svn.pem
+	# openssl req -new -key svn.pem -out svn.csr
+	# openssl x509 -req -days 365 -in svn.csr -signkey svn.pem -out svn.crt
+
 **Note:**svn.pem is key, and our certificate is svn.crt
 
-{% highlight bash %} 
-[root@edwin~]# chgrp apache -R /opt/subversion/keys
-[root@edwin~]# chmod go-rwx /opt/subversion/keys/svn.crt
-[root@edwin~]#chmod go-rwx /opt/subversion/keys/svn.pem
-{% endhighlight %} 
+	# chgrp apache -R /opt/subversion/keys
+	# chmod go-rwx /opt/subversion/keys/svn.crt
+	# chmod go-rwx /opt/subversion/keys/svn.pem
 
 ### Apache VirtualHost configuration file for the svn
 
 #### Method A
  
-	[root@edwin~]# vim /etc/httpd/conf.d/ssl.conf
+	# vim /etc/httpd/conf.d/ssl.conf
  
-Add the flollowing information after the tag named location
+Add the flollowing information after the tag named location.
 
 {% highlight bash %} 
 <Location /p>
@@ -139,17 +143,16 @@ Add the flollowing information after the tag named location
 #   </LimitExcept>
 </Location>
 {% endhighlight %} 
-方法A倒是简单，不过在linux下，迁出代码库的时候，会报类似如下的错误:
+
+Method A is actually simple, but in linux, When you check out the code,svn will report an error similar to the following:
 	
 	 SSL handshake failed: SSL error: A TLS warning alert has been received.
 
-这是svn客户端对服务器的自签名不识别的缘故，所以，还是推荐使用第二种方法。
-
-#### Method B
+The svn client does not recognize the self-signed certification, so it is recommended to use the  method B.
  
 	[root@edwin~]#vim /etc/httpd/conf.d/svnsite.conf
  
-Let’s suppose you’ll be creating a separate site for this, called svn.yoursitename.com.
+Let`s suppose you`ll be creating a separate site for this, called svn.yoursitename.com.
 
 
 {% highlight bash %} 

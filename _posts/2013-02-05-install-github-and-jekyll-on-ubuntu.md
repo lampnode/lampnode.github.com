@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "在Ubuntu上安装Github和Jekyll"
+title: "Install Github and jekyll on Ubuntu"
 tagline: "Install Github and jekyll on Ubuntu"
 description: "Install github and jekyll on Ubuntu 12.04 or later"
 category: Github
