@@ -20,7 +20,7 @@ The purpose of this document is to guide you how to post confiuration for CentOS
 
 ### Mail
 
-- [Install and setup postifx](/Linux/how-to-setup-postfix-on-centos/)
+- [Install and setup postifx](/linux/how-to-setup-postfix-on-centos/)
 
 ### Networking
 

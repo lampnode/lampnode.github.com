@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "服务器PHP安全配置"
+title: "PHP Security Configuration On Server"
 tagline: "PHP Security Configuration On Server"
 description: ""
 category: PHP
@@ -8,25 +8,25 @@ tags: [ Linux, PHP, Security ]
 ---
 {% include JB/setup %}
 
-PHP的安全设置，主要是修改 php.ini(一般位于/etc/php.ini)中的相关参数。主要参数如下:
 
-## 必须设置参数
+The purpose of this document is to provide a quick and easy security guide for settting php configuration file.
 
-### 禁止expose_php
+## Essential parameters
 
-默认为 
+### Forbidden expose_php
+
+Default as:
 
 	expose_php=On
 
-修改为 
+Update to:
 
 	expose_php=Off
 
-如果不禁止的话，通过使用curl命令，可以暴露服务器信息:
+If not to be forbidden, by using the curl command, it will expose the server information:
+
 
 	$ curl -I http://www.cyberciti.biz/index.php
-
-输入样例:
 
 	HTTP/1.1 301 Moved Permanently
 	Server: nginx
@@ -37,63 +37,60 @@ PHP的安全设置，主要是修改 php.ini(一般位于/etc/php.ini)中的相�
 	Vary: Accept-Encoding
 	X-Galaxy: Andromeda-2
 
-### PHP错误信息设置
+### PHP Error Report
 
-关闭显示错误
+Disable display errors
 
 	display_errors=Off
 
-将错误信息输出到指定文件：
+Export the errors to file：
 
 	log_errors=On
 	error_log=/var/log/httpd/php_scripts_error.log
 
-### 禁止远端代码执行
+### allow_url_fopen
 
 	allow_url_fopen=Off
 	allow_url_include=Off
 
-### 禁止不必要的模块
+### Disable unnecessary modules
 
-#### 查看所有模块配置文件
+#### View all module configuration files
 
 	# cd /etc/php.d
 	#ls
 	cups.ini  fileinfo.ini  mysqli.ini  pdo.ini        pdo_sqlite.ini  snmp.ini     zip.ini
 	curl.ini  json.ini      mysql.ini   pdo_mysql.ini  phar.ini        sqlite3.ini
 
-#### 禁止sqlite
-
-假设sqlite的配置文件在/etc/php.d,可以使用如下命令:
+#### Disable sqlite
 
 	 #mv /etc/php.d/sqlite3.ini /etc/php.d/sqlite3.disable
 
-### 启动sql安全模式
+### Enable sql safe mode
 
 	sql.safe_mode=On
 	magic_quotes_gpc=Off
 
 
-### 设置 Session path
+### Setup Session path
 
         session.save_path="/var/lib/php/session"
         ; Set the temporary directory used for storing files when doing file upload
         upload_tmp_dir="/var/lib/php/session"
 
-### 设置open_basedir
+### Setup open_basedir
 
-#### 方法1
+#### Method A
 
-在php.ini里直接设置
-
+Add the following in the php.ini:
 
 	open_basedir = /home/users/you/public_html:/tmp
 
-#### 方法2
+#### Method B
 
-在httpd.conf中设置
+Add the following in the httpd.conf:
 
-      	<Directory "/var/www/html/www.ccsenet.org/public_html">
+      	<Directory "/var/www/html/sitename/public_html">
         	Options Indexes FollowSymLinks
                 AllowOverride All
                 Order allow,deny
@@ -101,58 +98,37 @@ PHP的安全设置，主要是修改 php.ini(一般位于/etc/php.ini)中的相�
 		php_admin_value open_basedir .:/tmp/:/var/www/html/www.ccsenet.org/
         </Directory>	
 
-### 关闭magic_quotes_gpc
+### Turn off magic_quotes_gpc
 
 	magic_quotes_gpc = 0 
 
-### 禁止高危PHP函数
+### Disable functions
 
 	disable_functions = show_source, system, shell_exec, passthru, exec, phpinfo, popen, proc_open
 
-### 限制文件与路径的访问权限
+### Limit the file and access paths permisson
 
-#### 文件与目录的属组
 
-Apache不能使用root来执行，例如我们使用apache这个用户/组来执行web文件，所以:
 
-	# chown -R apache:apache /var/www/html/
-
-#### 文件与目录的基本设置
-
-针对/var/www/html,我们先全部设置为0444(只读):
-
-	chmod -R 0444 /var/www/html/
-
-<STRIKE> 然后调整其子目录的权限，可以设置为 0445 </STRIKE> 
-
-	#cd /var/www/html
-	#find . -type d -print0 | xargs -0 -I {} chmod 0445 {}	
-
-<STRIKE> 或者</STRIKE>
- 
-	#cd /var/www/html
-	#find . -type d -exec chmod 0445 {} \;
-
-#### 针对php文件的设置
+#### Change the php permission
 
 	#cd /var/www/html
 	#find . -type f -name "*.php" -exec chmod 0444 {} \;
 
-#### 特殊文件夹的设置
+#### Special folder settings
 
-##### 可上传文件夹
+##### Upload path
 
-针对软件用于存储图片，文档的文件夹，需要设置权限如下:
 	
 	#cd /var/www/html/public_html/upload
 	#find . -type d -exec chmod 0755 {} \;
 
-##### 软件缓存文件夹
+##### Cache path
 
 	# chmod a+w /var/www/html/public_html/cache
 	# echo 'deny from all' > /var/www/html/public_html/cache/.htaccess
 
-### 保护apache, php, mysql的配置文件
+### Protect apache, php, mysql configuration file:
 
 	# chattr +i /etc/php.ini
 	# chattr +i /etc/php.d/*
@@ -160,7 +136,7 @@ Apache不能使用root来执行，例如我们使用apache这个用户/组来执
 	# chattr +i /etc/httpd/conf/httpd.conf
 	# chattr +i /etc/
 
-### 安装 Mod_security
+### Install Mod_security
 
 	# yum install mod_security
 
@@ -172,11 +148,11 @@ Apache不能使用root来执行，例如我们使用apache这个用户/组来执
 * /var/log/httpd/modsec_audit.log - All requests that trigger a ModSecurity events (as detected) or a serer error are logged ("RelevantOnly") are logged into this file.
 
 
-#### 重启apache
+#### Reboot apache
 
 	# service httpd restart
 
-#### 测试是否执行
+#### Testing
 
 	# tail -f /var/log/httpd/error_log
 
@@ -188,9 +164,4 @@ Apache不能使用root来执行，例如我们使用apache这个用户/组来执
 	[Mon Apr 22 10:37:58 2013] [notice] ModSecurity: LUA compiled version="Lua 5.1"
 	[Mon Apr 22 10:37:58 2013] [notice] ModSecurity: LIBXML compiled version="2.7.6"
 
-## 可选设置
-
-### 控制post大小
-
-	post_max_size=1K
 
