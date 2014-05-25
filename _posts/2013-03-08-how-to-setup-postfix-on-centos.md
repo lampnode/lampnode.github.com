@@ -63,11 +63,11 @@ mydomain参数是指email服务器的域名，请确保为正式域名
 myorigin参数指定本地发送邮件中来源和传递显示的域名。在我们的例子中是我的域名。我们的邮件
 地址是user@server.com而不是user@mail.server.com。
 
-	myorigin = $mydomain
+	myorigin = $mydomain  (send mail as "user@$mydomain")
 
 当设定为 
 
-	myorigin = $myhostname
+	myorigin = $myhostname (send mail as "user@$myhostname")
 
 我们的邮件地址是user@mail.server.com而不是user@server.com。
 
@@ -76,7 +76,7 @@ myorigin参数指定本地发送邮件中来源和传递显示的域名。在我
 mydestination参数指定哪些邮件地址允许在本地发送邮件。这是一组被信任的允许通过服务器发送或传递邮件的IP地址
 用户试图通过发送从此处未列出的IP地址的原始服务器的邮件将被拒绝
 
-        mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain
+	mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain
 
 这里添加了$mydomain
 
@@ -98,18 +98,24 @@ inet_interfaces参数设置网络接口以便Postfix能接收到邮件。
 
 如果使用all的话，会有如下报错：
 
-        sendmail: warning: inet_protocols: IPv6 support is disabled: Address family 
-		not supported by protocol
-        sendmail: warning: inet_protocols: configuring for IPv4 support only
-        postdrop: warning: inet_protocols: IPv6 support is disabled: Address family 
-		not supported by protocol
-        postdrop: warning: inet_protocols: configuring for IPv4 support only
+	sendmail: warning: inet_protocols: IPv6 support is disabled: Address family 
+	not supported by protocol
+	sendmail: warning: inet_protocols: configuring for IPv4 support only
+	postdrop: warning: inet_protocols: IPv6 support is disabled: Address family 
+	not supported by protocol
+	postdrop: warning: inet_protocols: configuring for IPv4 support only
 
 ##### mynetworks
 
 mynetworks参数指定受信任SMTP的列表，具体的说，受信任的SMTP客户端允许通过Postfix传递邮件。
 
-	mynetworks =  127.0.0.0/8
+	mynetworks =  127.0.0.0/8  (safe: authorize local machine only)
+
+Examples:
+
+	mynetworks_style = subnet  (default: authorize subnetworks)
+	mynetworks_style = host    (safe: authorize local machine only)
+	mynetworks = 127.0.0.0/8 168.100.189.2/32 (authorize local machine) 
 
 **请注意:**如果你没有设定 mynetworks 的话，一定要将 mynetworks_style 设定为 host, 不然你的 IP 所在的子域的 IP 会被自动的认为是合法的.
 
@@ -117,7 +123,12 @@ mynetworks参数指定受信任SMTP的列表，具体的说，受信任的SMTP�
 
 relay_domains是系统传递邮件的目的域名列表。如果留空，我们保证了我们的邮件服务器不对不信任的网络开放。
 
-	relay_domains =
+	relay_domains =   (safe: never forward mail from strangers)
+
+Other Examples:
+
+	relay_domains = $mydestination (default)
+	relay_domains = $mydomain (forward mail to my domain and subdomains)
 
 #### 可选设置
 
@@ -177,3 +188,6 @@ relay_domains是系统传递邮件的目的域名列表。如果留空，我们�
 
 虽然不加DNS解析也能把邮件发出去，但会被大多数邮件服务器当作垃圾邮件。根据我们的实际经验，需要添加三条DNS解析记录：A记录:、MX记录、TXT记录。
 
+### Test
+
+	echo "mail content" | mail -s test admin@example.com
