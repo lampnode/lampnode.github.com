@@ -26,21 +26,27 @@ Then edit the ssmtp configuration file:
 
 	$sudo vim /etc/ssmtp/ssmtp.conf
 
-Comment out the "Root" and "Mailhub" lines. Add the following a the end of this file:
+Comment out the "root" , "hostname" and "mailhub" lines. Add the following a the end of this file:
 
-	Root=your_email@gmail.com
-	Mailhub=smtp.gmail.com:465
-	RewriteDomain=gmail.com
+	root=your_email@gmail.com
+	mailhub=smtp.gmail.com:587
+	rewriteDomain=gmail.com
+	hostname=<YOUR MACHINE HOSTNAME>
 	AuthUser=your_gmail_username # me@gmail.com
 	AuthPass=your_gmail_password
 	FromLineOverride=Yes
 	UseTLS=Yes
+	UseSTARTTLS=Yes
+
+Configure SSMTP "/etc/ssmtp/revaliases" file to looks like:
+
+	root:<YOUR EMAIL>@gmail.com:smtp.gmail.com:587
 
 Then, save the change. Add the "heirloom-mailx" as  mail application in command line.
 
 	$sudo apt-get install heirloom-mailx
 
-### Test
+### Test Email
 
 Now you can also use mail from the command line with something like:
 
