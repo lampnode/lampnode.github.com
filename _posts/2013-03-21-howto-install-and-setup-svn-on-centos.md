@@ -20,7 +20,7 @@ tags: [ Subversion, Linux, CentOs ]
 If you wish to confirm the version you have, run the following command, which will list the available protocols.
 
 {% highlight bash %} 
-[root@edwin~]# svn --version 
+[root@lampnode.com]# svn --version 
 svn, version 1.6.11 (r934486)
    compiled Jun  8 2011, 16:22:13
  
@@ -87,6 +87,7 @@ Create auth file named authz.conf
 Add the fllowing content to this file:
 
 {% highlight bash %} 
+
 [groups]
 todos = user1, user2
 proj = user1
@@ -144,19 +145,26 @@ Add the flollowing information after the tag named location.
 </Location>
 {% endhighlight %} 
 
+#### Method B
+
 Method A is actually simple, but in linux, When you check out the code,svn will report an error similar to the following:
 	
 	 SSL handshake failed: SSL error: A TLS warning alert has been received.
 
 The svn client does not recognize the self-signed certification, so it is recommended to use the  method B.
  
-	[root@edwin~]#vim /etc/httpd/conf.d/svnsite.conf
+	#vim /etc/httpd/conf.d/svnsite.conf
  
-Let`s suppose you`ll be creating a separate site for this, called svn.yoursitename.com.
+Let us suppose you will be creating a separate site for this, called svn.yoursitename.com.
 
 
 {% highlight bash %} 
-<VirtualHost svn.yoursitename.com:443>
+
+## Add 443 port for Virtual hosts if need
+NameVirtualHost *:443
+
+## add virtualhost for subversion
+<VirtualHost *:443>
     DocumentRoot "/opt/subversion/styles"
     ServerName svn.yoursitename.com
     SSLEngine on
@@ -177,8 +185,25 @@ Let`s suppose you`ll be creating a separate site for this, called svn.yoursitena
     </Location>
     ServerAdmin webmaster@yoursitename.com
 </VirtualHost>
+
+## Add directories 
+
+<Directory /opt/subversion/styles>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+</Directory>
+
+<Directory /opt/subversion/repos>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+</Directory>
+
 {% endhighlight %}
  
 ### Reboot apache
  
-	[root@edwin~]#service httpd restart
+	#service httpd restart
