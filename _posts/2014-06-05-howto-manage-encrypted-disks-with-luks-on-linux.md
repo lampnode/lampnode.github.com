@@ -168,7 +168,7 @@ if your want to use UUID, To find their UUIDs, try this:
 
 It should output something like this.
 
-	UUID=a4e810e2-7812-4dfa-893a-2f55dbf09d12
+	/dev/sda1: UUID="bf43f0ad-8a19-436a-8f33-3850cc8ce3a2" TYPE="crypto_LUKS" 
 
 Now, let`s use those UUIDs to update the "/etc/crypttab" file. It should look something like this. Those names at the beginning again create the entries that map to /dev/mapper.
 
@@ -177,6 +177,7 @@ Now, let`s use those UUIDs to update the "/etc/crypttab" file. It should look so
 When "/etc/crypttab" has been changed, update your initramfs so it can boot to the encrypted root partition:
 
 	#update-initramfs -u
+	update-initramfs: Generating /boot/initrd.img-3.13.0-24-generic
 
 #### Setup the fstab
 
@@ -187,7 +188,7 @@ this partition. It should be in this format and based off the UUID of the "/dev/
 
 Sample outputs:
 
-	UUID=3b122bc3-8b5d-5cc1-baf6-7ef163cc6760
+	/dev/mapper/backupX: UUID="51566f21-998b-4026-863c-94b5eb30377a" TYPE="ext4" 
 
 Let`s open the "/ect/fstab":
 
