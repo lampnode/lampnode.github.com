@@ -29,17 +29,34 @@ Please refer to [HowTo install and setup svn on CentOs](/linux/howto-install-and
 
 ### enable ssl
 
-	sudo a2enmod ssl
-	ls sites-available/
-	ls sites-enabled/	
+You should use the command a2enmod to enable ssl, authz_svn:
+
+	$sudo a2enmod ssl
+	$sudo a2enmod authz_svn
+
+***NOTE*** If you do not enable authz_svn, there are an error will been reported when you
+reboot the apache2. The error like:
+
+
+	Syntax error on line 64 of /etc/apache2/mods-enabled/dav_svn.conf:
+	Invalid command ‘AuthzSVNAccessFile’, perhaps misspelled or defined by a module not included in the server configuration
+	Action ‘configtest’ failed.
+	The Apache error log may have more information.
+	…fail!
+
+
+Then,Check the following pathes:
+
+	$ls sites-available/
+	$ls sites-enabled/	
 
 ### Checking the user and group of apache
 
-	vim /etc/apache2/apache2.conf 
+	$sudo vim /etc/apache2/apache2.conf 
 
 ### Edit default-ssl.conf
 
-	sudo vim sites-available/default-ssl.conf 
+	$sudo vim sites-available/default-ssl.conf 
 
 {% highlight bash%}
 	<IfModule mod_ssl.c>
@@ -101,8 +118,10 @@ Please refer to [HowTo install and setup svn on CentOs](/linux/howto-install-and
 	</IfModule>
 {% endhighlight %}
 
-	sudo a2ensite default-ssl
+You should use the command a2ensite to enable default-ssl:
+
+	$sudo a2ensite default-ssl
 
 ### Reboot The apache
 	
-	sudo /etc/init.d/apache2 restart
+	$sudo /etc/init.d/apache2 restart
