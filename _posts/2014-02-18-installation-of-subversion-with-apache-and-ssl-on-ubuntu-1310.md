@@ -17,17 +17,25 @@ System:Ubuntu 13.10
 ## Steps
 
 
-### insall and config svn 
+### Insall and setup svn repository 
 
 #### Install subversion and related packages
 
 	$sudo apt-get install subversion libapache2-svn apache2
 
-#### Configure the subversion repository
+#### Create the subversion repository
+
+The example respotory directorys:
+
+	+/subversion
+	+------/repos
+	+------/config
+	+------/styles
+	+------/keys
 
 Please refer to [HowTo install and setup svn on CentOs](/linux/howto-install-and-setup-svn-on-centos)
 
-### enable ssl
+### Enable apache ralated  modules
 
 You should use the command a2enmod to enable ssl, authz_svn:
 
@@ -47,76 +55,63 @@ reboot the apache2. The error like:
 
 Then,Check the following pathes:
 
-	$ls sites-available/
-	$ls sites-enabled/	
+	$ls /etc/apache2/sites-available/
+	$ls /etc/apache2/sites-enabled/	
 
 ### Checking the user and group of apache
 
-	$sudo vim /etc/apache2/apache2.conf 
+	$sudo vim /etc/apache2/apache2.conf
+
+In ubuntu, The default user/group for Apache service is www-data. In this example, the subverion respository is saved on "/opt". 
+Let`s change the owner of the repository.
+
+	$sudo chown -R www-data:www-data /opt/subversion
 
 ### Edit default-ssl.conf
 
-	$sudo vim sites-available/default-ssl.conf 
+	$sudo vim /etc/apache2/sites-available/default-ssl.conf 
 
-{% highlight bash%}
-	<IfModule mod_ssl.c>
-	<VirtualHost _default_:443>
-		ServerAdmin webmaster@localhost
+#### Update the DocumentRoot configuration:
 
-		DocumentRoot /opt/svnrepos/subversion/styles
-		
-		<Directory "/opt/svnrepos/subversion/styles">
-                Options Indexes FollowSymLinks MultiViews
-                AllowOverride All
-                Order allow,deny  
-                allow from all
-                Require all granted
-	        </Directory>
+Modify the "DocumentRoot"
 
+ 	DocumentRoot /opt/subversion/styles
 
-		ErrorLog ${APACHE_LOG_DIR}/error.log
-		CustomLog ${APACHE_LOG_DIR}/access.log combined
+Then, add the directory configuration for the new "DocumentRoot":
 
+	<Directory "/opt/subversion/styles">
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride All
+		Order allow,deny
+		allow from all
+		Require all granted
+	</Directory>
 
-		#   Enable/Disable SSL for this virtual host.
-		SSLEngine on
+#### Update the SSL Certificate files
 
-		#SSLCertificateFile	/etc/ssl/certs/ssl-cert-snakeoil.pem
-		#SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
-		SSLCertificateFile /opt/svnrepos/subversion/keys/svn.crt
-		SSLCertificateKeyFile /opt/svnrepos/subversion/keys/svn.pem
+Comment out the relevant parameters, add the following content
 
+	#SSLCertificateFile /etc/ssl/certs/ssl-cert-snakeoil.pem
+	#SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+	SSLCertificateFile /opt/subversion/keys/svn.crt
+    SSLCertificateKeyFile /opt/subversion/keys/svn.pem
 
-		#   SSL Engine Options:
-		<FilesMatch "\.(cgi|shtml|phtml|php)$">
-				SSLOptions +StdEnvVars
-		</FilesMatch>
-		<Directory /usr/lib/cgi-bin>
-				SSLOptions +StdEnvVars
-		</Directory>
+#### Add the location for the repository
 
-		#   SSL Protocol Adjustments:
-		BrowserMatch "MSIE [2-6]" \
-				nokeepalive ssl-unclean-shutdown \
-				downgrade-1.0 force-response-1.0
-		# MSIE 7 and newer should be able to use keepalive
-		BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
-		
-		<Location /p>
-	        DAV svn
-	        SVNParentPath /opt/svnrepos/subversion/repos
-	        SVNIndexXSLT "/svnindex.xsl"
-	        AuthzSVNAccessFile /opt/svnrepos/subversion/config/authz.conf
-	        Satisfy all
-	        Require valid-user
-	        # authenticating them valid ones
-	        AuthType Basic
-	        AuthName "Subversion Repositories at yoursitename.com"
-	        AuthUserFile /opt/svnrepos/subversion/config/users
-		</Location>
-	</VirtualHost>
-	</IfModule>
-{% endhighlight %}
+Add the following content before the tag "</VirtualHost>":
+
+	<Location /p>
+		DAV svn
+		SVNParentPath /opt/subversion/repos
+		SVNIndexXSLT "/svnindex.xsl"
+		AuthzSVNAccessFile /opt/subversion/config/authz.conf
+		Satisfy all
+		Require valid-user
+		# authenticating them valid ones
+		AuthType Basic
+		AuthName "Subversion Repositories at yoursitename.com"
+		AuthUserFile /opt/subversion/config/users
+	</Location>
 
 You should use the command a2ensite to enable default-ssl:
 
