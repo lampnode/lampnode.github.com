@@ -11,7 +11,7 @@ tags: [ Linux ]
 
 ## htop
 
-The hop is an interactive process viewer for Linux on command-line mode.
+The htop is an interactive process viewer for Linux on command-line mode.
 
 	$ sudo apt-get install htop 
 

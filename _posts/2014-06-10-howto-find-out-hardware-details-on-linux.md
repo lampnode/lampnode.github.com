@@ -15,11 +15,15 @@ The purpose of this document is to guide you how to find out the hardware inform
 
 You should install ralated command-line tools(e.g. lshw ) firstly.
 
-On ubuntu:
+### lshw
+
+lshw is a command-line utility for showing detailed hardware specification of a Linux machine.
+
+To install lshw on ubuntu:
 
 	$sudo apt-get install lshw
 
-On CentOS:
+To install lshw on CentOS:
 
 	#yum install lshw
 
@@ -155,3 +159,41 @@ Sample output:
        capabilities: isa pci pnp upgrade shadowing cdboot bootselect edd int13floppytoshiba int13floppy360 int13floppy1200 int13floppy720 int9keyboard int14serial int10video acpi usb biosbootspecification netboot
 {% endhighlight %}
 
+### Check the newtork
+
+	# lshw -class network
+
+Sample outputs:
+
+
+{% highlight bash %}
+  *-network:0             
+       description: Ethernet interface
+       product: NetXtreme II BCM5716 Gigabit Ethernet
+       vendor: Broadcom Corporation
+       physical id: 0
+       bus info: pci@0000:02:00.0
+       logical name: eth0
+       version: 20
+       serial: 78:2b:cb:3a:16:3e
+       size: 100MB/s
+       capacity: 1GB/s
+       width: 64 bits
+       clock: 33MHz
+       capabilities: pm vpd msi msix pciexpress bus_master cap_list ethernet physical tp 10bt 10bt-fd 100bt 100bt-fd 1000bt-fd autonegotiation
+       configuration: autonegotiation=on broadcast=yes driver=bnx2 driverversion=2.1.11 duplex=full firmware=6.2.12 bc 5.2.3 NCSI 2.0.11 ip=60.215.129.82 latency=0 link=yes module=bnx2 multicast=yes port=twisted pair speed=100MB/s
+  *-network:1 DISABLED
+       description: Ethernet interface
+       product: NetXtreme II BCM5716 Gigabit Ethernet
+       vendor: Broadcom Corporation
+       physical id: 0.1
+       bus info: pci@0000:02:00.1
+       logical name: eth1
+       version: 20
+       serial: 78:2b:cb:3a:16:3f
+       capacity: 1GB/s
+       width: 64 bits
+       clock: 33MHz
+       capabilities: pm vpd msi msix pciexpress bus_master cap_list ethernet physical tp 10bt 10bt-fd 100bt 100bt-fd 1000bt-fd autonegotiation
+       configuration: autonegotiation=on broadcast=yes driver=bnx2 driverversion=2.1.11 duplex=half firmware=6.2.12 bc 5.2.3 NCSI 2.0.11 latency=0 link=no module=bnx2 multicast=yes port=twisted pair	
+ {% endhighlight %}
