@@ -1,44 +1,41 @@
 ---
 layout: post
-title: "使用Rsync经SSH备份数据"
+title: "Using Rsync with SSH to backup data"
 tagline: "Using Rsync with SSH to backup data"
 description: ""
 category: Linux 
-tags: [CentOs, rsync]
+tags: [ Linux, rsync]
 ---
 {% include JB/setup %}
 
-## 系统要求
+## System requirement
 
-在常驻模式（daemon mode）下，rsync默认监听TCP端口873。SSH情况下，rsync用户端执行程式必须同时在本地和远程机器上安装。
-
-需要安装这些软件包：
+Related packages:
 
 - rsync
 - openssh
 - cron
 
-## 使用方法
+## Usage
 
-### 备份 
-
-不带 delete 参数
+### Backup without delete flag
  
 	$ rsync -avz -e ssh remoteuser@remotehost:/remote/dir /local/dir/ 
  
-### 镜像数据 
-
-带 delete 参数
+### Backup with delete flag
 
 By default, rsync will only copy files and directories, but not remove them from the destination copy when they are removed from the source. To keep the copies exact, include the --delete flag:
  
 	$ rsync -avz ssh  --delete remoteuser@remotehost:/remote/dir /local/dir/
 
-### 使用密钥
+### Backup with secret key
 
-#### 生成密钥
+#### Create Keys
 
 	$ ssh-keygen -t dsa -b 1024 -f rsync.key
+	
+Sample outputs:
+
 	Generating public/private dsa key pair
 	Enter passphrase (empty for no passphrase): [Enter without any input]
 	Enter same passphrase again: [Enter without any input]
@@ -47,11 +44,7 @@ By default, rsync will only copy files and directories, but not remove them from
 	The key fingerprint is: 
 	41:29:60:49:40:c3:a0:8f:2f:74:4e:40:64:a5:42:db edwin@client.local 
 
-这时候会产生2个文件:
-rsync.key
-rsync.key.pub
-
-#### 将公钥加入远端服务器
+#### Add the public key to server-side host
 
 	$ scp rsync.key.pub robert@remote.server.com:~/.ssh/ 
 	$ ssh robert@remote.server
@@ -59,21 +52,22 @@ rsync.key.pub
 	$ cat rsync.key.put >>  authorized_keys
 	$ chmod 600  authorized_keys
 
-#### 测试是否可以无密码登录远端服务器
+Test this key:
 	
 	$ssh -i rsync.key robert@remote.server
 
-#### 测试备份
+#### Test backup
 
 	$ rsync -avz -e "ssh -i rsync.key" robert@remote.server:~/backup/ /backup/ 
 
-
 ### rsync + ssh + No Password + Crontab 
 
-#### 创建执行脚本
-脚本文件为 /home/edwin/crontabScript/rsync.sh,内容如下
+#### Edit the script
 
-##### 当不含有Exclude Files
+The script file is  "/home/edwin/crontabScript/rsync.sh", the following content is:
+
+##### Without Exclude Files
+
 {% highlight bash %}
 #!/bin/bash
 RSYNC=/usr/bin/rsync
@@ -90,7 +84,8 @@ $RSYNC -avz -e "$SSH -i $KEY -p $SSH_PORT" $USER@$HOST:$REMOTE_DIR $LOCAL_DIR
 {% endhighlight %}
 
 
-##### 当含有Exclude Files	
+##### With Exclude Files	
+
 {% highlight bash %}
 #!/bin/bash 
 RSYNC=/usr/bin/rsync
@@ -107,7 +102,7 @@ LOCAL_DIR=/your/path/to/local_dir
 $RSYNC -avz -e "$SSH -i $KEY -p $SSH_PORT" --exclude-from "$EXCLUDE_FILE"  $USER@$HOST:$REMOTE_DIR $LOCAL_DIR 
 {% endhighlight %}
 
-Exclude file 文件格式如下:
+The content of exclude file:
 
 {% highlight bash %}
 
@@ -117,13 +112,13 @@ downloads/test/*
 
 {% endhighlight %}
 
-#### 设置crontab
+#### Setup crontab
 
 	$crontab -e
 	20 1 * * * /home/edwin/crontabScript/rsync.sh
 
 
-## 相关文章
-* [如何在Linux上安装Rsync](/Linux/how-to-setu
-p-rsync-on-linux/index.html)
+Related articles: 
+
+* [ How to Setup Rsync on Linux ](/Linux/how-to-setup-rsync-on-linux/index.html)
  
