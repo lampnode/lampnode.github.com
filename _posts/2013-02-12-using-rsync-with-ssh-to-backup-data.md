@@ -8,15 +8,26 @@ tags: [ Linux, rsync]
 ---
 {% include JB/setup %}
 
+The purpose of this ducument is guide you to setup cron job with rsync to bakcup data.
+
+
+
 ## System requirement
 
-Related packages:
+### Hosts
+
+- Data-Server [192.168.0.3]
+- Backup-Server[192.168.0.7]
+
+
+
+### Related packages:
 
 - rsync
 - openssh
 - cron
 
-## Usage
+## Rsync Usage Examples
 
 ### Backup without delete flag
  
@@ -28,9 +39,11 @@ By default, rsync will only copy files and directories, but not remove them from
  
 	$ rsync -avz ssh  --delete remoteuser@remotehost:/remote/dir /local/dir/
 
-### Backup with secret key
+## Backup with secret key
 
-#### Create Keys
+### Creating the ssh key
+
+The following steps will be complated on the backup server [192.168.0.7].
 
 	$ ssh-keygen -t dsa -b 1024 -f rsync.key
 	
@@ -44,29 +57,48 @@ Sample outputs:
 	The key fingerprint is: 
 	41:29:60:49:40:c3:a0:8f:2f:74:4e:40:64:a5:42:db edwin@client.local 
 
+### Server configration
+
+#### Configuring sshd
+
+Update the following params in the sshd configuration file.
+
+- "PubkeyAuthentication" should be set to "yes".
+- "PermitRootLogin" should be set to either "without-password", or "forced-commands-only".
+
+Then, reload the sshd
+
+	$sudo /etc/init.d/sshd restart
+
 #### Add the public key to server-side host
 
-	$ scp rsync.key.pub robert@remote.server.com:~/.ssh/ 
-	$ ssh robert@remote.server
-	$ cd .ssh
-	$ cat rsync.key.put >>  authorized_keys
-	$ chmod 600  authorized_keys
+You should finished the following steps on the backup server.
+  
+	$ scp rsync.key.pub robert@192.168.0.3:~/.ssh/
+	$ ssh root@192.168.0.3
+	# cd .ssh
+	# cat rsync.key.put >>  authorized_keys
+	# chmod 600 authorized_keys
 
-Test this key:
-	
-	$ssh -i rsync.key robert@remote.server
+#### Test this key     
 
-#### Test backup
+	$ ssh -i rsync.key root@192.168.0.3
 
-	$ rsync -avz -e "ssh -i rsync.key" robert@remote.server:~/backup/ /backup/ 
+or 
 
-### rsync + ssh + No Password + Crontab 
+	$ ssh -p10001 -i rsync.key root@192.168.0.3 "ls -al"
 
-#### Edit the script
+### Test backup 
+
+	$ rsync -avz -e "ssh -i rsync.key" root@192.168.0.3:~/backup/ /backup/ 
+
+## Backup Data with cron
+
+### Edit the script
 
 The script file is  "/home/edwin/crontabScript/rsync.sh", the following content is:
 
-##### Without Exclude Files
+#### Without Exclude Files
 
 {% highlight bash %}
 #!/bin/bash
@@ -84,7 +116,7 @@ $RSYNC -avz -e "$SSH -i $KEY -p $SSH_PORT" $USER@$HOST:$REMOTE_DIR $LOCAL_DIR
 {% endhighlight %}
 
 
-##### With Exclude Files	
+#### With Exclude Files	
 
 {% highlight bash %}
 #!/bin/bash 
@@ -112,7 +144,7 @@ downloads/test/*
 
 {% endhighlight %}
 
-#### Setup crontab
+### Setup crontab
 
 	$crontab -e
 	20 1 * * * /home/edwin/crontabScript/rsync.sh
