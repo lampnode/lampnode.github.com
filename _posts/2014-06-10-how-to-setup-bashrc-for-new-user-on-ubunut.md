@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "How to setup .bashrc for new user on Ubunut"
-tagline: "How to setup .bashrc for new user on Ubunut"
+title: "How to setup .bashrc for new user on Ubuntu"
+tagline: "How to setup .bashrc for new user on Ubuntu"
 description: ""
 category: Linux 
 tags: [Linux, Ubuntu, Bash ]

@@ -4,7 +4,7 @@ title: "Install Github and jekyll on Ubuntu"
 tagline: "Install Github and jekyll on Ubuntu"
 description: "Install github and jekyll on Ubuntu 12.04 or later"
 category: Github
-tags: [Ubuntu]
+tags: [ Ubuntu ]
 ---
 {% include JB/setup %}
 
@@ -21,6 +21,14 @@ Jekyll is a Git compatible static site generator that can be installed on Ubuntu
 In order to preview your blog locally you will  need to install the Jekyll ruby gem.
 
 	$sudo gem install jekyll
+
+If you are configuring this step on the Ubuntu Server Edition, the system will report an error like:
+
+	ERROR: Failed to build gem native extension
+
+You should install build-essential to fix this problem:
+
+	$sudo apt-get install build-essential -y
 
 ### Install Rake
 
@@ -39,10 +47,17 @@ if you don't install nodejs, when you boot jekyll server, the system will report
 
 	$git config --global user.name lampnode
   	$git config --global user.email robert@example.com	
+	$git config color.ui true
 
-## Usages
+### Checkout the repository from github
 
-### Start Jekyll
+	$mkdir USERNAME.github.com
+	$cd USERNAME.github.com
+	$git clone USERNAME@host:/path/to/repository .
+
+## Basic Usages
+
+### Start Jekyll server
 
 	$cd USERNAME.github.com
 	$jekyll --server
@@ -56,6 +71,7 @@ Your can access this by http://loclaohost:4000
 ### For Rake
 
 #### Create a new page
+
 	$rake page name="about.md"
 
 
@@ -67,8 +83,12 @@ Begin a new post
 
 The rake task automatically creates a file with properly formatted filename and YAML Front Matter. Make sure to specify your own title. By default, the date is the current date.
 
+## Update to local
+
+	$git pull
 	
 ## Commit to GitHub
+
 	$git add .
 	$git commit -m "Add some content"
 	$git push origin master

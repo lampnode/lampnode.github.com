@@ -55,19 +55,27 @@ Make sure you are editing the snmpd.conf file and not the snmp.conf file.
 	
 #### Edit the Agent Behavior
 
-Comment out the line for "connections from the local system only" and uncomment the line for 
-listening for "connections on all interfaces".
-
 	#  Listen for connections from the local system only
-	#agentAddress  udp:127.0.0.1:161
+	agentAddress  udp:127.0.0.1:161
 	#  Listen for connections on all interfaces (both IPv4 *and* IPv6)
-	agentAddress udp:161,udp6:[::1]:161
+	#agentAddress udp:161,udp6:[::1]:161
+
+If you want to enable remote access, you should comment out the line for "connections from the local system only" and uncomment the line for
+ 59 listening for "connections on all interfaces".
+
+#### Add view
+
+	view   all         included   .1                80
 
 #### ACCESS CONTROL
 
-Uncomment and edit the line for "rocommunity secret 10.0.0.0/16". We will be changing this to reference our specific Cacti server(192.168.0.16). 
-	
-	rocommunity secret 192.168.0.16
+Change the following line:
+
+	rocommunity public  default    -V systemonly
+
+To:
+
+	rocommunity secret default    -V all
 
 #### SYSTEM INFORMATION
 
