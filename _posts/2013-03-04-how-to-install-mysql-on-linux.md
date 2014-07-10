@@ -307,13 +307,20 @@ mysql的配置文件，在CentOS是放在/etc/目录下的:
 
 #For ~/.my.cnf
 [client]
-pass=ROOT_PASSWD
+pass="ROOT_PASSWD"
 user=root
 [mysqldump]
-pass=ROOT_PASSWD
+pass="ROOT_PASSWD"
 user=root
 
 {% endhighlight %}
+
+如果是新版本的mysql, 当你用配置文件登录的时候会有如下报错:
+
+	Warning: Using unique option prefix pass instead of password is deprecated and will be removed in a future release. Please use the full name instead.
+
+只要修改字段"pass"为"password" 即可。
+
 修改.my.cnf的权限：
 
 	[root@server~]#chmod 700 ~/.my.cnf
