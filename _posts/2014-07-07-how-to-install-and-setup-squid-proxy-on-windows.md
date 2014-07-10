@@ -115,11 +115,36 @@ Note: if you want to uninstall squid services, you should run the following comm
 
 #### DNS
 
-use specific dns server in this case
+Add the following line on the end of the file:
 
-	dns_nameservers 208.67.222.222 208.67.220.220
+	dns_nameservers 208.67.222.222 208.67.220.220 8.8.8.8 8.8.4.4
+
+***NOTE*** This setting is necessary, or you will can`t visit some website.
 
 #### visible_hostname
 
 	visible_hostname squid.example.com
+
+## Enable TCP/IP Forwarding on Windows
+
+To enable TCP/IP forwarding, follow these steps:
+
+### Start Registry Editor
+
+To run the command "Regedit.exe" on the cmd.
+
+### Modify the key
+
+In Registry Editor, locate the following registry key:
+ 
+	HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
+	Set the following registry value:
+	Value Name: IPEnableRouter
+	Value type: REG_DWORD
+	Value Data: 1
+    
+A value of 1 enables TCP/IP forwarding for all network connections that are installed and used by this computer.
+
+### Quit Registry Editor.
+
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "在Linux上安装配置MySQL"
+title: "How to install MySQL on Linux"
 tagline: "How to install MySQL on Linux"
 description: ""
 category: MySQL
