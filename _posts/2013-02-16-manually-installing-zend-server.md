@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "手动安装 Zend Server"
+title: "Manually Installing Zend Server"
 tagline: "Manually Installing Zend Server"
 description: ""
 category: Linux 
@@ -8,48 +8,50 @@ tags: [ ZendServer, CentOs, Ubuntu, PHP ]
 ---
 {% include JB/setup %}
 
-本文档，只适合Zend server 5.x
+This document applies only to Zend Server 5.x
  
-## 安装 
-### Ubuntu
+## Installation 
 
+### On Ubuntu
 
-#### 设置软件源
+Only for Ubuntu 10.x, 9.x, 11.04 or later versions do not apply this configuration.
 
-在文件" /etc/apt/sources.list" 增加如下一行:
+#### Add deb sources 
+
+Add the following line on the file named " /etc/apt/sources.list":
 
 	deb http://repos.zend.com/zend-server/deb server non-free
 
 
-导入 Zend repository的 public key:
+Import public key from the Zend repository:
 
-	# wget http://repos.zend.com/zend.key -O- |sudo apt-key add -
+	$ wget http://repos.zend.com/zend.key -O- |sudo apt-key add -
 
-同步软件源:
+Then, update local repository:
 
-	# sudo apt-get update
+	$ sudo apt-get update
 
 
-#### 安装
+#### Setup
 
 ##### Install Zend Server CE
 
-	# sudo apt-get install zend-server-php-5.x
+	$ sudo apt-get install zend-server-php-5.x
 
 ##### Install Zend Server
 
 
-	# sudo apt-get install zend-server-php-5.x
+	$ sudo apt-get install zend-server-php-5.x
 
-### CentOs/RHEL/Fedora
+### On CentOs/RHEL/Fedora
 
-#### 设置YUM源
+#### Setup YUM repository
 
-创建文件"/etc/yum.repos.d/zend.repo",
+Create a new repo file named "/etc/yum.repos.d/zend.repo",
 	
-	vim /etc/yum.repos.d/zend.repo
+	$sudo vim /etc/yum.repos.d/zend.repo
 	
-并添加如下内容:
+Add the following lines to this file:
 
 	[Zend]
 	name=Zend Server
@@ -66,27 +68,31 @@ tags: [ ZendServer, CentOs, Ubuntu, PHP ]
 	gpgkey=http://repos.zend.com/zend.key
 
 
-#### 安装
+#### Setup
 
-##### Zend Server CE
+##### For Zend Server CE
 
-	yum install zend-server-ce-php-5.x
+	$sudo yum install zend-server-ce-php-5.x
 
-例如
+Examples:
 
-	yum install zend-server-ce-php-5.2
+	$sudo yum install zend-server-ce-php-5.2
+
+Or for php 5.3(Recommend)
+
+	$sudo yum install zend-server-ce-php-5.3
 
 
-##### Install Zend Server  
+##### For Zend Server  
 
 
-	# yum install zend-server-php-x
+	$sudo yum install zend-server-php-x
 
-##### 清理软件包
+##### post installation
 
 	# yum clean all
 
-## 设置管理界面
+## Setup web shell for zend server
 
 After installing, a completion notification will appear, with a notice that the servers have started. To access the Administration Interface (Web) open your browser at:
  
@@ -99,46 +105,49 @@ or
 Upon initial log in, you will be prompted to define your password.
 
 
-## 安装后配置
+## Post configuration
 
-### 系统环境配置
+### Add path
+
 To add the install/path/bin directory to your $PATH environment variable for all users:
 
-Log in as root or use sudo to execute the following commands.Using a text editor, open /etc/profile.  Add the following lines to the end of the file
+Log in as root or use sudo to execute the following commands.Using a text editor, open /etc/profile.  
+	
+	$sudo vim /etc/profile	
 
+Add the following lines to the end of the file:
 	
 	PATH=$PATH:/install/path/bin
 	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:install/path/lib
 
-例如:
+Example:
 
-	PATH=$PATH:/usr/local/zend//bin
+	PATH=$PATH:/usr/local/zend/bin
 	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/zend/lib
 
 
-Replace install_path with your Zend Server installation path.
+Replace install_path with your Zend Server installation path. Then save the file. In order for this to take effect, close and reopen your shell or run the following command:
 
-Save the file.In order for this to take effect, close and reopen your shell or run the following command:
-
-	source /etc/profile
+	$sudo source /etc/profile
 
 You can now run the PHP binary provided by Zend Server without typing its full path.
 
-## 卸载 Zend Server
+## Uninstall Zend Server
 
-### 步骤 
+### Steps
 
 To uninstall run:
 
-	zendctl.sh stop
+	$sudo zendctl.sh stop
+
 And then:
 
-	yum remove -y 'deployment-daemon-zend-server' && yum remove -y '*zend*'
+	$yum remove -y 'deployment-daemon-zend-server' && yum remove -y '*zend*'
 
-如果想禁止zend的源的话，需要移除zend.repo
+If you want to disable Zend source words, need to remove the zend.repo
 
-### 虚拟主机设置
+### Reference articles
 
-参看 [如何配置Apache虚拟机](/Apache/how-to-setup-apache-virtual-host-configuration/)
+See [How to setup apache virtual hosts ](/apache/how-to-setup-apache-virtual-host-configuration/)
 
 

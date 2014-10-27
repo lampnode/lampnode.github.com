@@ -95,7 +95,7 @@ Add the following in the httpd.conf:
                 AllowOverride All
                 Order allow,deny
                 Allow from all
-		php_admin_value open_basedir .:/tmp/:/var/www/html/www.ccsenet.org/
+		php_admin_value open_basedir .:/tmp/:/var/www/html/www.example.com/
         </Directory>	
 
 ### Turn off magic_quotes_gpc
