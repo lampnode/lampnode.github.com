@@ -8,6 +8,9 @@ tags: [ MySQL ]
 ---
 {% include JB/setup %}
 
+Here are quick commands that are useful to check, optimize , enhance the performance and health of your MySQL 
+systems.
+
 ## How to check variables and status on mysql
 
 	mysql> show variables;
@@ -129,7 +132,10 @@ Created_tmp_disk_tables / Created_tmp_tables * 100% = 102.51% ( < 25 is better )
 	+---------------------+-----------+
 	2 rows in set (0.00 sec)
 
-You should add tmp_table_size.
+You should add tmp_table_size. Related my.cnf params:
+
+	tmp_table_size = 512M
+	max_heap_table_size= 512M
 
 ### Open tables
 
