@@ -49,6 +49,25 @@ Related my.cnf params:
 	long_query_time=10                                                               
 	log-queries-not-using-indexes
 
+#### mysqldumpslow
+
+If a lot of content recorded slow queries, you can use the mysqldumpslow tool:
+
+	mysqldumpslow -s c -t 4 /var/log/mysql.slow.log
+
+	Reading mysql slow query log from /var/log/mysql.slow.log
+	Count: 1032  Time=102.68s (102s)  Lock=0.00s (0s)  Rows=789516.0 (789516), root[root]@localhost
+  	SELECT * FROM `author_log`
+
+	Count: 252  Time=82.59s (20811s)  Lock=0.00s (0s)  Rows=426657.8 (107517760), root[root]@localhost
+  	SELECT /*!N SQL_NO_CACHE */ * FROM `em_article`
+
+	Count: 222  Time=46.47s (92s)  Lock=0.00s (0s)  Rows=393095.5 (786191), root[root]@localhost
+  	SELECT * FROM `ecs_log`
+
+	Count: 123  Time=20.13s (5757s)  Lock=0.00s (0s)  Rows=3391178.4 (969877028), root[root]@localhost
+ 	SELECT /*!N SQL_NO_CACHE */ * FROM `pm_record`
+
 
 ### Connections
 
@@ -68,8 +87,22 @@ Related my.cnf params:
 	+----------------------+-------+
 
 
-max_used_connections / max_connections * 100% = 6% (Better is < 85%)
+max_used_connections / max_connections * 100% = 6% (10% <  Better < 85%)
 
+### Back_log
+
+	mysql>show full processlist;
+	+-------+-------------+--------------------+------------+---------+------+-------+-----------------------+
+	| Id    | User        | Host               | db         | Command | Time | State | Info                  |
+	+-------+-------------+--------------------+------------+---------+------+-------+-----------------------+
+	| 44835 | root        | localhost          | NULL       | Query   |    0 | NULL  | show full processlist |
+	| 44934 | remote_user | 10.102.13.19:56922 | example_db | Sleep   |    4 |       | NULL                  |
+	+-------+-------------+--------------------+------------+---------+------+-------+-----------------------+
+	2 rows in set (0.00 sec)
+
+The back_log value indicates how many requests can be stacked during this short time before MySQL momentarily stops answering new requests. You need to increase this only if you expect a large number of connections in a short period of time. Before 5.6.6, the default is 50. 
+	
+	value= 50 + (max_connections / 5) # 50 - 128 is OK
 
 ### Key buffer size
 
@@ -105,8 +138,10 @@ key_cache_miss_rate ＝ Key_reads / Key_read_requests * 100% = 0.038% ( 0.01 <  
 	+-------------------+--------+
 	2 rows in set (0.00 sec)
 
-Key_blocks_used / (Key_blocks_unused + Key_blocks_used) * 100% = 7.62% (< 80% is better )
+	
+	Key_blocks_used / (Key_blocks_unused + Key_blocks_used) * 100% = 7.62% (< 80% is better )
 
+Default of key buffer size is 8388600(8M)，If memory is 4GB，you should add this value to 268435456(256MB, < 33% of RAM is better)
 
 ### Create tmp file/tables
 
@@ -134,8 +169,8 @@ Created_tmp_disk_tables / Created_tmp_tables * 100% = 102.51% ( < 25 is better )
 
 You should add tmp_table_size. Related my.cnf params:
 
-	tmp_table_size = 512M
-	max_heap_table_size= 512M
+	tmp_table_size = 256M #64-256 is better
+	max_heap_table_size= 256M #16-256 is better 
 
 ### Open tables
 
@@ -226,6 +261,8 @@ To be sure the  query cache is turned on. The query_cache_type variable should b
 
 	Qcache_free_blocks / Qcache_total_blocks * 100%  = 13.72 % ( < 20% is better)
 
+If >20%, you can try to reduce the value of query_cache_min_res_unit.
+
 #### Cache used
 
 To calculate the percentage used value for the query cache you can use the following formula
@@ -235,6 +272,8 @@ To calculate the percentage used value for the query cache you can use the follo
  * If < 25%, you should reduce the query_cache_size.
 
  * If  >80%, and Qcache_lowmem_prunes > 50, your should improve the query_cache_size.
+
+
 
 	
 ### Sort usage
