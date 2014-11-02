@@ -12,9 +12,9 @@ The query profiling of MySQL server is a useful method when you want to analyze 
 some usefull query profiling technology on MySQL server. 
 
 
-## About the configuration
+## Managing the configuration
 
-Check out the configuration
+Check out the configuration:
 
 	mysql> show variables like '%log%';
 
@@ -109,9 +109,3 @@ To disable logs at runtime, login to mysql client:
 ## Display log results
 
 	$sudo tail -f /path/to/your/log/file
-
-
-
-
-		
-	
