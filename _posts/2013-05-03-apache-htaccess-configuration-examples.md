@@ -33,6 +33,19 @@ tags: [ Apache, Linux ]
 
 一条指令一行。上述第一条指令的意思是对于404，也就是没有找到所需要的文档的时候得显示页面为/errors目录下的notfound.html页面。
 
+### 实现域名跳转
+
+	RewriteEngine on
+	RewriteCond %{HTTP_HOST} ^oldDomain.com [NC]
+	RewriteRule ^(.*)$ http://www.newDomain.com/$1 [L,R=301]
+
+或者:
+
+	RewriteEngine on
+	RewriteCond %{HTTP_HOST} ^www.oldDomain.com [NC]
+	RewriteRule ^(.*)$ http://www.newDomain.com/$1 [L,R=301]
+
+
 ### 改变缺省的首页文件
 
 	DirectoryIndex filename.html index.cgi index.pl default.htm
