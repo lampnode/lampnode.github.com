@@ -1,54 +1,110 @@
 ---
 layout: post
-title: "如何在Linux上安装与配置 Logwatch"
+title: "How to Installing and Configuring Logwatch on Linux"
 tagline: "How to Installing and Configuring Logwatch on Linux"
 description: ""
 category: Linux
-tags: [ Linux, CentOs]
+tags: [ Linux, CentOs, Ubuntu ]
 ---
 {% include JB/setup %}
 
-Logwatch是一款专门监测Linux日志文件的软件。安装以后只要稍微配置一下，就能每天将主机的log分析文件发送至指定的邮箱.
+All of applications in the Linux create log files to keep track of activities. A good log file should be
+as detailed as posible in order to help the administrator, who have the responsibility of maintaining the 
+system, find the exact information needed for a certain purpose. This is where Logwatch, a perfect application
+that designed for this job.
 
-## 安装与配置
+## Installing Logwatch
 
-### CentOs
+### On CentOs
 
-#### YUM安装
+Using YUM to install logwatch, run the folloing: 
 
-	yum install logwatch
+	# yum install -y logwatch
 
-#### 配置
+### On Ubuntu
 
-	vi /usr/share/logwatch/default.conf/logwatch.conf
+To install logwatch on Ubuntu, run the folloing:
 
-##### 发送邮件
+	#sudo apt-get install -y logwatch
 
-查找 MailTo = ，然后改为你的实际Email地址，比如 
+## Configuring Logwatch
+
+The default configuration file for logwatch on linux(Ubuntu/CentOs) is located at:
+
+	/usr/share/logwatch/default.conf/logwatch.conf
+
+Let us open up this file in order to modify the variables:
+
+	#sudo vim /usr/share/logwatch/default.conf/logwatch.conf
+
+In order to begin using the logwatch, we will need to make a few changes to these valiables. The important options which we need to set:
+
+### The email address to receive the daily digest reports from logwatch:
+
+	MailTo = root
+
+Replace root with your email address:
 	
 	MailTo = user@domain.com 
 
 
-##### 设置详细程度
+### Setting the range for the reports
 
-Detail = 是细节度，推荐 10 ，即最高。 
+	Range = yesterday
 
-logwatch默认为每天执行一次（cron.daily）。
+You have options of receiving reports for All (all available since the beginning), Today (just today) or Yesterday (just yesterday).
 
-## 使用方法
+### Setting the reports detail level
 
-手动执行logwatch的命令为： 
+	Detail = Low
+
+
+You can modify the reports detail level here. Options are: Low, Medium and High.
+
+### Setting services/applications to be analysed
+
+By default, the logwatch covers a wide range of services/application. If you would like to see a full list, running the following:
+
+	ls -l /usr/share/logwatch/scripts/services
+	
+You can choose to receive reports for all services or some specific ones.
+
+#### For all services
+	
+To keep the line as: Service = All
+
+If you want to disable specific services, listing each service after the "Service = All":
+
+	Service= "-http"
+	Service= "-cron"
+	Service= "-dpkg"
+	Service= "-postfix"
+	
+
+#### For specific service(s)
+
+If you wish to receive reports for specific ones, modify it similar to the following example, listing each service on a new line:
+
+	Service = sendmail
+	Service = http
+	Service = identd
+	Service = sshd2
+	Service = sudo
+
+## Running Logwatch Manually
+
+
+To run the Logwatch manually whenever you need through the command line(Unless you specify an option, it will be read from 
+the configuration file):
+
+### Print on the screen:
 
 	logwatch --print
 
-这条命令将会把昨天的日志信息简要的打印出来. 比如用户登录失败信息、SSH 登录信息、磁盘空间使用等.
-
-
-直接指定邮件发送
+### Send to the email
 
 	logwatch --range today --print --mailto yourmail@gmail.com
 
-
-单独查看某个服务，比如 SSH 登录信息: 
+### Print on the screen for specific service:
 
 	logwatch --service sshd --print
