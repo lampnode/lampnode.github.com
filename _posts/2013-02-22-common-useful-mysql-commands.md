@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "常用的MySQL命令汇总"
+title: "Common Useful MySQL command-line tools"
 tagline: "Common Useful MySQL Commands"
 description: ""
 category: MySQL
@@ -8,106 +8,123 @@ tags: [MySQL]
 ---
 {% include JB/setup %}
 
+Here are examples of how to solve some common problems with MySQL.
 
-## 系统要求
+## Requirement
 
-* CentOs 5.x 6.x
-* Ubuntu 8.x or later
+* CentOs 5.x 6.x/Ubuntu 8.x or later
+* MySQL and MySQL-server has been installed on system
+* DBA can access mySql server
 
-## 软件要求
+## To login
 
-1. MySQL and MySQL-server has been installed on system
-2. DBA can access mySql server
+	$mysql -h hostname -u root -p
 
-## 用法
+## Importing/export data
 
-### 导入sql文件到指定数据库
+### To import sql file to specific database:
 
-	mysql -u USERNAME -p --default-character-set=utf8 USER_DATABASE < backup.sql
+	$mysql -u USERNAME -p --default-character-set=utf8 USER_DATABASE < backup.sql
 
-参数解析:
+Example:
 
-* --default-character-set=utf8 编码
-* USER_DATABASE 指定数据库
-* USERNAME 数据库管理员用户名
+	mysql -u root --default-character-set=utf8 shop < backup.sql
 
-### 用户管理
+Note:
 
-#### 显示所有用户
+* --default-character-set=utf8:encoding
+* USER_DATABASE:specific database   
+* USERNAME:the admin for the database 
 
-	mysql> SELECT * FROM mysql.user;
+### To export data to sql file:
 
-#### 删除Null用户
+#### To export from specific database:
 
-	mysql> DELETE FROM mysql.user WHERE user = ' ';
+	$mysqldump -u root  --add-drop-table --extended-insert=false --default-character-set=utf8 DTATBASE_NAME > backup.sql
 
-#### 删除所有非ROOT用户
-
-	mysql> DELETE FROM mysql.user WHERE NOT (host="localhost" AND user="root");
-
-#### 修改数据库管理员用户名
-
-	mysql> UPDATE mysql.user SET user="mydbadmin" WHERE user="root";
-
-#### 创建一个新的DBA
-
-不指定数据库
-
-	mysql> GRANT ALL PRIVILEGES ON *.* TO 'username'@'localhost' IDENTIFIED BY 'mypass' WITH GRANT OPTION;
-
-指定数据库
-
-	mysql> GRANT ALL PRIVILEGES ON mydatabase.* TO 'username'@'localhost' IDENTIFIED BY 'mypass' WITH GRANT OPTION;
-
-#### 创建一个高级用户给指定数据库
-
-数据库名不含有"_"
-
-	mysql>GRANT ALL PRIVILEGES ON `YOURDB`.* TO 'NEW_USER'@'localhost' IDENTIFIED BY 'NEW_PASSWD_TO_USER';
-
-数据库名含有"_"
-
-	mysql>GRANT ALL PRIVILEGES ON `YOUR\_DB`.* TO 'NEW_USER'@'localhost' IDENTIFIED BY 'NEW_PASSWD_TO_USER';
-
-#### 授权一个普通用户给指定数据库
-
-##### 数据库名不含有"_"
-
-	mysql>GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON YOURDB.* TO 'NEW_USER'@'localhost' IDENTIFIED BY 'NEW_PASSWD_TO_USER';
-	
-##### 数据库名含有"_"
-	
-	mysql>GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON `YOUR\_DB`.* TO 'NEW_USER1'@'localhost' IDENTIFIED BY 'NEW_PASSWD_TO_USER';
-
-#### 修改用户密码
-
-	mysql> UPDATE mysql.user SET password=oldpass("newpass") WHERE User='username';
-
-### 删除数据库用户
-	
-	mysql>DELETE FROM mysql.user WHERE user="username";
-	mysql>DELETE FROM mysql.user where User='NEW_USER' and Host='localhost';
-
-### 查看权限 (privileges)
-	mysql>show grants for 'root'@'localhost';
-
-### 使用mysqldump备份数据库
-
-#### 备份指定数据库到指定的(压缩)文件
-	mysqldump -u root  --add-drop-table --extended-insert=false \
+or
+	$mysqldump -u root  --add-drop-table --extended-insert=false \
 	--default-character-set=utf8 DTATBASE_NAME \
 	| gzip > DTATBASE_NAME.$(date -d today +"%Y-%m-%d").sql.gz
 
-参数解析：
+Note：
 
--  --add-drop-table 添加删除数据库表的语句
--  --extended-insert=false 使用完整INSERT语句进行导出
--  --default-character-set=utf8 导出数据库编码设置
+-  --add-drop-table
+-  --extended-insert=false
+-  --default-character-set=utf8
 
-#### 备份所有数据库
- 
-	mysqldump -u root -p --all-databases > alldatabases.sql
-	mysqldump -u root -p--all-databases | gzip > databasebackup.sql.gz
+#### To dump all databases
+
+	$mysqldump -u root -p --all-databases > alldatabases.sql
+
+or
+
+	$mysqldump -u root -p --all-databases | gzip > databasebackup.sql.gz
 
 
-或者使用shell脚本将所有数据库备份到指定文件夹，参看<a href="/MySQL/mysql-automatic-backup-script">Mysql自动备份脚本</a>
+Or, you should use shell script to backup database, see <a href="/MySQL/mysql-automatic-backup-script">Mysql automatic backup script</a>
+
+#### To dump only specific tables from a database
+
+	$mysqldump DTATBASE_NAME TABLE_1 TABLE_2 TABLE_3 > dump.sql
+
+## User management
+
+### List users
+
+	mysql> SELECT * FROM mysql.user;
+
+### Delete the Null user
+
+	mysql> DELETE FROM mysql.user WHERE user = ' ';
+
+### To delete all of users except root
+
+	mysql> DELETE FROM mysql.user WHERE NOT (host="localhost" AND user="root");
+
+### Rename the root
+
+	mysql> UPDATE mysql.user SET user="mydbadmin" WHERE user="root";
+
+### Add a new DBA
+
+#### Do not specify a database
+
+	mysql> GRANT ALL PRIVILEGES ON *.* TO 'username'@'localhost' IDENTIFIED BY 'mypass' WITH GRANT OPTION;
+
+#### To specify a database
+
+	mysql> GRANT ALL PRIVILEGES ON mydatabase.* TO 'username'@'localhost' IDENTIFIED BY 'mypass' WITH GRANT OPTION;
+
+### Add a new admin to specific database
+
+#### The database name does not contain  "_"
+
+	mysql>GRANT ALL PRIVILEGES ON `YOURDB`.* TO 'NEW_USER'@'localhost' IDENTIFIED BY 'NEW_PASSWD_TO_USER';
+
+#### The database name contain "_"
+
+	mysql>GRANT ALL PRIVILEGES ON `YOUR\_DB`.* TO 'NEW_USER'@'localhost' IDENTIFIED BY 'NEW_PASSWD_TO_USER';
+
+### Add a new normal user to specific database
+
+##### The database name do not contain "_"
+
+	mysql>GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON YOURDB.* TO 'NEW_USER'@'localhost' IDENTIFIED BY 'NEW_PASSWD_TO_USER';
+
+##### the database name contain "_"
+
+	mysql>GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON `YOUR\_DB`.* TO 'NEW_USER1'@'localhost' IDENTIFIED BY 'NEW_PASSWD_TO_USER';
+
+### To update passwd
+
+	mysql> UPDATE mysql.user SET password=oldpass("newpass") WHERE User='username';
+
+### To delete user
+
+	mysql>DELETE FROM mysql.user WHERE user="username";
+	mysql>DELETE FROM mysql.user where User='NEW_USER' and Host='localhost';
+
+### Check the privileges
+
+	mysql>show grants for 'root'@'localhost';

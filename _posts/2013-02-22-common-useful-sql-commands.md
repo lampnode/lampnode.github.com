@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "常用的SQL语句"
+title: "Common Useful SQL Commands"
 tagline: "Common Useful SQL Commands"
 description: ""
 category: MySQL
@@ -8,117 +8,122 @@ tags: [ SQL, MySQL ]
 ---
 {% include JB/setup %}
 
+Here are examples of how to solve some common problems with MySQL.
 
-## 用法
 
-### 数据库操作
+## For Database
 
-####  显示所有数据库
+### Show all databases;
 
 	mysql> SHOW DATABASES;
 
-#### 创建数据库
-
+#### Add new database
 
 	mysql> CREATE DATABASE mydatabase;
 
-Custom character-set
+Or, custom character-set
 
 	mysql>CREATE DATABASE `mydatabase` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci
-#### 使用指定数据库
+
+### Use specific database
 
 	mysql> USE mydatabase;
 
-#### 删除数据库
+### Delete database
 
 	mysql> DROP DATABASE mydatabase;
 
-### 数据表操作
+## For tables
 
-#### 创建一个表
+### Add a new table
+
 
 	CREATE TABLE if not exists database_name.table_name (fieldname1 type1, fieldname2, type2 ...)
 
-需要指定表中有哪些字段，以及他们持有什么样的数据。
+or
 
 	CREATE TABLE if not exists db.people (First text, Last text, Age int, pk int not null auto_increment primary key)
 
 
-#### 显示当前数据库所有数据表
+### list all of tables
 
 	mysql> SHOW TABLES;
 
-#### 显示当前表的结构
+###  provides information about a table 
 
 	mysql> DESC mytable;
 
-或者
+or
 
 	mysql> SHOW COLUMNS FROM mytable;
 
-#### 重新命名数据库表
+or 
+
+	mysql> SHOW CREATE TABLE mysql name;
+
+### Rename a table
 
 	mysql> RENAME TABLE OLD_NAME TO NEW_NAME;
 
-或者
+or
 
 	mysql> ALTER TABLE OLD_NAME rename as NEW_NAME;
 
-#### 删除一个表
+### Drop a table
 
 	mysql> DROP TABLE mytable;
 
-#### 清空一个表
+### Truncate a table
 
 	TRUNCATE TABLE database_name.table_name
 
-#### 复制一个表
+### Duplicate a table
 
 	CREATE TABLE database_name.copy_name LIKE database_name.original_name
 
 	INSERT database_name.copy_name SELECT * FROM database_name.original_name
 
-有许多复制的表的方法，但其中大多数是不完整的。上面的第一行复制的原始表的结构，第二行中的数据复制。其他复制方法可能无法复制的每一个细节。
 
-### 数据操作
+## For column
 
-#### 修改表字段名
+#### To update a column
 
 	mysql> UPDATE mytable SET mycolumn="newinfo" WHERE mycolumn="oldinfo";
 
-#### 修改表字段
+#### To modify a column
 
-	ALTER TABLE db_name.ziptable CHANGE latitude latitude double
+	mysql> ALTER TABLE `ec_journal_info` CHANGE COLUMN `foo` `foo` varchar(50) character set utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0' COMMENT '';
 
-#### 删除一个表字段
+#### To drop a column
 
 	ALTER TABLE database_name.table_name DROP COLUMN fieldname
 
-该字段以及相关数据将被一并删除
+## For rows
 
-### 删除一条记录
+### To drop a row
 
 	DELETE FROM database_name.table_name WHERE (record identifiers)
 
-这将删除特定的记录从表中。要小心，到指定的记录要明确，以避免删除比你预计的更多的记录。如果每一条记录都有一个唯一的主键，使用它.
 
-### 管理字符集
+## For charset
 
-#### 查看MySQL数据表（table）的MySQL字符集
-##### 使用 table status查询
-例如查询cms数据库里的systems_user表：
+### Table level
+
+#### For specific table
+
+Example: To check the table named systems_user from the database named cms
 
 {% highlight bash %}
 mysql>show table status from cms like '%systems_user%'; 
 +-----------------+--------+---------+------------+----+-----------------+-----------+
 | Name            | Engine | Version | Row_format | Rows  | Collation    | ...       |
 +-----------------+--------+---------+------------+----+-----------------+-----------+
-| ec_systems_user | MyISAM |      10 | Dynamic    | 5  | utf8_general_ci | ...       |   
+| systems_user    | MyISAM |      10 | Dynamic    | 5  | utf8_general_ci | ...       |   
 +-----------------+--------+---------+------------+----+-----------------+-----------+
 1 row in set
 {% endhighlight %}
 
-##### 使用select语句查询
+#### For all of table
 
 {% highlight bash %}
 mysql> SELECT table_name,Engine,table_rows,Avg_row_length,Data_length,
@@ -142,7 +147,7 @@ mysql> SELECT table_name,Engine,table_rows,Avg_row_length,Data_length,
 10 rows in set 
 {% endhighlight %}
 
-#### 查看MySQL数据列（column）的MySQL字符集。
+### Column level
 
 {% highlight bash %}
 
@@ -162,10 +167,7 @@ mysql> show full columns from ec_systems_user;
 
 {% endhighlight %}
 
-#### 修改表的字符集
+### modify the charset
 
 	ALTER TABLE db_name.table_name CHARACTER SET utf8 COLLATE utf8_unicode_ci
 
-	ALTER TABLE db_name.table_name CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci
-
-使用第二个的时候需要确认有没有旧的和新的字符编码之间的冲突的可能性。
