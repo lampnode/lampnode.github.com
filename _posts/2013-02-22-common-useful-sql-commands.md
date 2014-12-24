@@ -92,7 +92,11 @@ or
 
 #### To modify a column
 
-	mysql> ALTER TABLE `ec_journal_info` CHANGE COLUMN `foo` `foo` varchar(50) character set utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0' COMMENT '';
+	mysql> ALTER TABLE `myTableName` CHANGE COLUMN `foo` `foo` varchar(50) NOT NULL DEFAULT '0' COMMENT '';
+
+#### To add a new column
+
+	mysql>ALTER TABLE myTableName ADD `isEnabled` tinyint(1) NOT NULL DEFAULT '1';
 
 #### To drop a column
 
