@@ -8,9 +8,6 @@ tags: [ Linux, Ubuntu, VPN ]
 ---
 {% include JB/setup %}
 
-~~The purpose of this document is to guide you to manage the VPN connection by  update-rc.d.~~
-(It is not work well by update-rc.d on Ubuntu 14.04, if you manage vpn connection by update-rc.d, that will cause the system can not be shutdown and startup  normally )
-
 The purpose of this document is to guide you to manage the VPN connection by command line script.
 We will use a bash script to run at startup that checks to see if connected to VPN every 5s,
 and if not it tries to connect. 
@@ -21,6 +18,7 @@ and if not it tries to connect.
  - Network Manager is OK
  - Has a vpn account
  - Ubuntu 14.04
+ - It is supposted that you will auto-login by the user named root
 
 ## Setup
 
@@ -117,33 +115,26 @@ do
 done
 {% endhighlight %}
 
-~~then, create a script named autovpn and save it in /etc/init.d by doing the following:~~
+Then, change the script user permission(According to your auto-login user):
+  
+	$sudo chown root:root /root/vpn/autovpn.sh
 
-~~$sudo vim /etc/init.d/autovpn~~
-
-~~Add the following to this file:~~
-
-~~#!/bin/sh -e~~  
-
-~~if [ -x /root/vpn/autovpn.sh ]; then~~
-~~     /root/vpn/autovpn.sh~~
-~~fi~~
-
-~~exit 0~~
-
-~~Step 5 Add it as system service~~
-
-~~Now we want to add autovpn as a service that starts when the computer starts, so we run:~~
-
-~~$sudo update-rc.d autovpn defaults~~
 
 ### Step 5 Enable Auto connect
 
 	$sudo vim /etc/profile
 
-Add the following to the end of this file:
+Add the following to the end of this file( Run command in background, discard stdout and stderr ):
 
-	bash /root/vpn/autovpn.sh &
+	/bin/bash /root/vpn/autovpn.sh > /dev/null 2>&1 &
+
+if you want to debug this script, you should redirect stdout and stderr to log file:
+
+	/bin/bash /root/vpn/autovpn.sh >> /var/log/vpnLog 2>&1 &
+
+Then,
+
+	$chmod 666 /var/log/vpnLog
 
 
 Reboot the computer, the script will launch and automatically check if it's connected to VPN every 5 seconds, 
