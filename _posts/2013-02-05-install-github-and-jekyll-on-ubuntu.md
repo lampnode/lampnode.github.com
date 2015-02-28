@@ -46,14 +46,22 @@ if you don't install nodejs, when you boot jekyll server, the system will report
 ### setup Global config
 
 	$git config --global user.name lampnode
-  	$git config --global user.email robert@example.com	
-	$git config color.ui true
+  	$git config --global user.email robert.qian@lampnode.com	
+	$git config --global color.ui true
 
 ### Checkout the repository from github
 
 	$mkdir USERNAME.github.com
 	$cd USERNAME.github.com
-	$git clone USERNAME@host:/path/to/repository .
+	$git clone git@github.com:USERNAME/path/to/repository .
+
+By Https
+
+	$git clone https://github.com/lampnode/lampnode.github.com.git .
+
+by SSH(Need login):
+	
+	$git clone git@github.com:lampnode/lampnode.github.com.git .
 
 ## Basic Usages
 
