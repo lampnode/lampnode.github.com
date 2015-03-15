@@ -328,8 +328,8 @@ mysql的配置文件，在CentOS是放在/etc/目录下的:
 
 如果mysql版本大于或者等于5.5, "[mysqld]"的设置需要修改为
 
-	init_connect='SET collation_connection = utf8_unicode_ci'
-	init_connect='SET NAMES utf8'
+	#init_connect='SET collation_connection = utf8_unicode_ci'
+	#init_connect='SET NAMES utf8'
 	character-set-server=utf8
 	collation-server=utf8_unicode_ci
 	skip-character-set-client-handshake
