@@ -100,7 +100,8 @@ As you see above, latest java 1.8 has been installed.
 
 ### Setup Global Environment Variables
 
-To create a file called java.sh under /etc/profile.d/ directory.
+To create a file called java.sh under /etc/profile.d/ directory. The script under /etc/profile.d 
+will be loaded when starting up.
 
 	$sudo vim /etc/profile.d/java.sh
 
@@ -114,6 +115,11 @@ Add the following lines:
 Save and close the file. Make it executable using command:
 
 	$sudo chmod +x /etc/profile.d/java.sh
+
+or 
+
+	$sudo chmod 755 /etc/profile.d/java.sh
+
 
 Then, set the environment variables permanently by running the following command:
 
