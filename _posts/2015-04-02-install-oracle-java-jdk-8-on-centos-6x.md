@@ -107,10 +107,9 @@ To create a file called java.sh under /etc/profile.d/ directory.
 Add the following lines:
 
 	#!/bin/bash
-	JAVA_HOME=/usr/java/jdk1.8.0_25/
-	PATH=$JAVA_HOME/bin:$PATH
-	export PATH JAVA_HOME
-	export CLASSPATH=.
+	export JAVA_HOME=/usr/java/jdk1.8.0_25
+	export PATH=$JAVA_HOME/bin:$PATH
+	export CLASSPATH=.:$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar
 
 Save and close the file. Make it executable using command:
 
