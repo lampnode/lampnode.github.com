@@ -8,11 +8,12 @@ tags: [ Linux, CentOS, Ubuntu ]
 ---
 {% include JB/setup %}
 
-The purpose of this document is to guide you setting the corrct timezone on Linux (e.g. Ubuntu, CentOs ).
+The purpose of this document is to guide you setting the correct timezone on Linux (e.g. Ubuntu, CentOs ). If you have one 
+more servers need to deploy same services, you should think about the time zone problem. 
 
 ## Check the time
 
-You can check your current timezone by just running
+You may check your current timezone by just running:
 
 	$ date
 	Thu Mar 21 18:02:49 MST 2012
@@ -22,33 +23,37 @@ checking the timezone file at
 	$ more /etc/timezone
 	US/Arizona
 
-## Update the timezone
+## projects
 
-### CentOS
+### Install NTP
 
+#### On CentOS
 
-#### Installation
+Install ntp service and start it:
 
 	$sudo yum install ntp
+	$sudo /etc/init.d/htpd start
+	$sudo chkconfig ntpd on
+	
 
-Then
+Then, sync the time:
 
 	$sudo ntpdate us.pool.ntp.org
 
+#### On ubuntu
 
-#### Update timezone
+Install ntp and run it:
+
+    $sudo apt-get install ntp
+    $sudo /etc/init.d/ntp start
+
+### Update timezone
 
 Timezone data (tzdata) is stored in /usr/share/zoneinfo. To change your system  timezone, 
 simply run the following command:
 
 	$sudo cp -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
-
-### Ubuntu
-
-To change it just run
-
-	$ sudo dpkg-reconfigure tzdata
 
 
 ### Related services
