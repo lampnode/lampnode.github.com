@@ -170,3 +170,25 @@ For security resons, It is recommanded that you should run tomcat as non-root us
         esac
         exit 0
 
+### Change default ROOT folder in Tomcat
+
+Delete ROOT folder or rename ROOT. then,
+
+	sudo ln -s yourapp ROOT
+
+or,
+
+	sudo mkdir ROOT
+
+then add index.html to this folder,
+
+	<html>
+	<head>
+		<title>Redirecting to /MYAPPLICATION</title>
+	</head>
+		<body onLoad="javascript:window.location='MYAPPLICATION';">
+		</body>
+	</html>
+
+
+
