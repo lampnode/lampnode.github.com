@@ -131,6 +131,8 @@ We can set the manager-gui role, for example as below
 	<role rolename="admin-gui" />
 	<user username="admin" password="_SECRET_PASSWORD_" roles="manager-gui,admin-gui" />
 
+Note: the "_SECRET_PASSWORD_", should be really complex password.
+
 ## tomcat security options
 
 ### Run tomcat using Non-root user
@@ -190,5 +192,76 @@ then add index.html to this folder,
 		</body>
 	</html>
 
+
+### Protecting the Shutdown Port
+
+change the shutdown command in CATALINA_HOME/conf/server.xml and make sure that file is only readable by the tomcat user.
+
+	<Server port="8005" shutdown="ReallyComplexWord">
+
+
+### Changing the Tomcat Port
+
+Locate server.xml in tomcat installation folder "conf\", and find following similar statement:
+
+	<Connector port="8080" protocol="HTTP/1.1" 
+	               connectionTimeout="20000" 
+	               redirectPort="8443" />
+
+You should change the commector port="8080" port to any other port number(Such as 8181). For example:
+
+	<Connector port="8181" protocol="HTTP/1.1" 
+	               connectionTimeout="20000" 
+	               redirectPort="8443" />
+
+
+### Remove Server Banner
+
+Removeing server banner from http header. Add the following under Connector prot and save the file:
+
+	Server =" "
+
+Example:
+
+	<Connector port="8080" protocol="HTTP/1.1" connectionTimeout="20000" Server=" " redirectPort="8443" />
+
+
+### Replace default 404, 403, 500 page
+
+Having default page for not found, forbidden, server error expose Tomcat version and that leads to security risk if you are running with vulnerable version. 
+
+To mitigate, you can first create a general error page and configure web.xml to redirect to general error page. Go to the 
+current application($tomcat/webapps/$application), create an error.jsp file:
+
+	<html>
+		<head> 
+		<title>404-Page Not Found</title>
+		</head>
+	<body> That is an error! </body>
+	</html>
+
+then, go to "$tomcat/conf" folder, add the following in web.xml, and ensure the content before </web-app> syntax.
+
+	<error-page> 
+		<error-code>404</error-code> 
+		<location>/error.jsp</location>
+	</error-page>
+	<error-page> 
+		<error-code>403</error-code> 
+		<location>/error.jsp</location>
+	</error-page>
+	<error-page> 
+		<error-code>500</error-code> 
+		<location>/error.jsp</location>
+	</error-page>
+
+
+You can do this for "java.lang.Exception" as well. This will help in not exposing tomcat version information 
+if any java lang exception. Just add following in web.xml:
+
+	<error-page> 
+		<exception-type>java.lang.Exception</exception-type> 
+		<location>/error.jsp</location>
+	</error-page>
 
 
