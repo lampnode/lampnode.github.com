@@ -264,4 +264,15 @@ if any java lang exception. Just add following in web.xml:
 		<location>/error.jsp</location>
 	</error-page>
 
+### Remove default/unwanted applications
+
+By default Tomcat comes with following web applications, which may or not be required in production environment. 
+You can delete them to keep it clean and avoid any known security risk with Tomcat default application.
+
+ * ROOT – Default welcome page
+ * Docs – Tomcat documentation
+ * Examples – JSP and servlets for demonstration
+ * Manager, host-manager – Tomcat administration
+
+
 
