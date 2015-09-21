@@ -117,7 +117,26 @@ Examples:
 	mynetworks_style = host    (safe: authorize local machine only)
 	mynetworks = 127.0.0.0/8 168.100.189.2/32 (authorize local machine) 
 
-**请注意:**如果你没有设定 mynetworks 的话，一定要将 mynetworks_style 设定为 host, 不然你的 IP 所在的子域的 IP 会被自动的认为是合法的.
+**请注意:**
+ - 如果你没有设定 mynetworks 的话，一定要将 mynetworks_style 设定为 host, 不然你的 IP 所在的子域的 IP 会被自动的认为是合法的.
+ - 如果是专职的发信服务器,需要设置为: mynetworks =  127.0.0.0/8, 否则会报类似错误(其中 user@example.com是收件人):
+
+	javax.mail.SendFailedException: Invalid Addresses
+		at com.sun.mail.smtp.SMTPTransport.rcptTo(SMTPTransport.java:1294) ~[mail-1.4.1.jar:1.4.1]
+		at com.sun.mail.smtp.SMTPTransport.sendMessage(SMTPTransport.java:635) ~[mail-1.4.1.jar:1.4.1]
+		at javax.mail.Transport.send0(Transport.java:189) ~[mail-1.4.1.jar:1.4.1]
+		at javax.mail.Transport.send(Transport.java:118) ~[mail-1.4.1.jar:1.4.1]
+		at org.easycore.mail.sender.ExpressMailSender.sendMail(ExpressMailSender.java:69) [JourcoreToolkit.jar:5.09.21]
+		at org.easycore.mail.sender.AbstractMailSender.send(AbstractMailSender.java:110) [JourcoreToolkit.jar:5.09.21]
+		at org.easycore.mail.sender.ExpressMailSender.send(ExpressMailSender.java:25) [JourcoreToolkit.jar:5.09.21]
+		at org.easycore.mail.MailSender.send(MailSender.java:100) [JourcoreToolkit.jar:5.09.21]
+		at org.easycore.app.jourcore.cmd.EmailCommand.execute(EmailCommand.java:64) [JourcoreToolkit.jar:5.09.21]
+		at org.easycore.cli.toolkit.cmd.CommandExecutor.run(CommandExecutor.java:30) [JourcoreToolkit.jar:5.09.21]
+		at org.easycore.app.jourcore.JourcoreToolkit.execute(JourcoreToolkit.java:85) [JourcoreToolkit.jar:5.09.21]
+		at org.easycore.cli.toolkit.AbstractToolkit.run(AbstractToolkit.java:81) [JourcoreToolkit.jar:5.09.21]
+		at org.easycore.app.jourcore.JourcoreToolkit.main(JourcoreToolkit.java:34) [JourcoreToolkit.jar:5.09.21]
+	Caused by: com.sun.mail.smtp.SMTPAddressFailedException: 554 5.7.1 <user@example.com>: Relay access denied
+
 
 ##### Relay_domains
 
