@@ -116,6 +116,16 @@ We can now access the Tomcat Manager page at: http://yourdomain.com:8080 or http
 	sudo chkconfig --list tomcat
 	tomcat         	0:off	1:off	2:on	3:on	4:on	5:on	6:off
 
+Note: if it have the following error:
+
+	service myservice does not support chkconfig
+
+you should add two rows after "#!/bin/bash":
+
+	#!/bin/bash
+	# chkconfig: 2345 10 90 
+	# description: tomcat
+
 ### Tomcat User management
 
 For security reasons, no users or passwords are created for the Tomcat manager roles by default. In a production deployment, it is always best to remove the Manager application.To set roles, user name(s) and password(s), we need to configure the tomcat-users.xml file located at $CATALINA_HOME/conf/tomcat-users.xml.
@@ -131,23 +141,24 @@ We can set the manager-gui role, for example as below
 	<role rolename="admin-gui" />
 	<user username="admin" password="_SECRET_PASSWORD_" roles="manager-gui,admin-gui" />
 
-## tomcat security options
+Note: the "_SECRET_PASSWORD_", should be really complex password.
+
+## Tomcat security options
 
 ### Run tomcat using Non-root user
 
 For security resons, It is recommanded that you should run tomcat as non-root user, so, we need to do the following steps:
 
-#### create tomcat user&group
+#### Create tomcat user&group
 
 	$sudo groupadd tomcat
-	$sudo useradd -s /bin/bash -g tomcat tomcat
+	$sudo useradd -g tomcat tomcat
 
 #### Change the permissions of  tomcat files to new user tomcat
 
 	$sudo chown -Rf tomcat.tomcat /usr/local/tomcat7
 
-#### Adjust the start/stop service script created above.
-
+#### Adjust the start/stop service script created above(Add "/bin/su tomcat" to shell scripts).
 
         #!/bin/bash
         JAVA_HOME=/usr/java/jdk1.8.0_40
@@ -161,7 +172,7 @@ For security resons, It is recommanded that you should run tomcat as non-root us
         /bin/su tomcat $CATALINA_HOME/bin/startup.sh
         ;;
         stop)
-        /bin/suo tomcat  $CATALINA_HOME/bin/shutdown.sh
+        /bin/su tomcat  $CATALINA_HOME/bin/shutdown.sh
         ;;
         restart)
         /bin/su tomcat $CATALINA_HOME/bin/shutdown.sh
@@ -169,4 +180,123 @@ For security resons, It is recommanded that you should run tomcat as non-root us
         ;;
         esac
         exit 0
+
+### Change default ROOT folder in Tomcat
+
+Delete ROOT folder or rename ROOT to "_SECRET_ROOT". then,
+
+	sudo ln -s yourapp ROOT
+
+or,
+
+	sudo mkdir ROOT
+
+then add index.jsp to this folder,
+
+	<html>
+	<head>
+		<title>Redirecting to /MYAPPLICATION</title>
+	</head>
+		<body onLoad="javascript:window.location='MYAPPLICATION';">
+		</body>
+	</html>
+
+
+### Protecting the Shutdown Port
+
+Change the shutdown command in CATALINA_HOME/conf/server.xml and make sure that file is only readable by the tomcat user.
+
+	<Server port="8005" shutdown="ReallyComplexWord">
+
+
+### Changing the Tomcat Port
+
+Locate server.xml in tomcat installation folder "conf\", and find following similar statement:
+
+	<Connector port="8080" protocol="HTTP/1.1" 
+	               connectionTimeout="20000" 
+	               redirectPort="8443" />
+
+You should change the commector port="8080" port to any other port number(Such as 8181). For example:
+
+	<Connector port="8181" protocol="HTTP/1.1" 
+	               connectionTimeout="20000" 
+	               redirectPort="8443" />
+
+
+### Remove Server Banner
+
+Removeing server banner from http header. Add the following under Connector prot and save the file:
+
+	Server =" "
+
+Example:
+
+	<Connector port="8080" protocol="HTTP/1.1" connectionTimeout="20000" Server=" " redirectPort="8443" />
+
+
+### Replace default 404, 403, 500 page
+
+NOTE: New Servlet 3.0 global error page feature does not work on Tomcat 7!
+
+Having default page for not found, forbidden, server error expose Tomcat version and that leads to security risk if you are running with vulnerable version. 
+
+To mitigate, you can first create a general error page and configure web.xml to redirect to general error page. Go to the 
+current application($tomcat/webapps/$application), create an error.jsp file:
+
+	<html>
+		<head> 
+		<title>404-Page Not Found</title>
+		</head>
+	<body> That is an error! </body>
+	</html>
+
+then, go to "$tomcat/webapps/$application" folder, create a new directory named "WEB-INF", add the web.xml to the WEB_INF, and ensure the content before </web-app> syntax.
+
+
+	<?xml version="1.0" encoding="UTF-8"?> 
+	<web-app xmlns="http://java.sun.com/xml/ns/javaee" 
+	                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	                 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	        http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
+	                 version="2.5">
+
+	    <!-- Custome error pages -->
+	    <error-page>
+	       <error-code>404</error-code>
+	       <location>/error.jsp</location>
+	    </error-page>
+	    <error-page>
+	        <error-code>403</error-code>
+	        <location>/error.jsp</location>
+	    </error-page>
+	    <error-page>
+	        <error-code>500</error-code>
+	        <location>/error.jsp</location>
+	    </error-page>
+
+	    <error-page>
+	        <exception-type>java.lang.Exception</exception-type>
+	        <location>/error.jsp</location>
+	   </error-page>
+	</web-app>
+
+
+Note:The setting for "java.lang.Exception" that will help in not exposing tomcat version information 
+if any java lang exception.
+
+
+### Remove default/unwanted applications
+
+By default Tomcat comes with following web applications ( found in the ${tomcat_home}/webapps directory ), which 
+may or not be required in production environment. 
+
+You can delete them to keep it clean and avoid any known security risk with Tomcat default application.
+
+ * ROOT – Default welcome page
+ * Docs – Tomcat documentation
+ * Examples – JSP and servlets for demonstration
+ * Manager, host-manager – Tomcat administration
+
+
 
