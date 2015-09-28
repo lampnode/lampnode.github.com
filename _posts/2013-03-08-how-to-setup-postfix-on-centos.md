@@ -210,3 +210,32 @@ Other Examples:
 ### Test
 
 	echo "mail content" | mail -s test admin@example.com
+
+## 常用辅助工具
+
+### 显示待寄邮件的队列
+
+mailq可列出待寄邮件的清单，包括邮件ID，邮件大小，邮件保存时间，寄信人，收信人，以及邮件无法寄出的原因，提供管理员参考的信息。mailq实际上是执行sendmail -bp指令.
+
+	$ mailq
+
+样例输出：
+
+	-Queue ID- --Size-- ----Arrival Time---- -Sender/Recipient-------
+	80B1016047F     3411 Sun Sep 27 08:30:38  websrvs@cerebromed.com
+	(host relay.uni-example1.com[168.192.100.212] said: 451 4.1.8 Fix reverse DNS for 168.192.220.232 (in reply to MAIL FROM command))
+                                         guido.jch@example2.com
+	.....
+
+### 清除邮件队列
+
+#### 全部删除
+
+	$ postsuper -d ALL
+	postsuper: Deleted: 69 messages
+
+#### 删除个例
+
+	$postsuper -d Queue_ID
+
+
