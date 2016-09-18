@@ -3,7 +3,7 @@
 #
 # CREATE MYSQL BACKUP
 # Author:Robert Chain
-# Mail:robert.c@lampnode.com
+# Mail:robert.qian@lampnode.com
 #
 
 ##
