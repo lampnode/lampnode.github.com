@@ -1,0 +1,24 @@
+
+
+2016-12-02 14:29:34 apctest 3.14.12 (29 March 2014) debian
+Checking configuration ...
+sharenet.type = Network & ShareUPS Disabled
+cable.type = USB Cable
+mode.type = USB UPS Driver
+apctest FATAL ERROR in apctest.c at line 335
+Unable to create UPS lock file.
+  If apcupsd or apctest is already running,
+  please stop it and run this program again.
+apctest error termination completed
+
+
+2016-12-02 14:38:41 apctest 3.14.12 (29 March 2014) debian
+Checking configuration ...
+sharenet.type = Network & ShareUPS Disabled
+cable.type = USB Cable
+mode.type = USB UPS Driver
+apctest FATAL ERROR in apctest.c at line 335
+Unable to create UPS lock file.
+  If apcupsd or apctest is already running,
+  please stop it and run this program again.
+apctest error termination completed
