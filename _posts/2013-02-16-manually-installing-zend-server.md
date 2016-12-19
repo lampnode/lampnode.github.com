@@ -132,17 +132,19 @@ Replace install_path with your Zend Server installation path. Then save the file
 
 You can now run the PHP binary provided by Zend Server without typing its full path.
 
-## Uninstall Zend Server
+## Uninstall Zend Server/or change  php version
+
+Note: If your want to change php version, you should follow the steps. 
 
 ### Steps
 
 To uninstall run:
 
-	$sudo zendctl.sh stop
+	$sudo ./zendctl.sh stop
 
 And then:
 
-	$yum remove -y 'deployment-daemon-zend-server' && yum remove -y '*zend*'
+	$sudo yum remove -y 'deployment-daemon-zend-server' && sudo yum remove -y '*zend*'
 
 If you want to disable Zend source words, need to remove the zend.repo
 
