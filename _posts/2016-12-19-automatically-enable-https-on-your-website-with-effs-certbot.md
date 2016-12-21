@@ -35,6 +35,10 @@ If you're feeling more conservative and would like to make the changes to your A
 
     $ ./path/to/certbot-auto --apache certonly
 
+Then enter your domain name(s). Note that if you want a single cert to work with multiple domain names (e.g. example.com and www.example.com), be sure to include all of them:
+    
+    www.example.com example.com
+
 To learn more about how to use Certbot read our documentation.
 
 ## Automating renewal
