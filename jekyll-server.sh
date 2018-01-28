@@ -1,3 +1,3 @@
 #!/bin/bash
 
-/usr/local/bin/jekyll  serve -w --host=0.0.0.0
+/usr/local/bin/jekyll  server -w --host=0.0.0.0
