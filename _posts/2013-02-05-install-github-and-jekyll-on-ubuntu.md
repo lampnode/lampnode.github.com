@@ -22,7 +22,8 @@ Jekyll is a Git compatible static site generator that can be installed on Ubuntu
 In order to preview your blog locally you will  need to install the Jekyll ruby gem.
 
 	$sudo gem install jekyll
-
+    $sudo gem install jekyll-paginate
+    
 If you are configuring this step on the Ubuntu Server Edition, the system will report an error like:
 
 	ERROR: Failed to build gem native extension
