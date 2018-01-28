@@ -1,3 +1,8 @@
+# For feed.xml
+name: "lamp technology blog"
+description: "for lamp development"
+url: http://www.lampnode.com
+
 # This is the default format. 
 # For more see: https://github.com/mojombo/jekyll/wiki/Permalinks
 permalink: /:categories/:title.html 

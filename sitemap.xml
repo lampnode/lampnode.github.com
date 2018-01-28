@@ -16,7 +16,7 @@ title :
 {% for page in site.pages %}
 <url>
 <loc>{{site.production_url}}{{ page.url }}</loc>
-<lastmod>{{ site.time | | date: '%Y-%m-%d' }}</lastmod>
+<lastmod>{{ site.time | date: '%Y-%m-%d' }}</lastmod>
 </url>
 {% endfor %}
 
