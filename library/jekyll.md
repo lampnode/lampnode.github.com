@@ -14,7 +14,7 @@ jekyll是一个简单的免费的Blog生成工具，jekyll通过生成静态网�
 
 ## Install jekyll and git
 
-[Install Github and jekyll on Ubuntu](/github/install-github-and-jekyll-on-ubuntu/)
+[Install Github and jekyll on Ubuntu](/github/install-github-and-jekyll-on-ubuntu.html)
 
 ## Clone blog from github by ssh
 
