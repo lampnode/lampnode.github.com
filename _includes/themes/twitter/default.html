@@ -25,7 +25,7 @@
     <!--[if lt IE 9]>
       <script src="/scripts/html5.js"></script>
     <![endif]-->
-	
+    <script src="/scripts/jquery.min.js"></script>
     <!-- Le styles -->
     <link href="/assets/themes/twitter/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/themes/twitter/bootstrap/bootstrap-responsive.min.css" />
@@ -67,13 +67,11 @@
                     {% assign group = 'navigation' %}
                     {% include JB/pages_list %}
                     <li><a href="/library/jekyll.html">JEKYLL</a></li>
-                    <li>
-                        <ul class="sharing">
-                        <li><a href="https://twitter.com/share" class="twitter-share-button" data-via="lampnode" style="border:0;padding:0px;font-size:10pt;color:#ffffff">Tweet</a>
+                    <li class="sharing">
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-via="lampnode">Tweet</a>
                         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                        <span class="divider-vertical"></span>
                         </li>
-                        <li class="divider-vertical"></li>
-                        </ul>
                     </li>
                 </ul>
             </div>
@@ -156,7 +154,6 @@
         </div>
     </footer>
 </div>
-<script src="/scripts/jquery.min.js"></script>
 <script src="/assets/themes/twitter/bootstrap/js/bootstrap.min.js"></script>
 <script  src="/scripts/jquery.tools.js"></script>
 <script src="/scripts/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script>
