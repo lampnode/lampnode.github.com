@@ -27,7 +27,7 @@ author :
   twitter : username
   feedburner : feedname
 
-paginate: 5
+paginate: 10
 
 # The production_url is only used when full-domain names are needed
 # such as sitemap.txt 

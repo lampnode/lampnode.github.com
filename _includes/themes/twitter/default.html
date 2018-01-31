@@ -50,8 +50,9 @@
     <script>hljs.initHighlightingOnLoad();</script> 
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
+<!--levevl 3 -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navichannel" aria-expanded="false" aria-controls="navbar">
                             <span class="sr-only">Toggle navigation</span>
@@ -75,63 +76,68 @@
                     </li>
                 </ul>
             </div>
-        </div>
-    </nav>
- 
-   <div class="container">
+    </div>
+</nav>
+<!-- lever 2 --> 
+<div class="container-fluid">
       <div class="row-fluid">
             <!--left sider -->
-            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-2">
-             <a href="#" name="top"></a>
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xl-2">
             <div class="contentNavi">
-	        <!--box1-->
-            <div class="contentNaviBox">
-                        <form action="http://www.google.com/search" style="padding:5px;" target="google_window">
+                <a href="#" name="top"></a>
+	            <!--box1-->
+                <div class="contentNaviBox">
+                        <form action="http://www.google.com/search"  target="google_window">
+                            <div class="form-group">
                                 <label for="g_search" class="hidden"></label>
-                                <input id="g_search" style="width:140px;float:left;" type="text"  placeholder="Search.." name="q" />
-                                <input type="submit"  name='btnG' style="display:none; margin-left:5px; float:left;" id="dsearchsubmiti" value="Go" />
+                                <input id="g_search" class="form-control"  type="text"  placeholder="Search.." name="q" />
+                                <input type="submit" name='btnG' style="display:none;" id="dsearchsubmiti" value="Go" />
                                 <input type="hidden" name="ie" value="UTF-8" />
                                 <input type="hidden" name="oe" value="UTF-8" />
                                 <input type="hidden" name="hl" value="zh-CN" />
                                 <input type="hidden" name="domains" value="www.lampnode.com" />
                                 <input type="hidden" name="sitesearch" value="www.lampnode.com" />
+                            </div>
                          </form>
-	        </div>
-	        <!--box2-->
-            <div class="contentNaviBox col-sm-6 col-md-7">
-                <p class="contentNaviBoxTitle"><a href="/categories.html">Categories</a></p>
-                <ul class="tag_box inline">
+	            </div>
+	            <!--box2-->
+                <div class="contentNaviBox">
+                    <p class="contentNaviBoxTitle"><a href="/categories.html">Categories</a></p>
+                    <ul class="tag_box inline">
                         {% assign categories_list = site.categories %}
                         {% include JB/categories_list %}
-                </ul>
-           </div> 
-	        <!--box3-->
-          <div class="contentNaviBox">
-		    <p class="contentNaviBoxTitle"><a href="/tags.html">Tags</a></p>
-	  	    <div id='tag_cloud' style="padding:5px;">
-			    {% for tag in site.tags %}
-				    <a href="/tags.html#{{ tag[0] }}-ref" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>
-			    {% endfor %}
-		    </div>
-	      </div>
-	      <!--box4 -->
-          <div class="contentNaviBox">
-	  	    <p class="contentNaviBoxTitle">Links</p> 
-	  	    <ul>
-			    <li><a href="http://www.php.net">PHP.net</a></li>
-			    <li><a href="http://www.centos.org">Centos.org</a></li>
-		    </ul>   
-	      </div>
-          </div>
+                    </ul>
+                </div> 
+	            <!--box3-->
+                <div class="contentNaviBox">
+		            <p class="contentNaviBoxTitle"><a href="/tags.html">Tags</a></p>
+	  	            <div id='tag_cloud' style="padding:5px;">
+			        {% for tag in site.tags %}
+				        <a href="/tags.html#{{ tag[0] }}-ref" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>
+			        {% endfor %}
+		            </div>
+                </div>
+	            <!--box4 -->
+                <div class="contentNaviBox">
+	  	            <p class="contentNaviBoxTitle">Links</p> 
+	  	            <ul>
+			            <li><a href="http://www.php.net">PHP.net</a></li>
+			            <li><a href="http://www.centos.org">Centos.org</a></li>
+		            </ul>   
+	            </div>
+            </div>
 	    </div>
         <!--right sider -->
-	    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-10"> 
+	    <div class="col-sm-12 col-md-9 col-lg-10 col-xl-10"> 
 	        <div class="contentMain"> 
                 {{ content }}
             </div>
 	    </div>
-        </div>
-      <footer class="row-fluid">
+    </div>
+</div>
+<!-- level 3 -->
+<div class="row-fluid">
+    <footer>
         <ul id="footerNaviBnt">
                                 <a href="/"><img src="/images/bnt_home.gif"/></a>
                                 <a href="#top"><img src="/images/bnt_top.gif"/></a>
@@ -154,6 +160,7 @@
         </div>
     </footer>
 </div>
+
 <script src="/assets/themes/twitter/bootstrap/js/bootstrap.min.js"></script>
 <script  src="/scripts/jquery.tools.js"></script>
 <script src="/scripts/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script>
@@ -179,5 +186,5 @@
 
 </script>
 <!-- Google anylytics stop -->
-    </body>
+</body>
 </html>

@@ -47,7 +47,7 @@ h4{padding:5px 0px 5px 5px; margin:15px 0px 10px 0px;
 font-family:'Microsoft YaHei','Tahoma', 'Arial', 'Helvetica', 'STHeiti'; font-size:1.2em;}
 h5{padding:5px 0px; margin:5px 0px; font-size:1.1em; color:#003366}
 h6{padding:5px 0px; margin:5px 0px; font-size:1em;}
-.homeBlockTitle{background-color:blanchedalmond;}
+.homeBlockTitle{background-color:blanchedalmond;font-size:16px;font-weight:bold;margin-top:5px;}
 #postWrapper ul li{line-height:1.5em;}
 
 .navbar {
@@ -66,17 +66,17 @@ footer p {
 .siteRss img{padding:0px 10px;border-left:1px solid #cccccc; margin:0;}
 .contentNaviBox{margin:auto;padding:10px;border:0}
 .contentNaviBox .contentNaviBoxTitle{width:100%; font-family:'Microsoft YaHei','Tahoma', 'Arial', 'Helvetica', 'STHeiti';font-size:16px;padding:5px;margin:5px;border-bottom:2px solid #cccccc;clear:both;over-flow:hidden}
-.contentMain{background-color:#ffffff;border:1px solid #cccccc;margin:0px;padding:10px;}
-.contentMainBox{padding:10px;}
+.contentMain{background-color:#ffffff;border:0;margin:0px;padding:5px;}
+.contentMainBox{padding:5px}
 .contentMainBox ul li b{padding-right:10px;}
-.contentMainBoxItem{width:98%;clear:both;border:0;height:auto;overflow:hidden;padding:10px 1%;margin:0px;}
+.contentMainBoxItem{clear:both;border:0;height:auto;overflow:hidden;padding:5px;margin:0px;}
 .contentMainBoxItem ul{list-style:none;padding:5px;margin:0px;}
 .contentMainBoxItem ul li{list-style:none;}
 .imgContent{padding:5px;margin:10px;float:right;border:1px solid #cccccc;border-radius:5px;}
 
-.contentMainBoxItemSub {width:46%;border:0;height:300px;overflow:hidden;float:left;padding:5px 1% 10px 1%;margin:10px 1%;background-color:#E6E6FA
-;border-radius:5px;}
+.contentMainBoxItemSub {}
 .contentMainBoxItemSub h3{margin:0px;}
+.lightBlueBk{background-color:#E6E6FA;border-radius:5px;margin-top:10px;}
 
 /*For laster updated*/
 .lastUpdated{padding:0px;margin-left:5px;}
@@ -92,10 +92,10 @@ footer p {
 .lastUpdatedItem dd{line-height:1.5em; word-wrap:break-word }
 .lastUpdatedTitle{font-size:16px;padding:5px;}
 
-footer{clear:both;border:0px;margin:10px auto;padding:0px;width:980px;}
+footer{clear:both;border:0px;margin:10px auto;padding:0px;}
 #footerContent{border-top:5px solid #cccccc;clear:both;overflow:hidden;height:auto;padding:10px 0px;}
 .footerLogo{width:120px;float:left;border-right:0;padding:10px 10px 0px 0px;margin:0px;}
-.footerBox{border:0;float:left;width:800px;height:auto;padding:10px 0px 0px 10px;margin:0px;}
+.footerBox{border:0;float:left;height:auto;padding:10px 0px 0px 10px;margin:0px;}
 .footerBox .footBoxItems{border:0;padding:0px;margin:0px;float:left;text-align:left;clear:both;}
 #footerNaviList{border:0;list-style:none;padding:0px;margin:0px;clear:both;}
 #footerNaviList li{float:left;list-style:none;padding:0px 10px 0px 0px;margin:0px;}
