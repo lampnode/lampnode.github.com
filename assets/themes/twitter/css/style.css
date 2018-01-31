@@ -8,6 +8,10 @@ html, body {
   background-repeat: repeat-x;
   background-position: 0 40px;
 }
+body{padding-top: 60px;}
+@media(max-width: 992px) {
+    body{padding-top:0px;}
+}
 
 blockquote{background-color:#ffffff;font-size:10px;color:#555555;}
 blockquote p{font-size:10px;}
@@ -49,29 +53,21 @@ h6{padding:5px 0px; margin:5px 0px; font-size:1em;}
 .navbar {
   margin-bottom: 0;
 }
-.container > footer {
+footer {
   margin-top: 20px;
 }
-.container > footer p {
+footer p {
   text-align: center; /* center align it with the container */
 }
 
 /* The white background content wrapper */
 
-.contentNavi{background-color:#ffffff;width:160px; float:left; border:1px solid #cccccc;height:auto;margin:0px; padding:10px 0px;
-	-webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
-        border-radius: 10px;
-}
+.contentNavi{background-color:#ffffff;border:1px solid #cccccc;height:auto;margin:0px; padding:10px;}
 .siteRss img{padding:0px 10px;border-left:1px solid #cccccc; margin:0;}
-.contentNaviBox{margin:auto;padding:0px 0px 10px 0px;border:0}
-.contentNaviBox .contentNaviBoxTitle{font-family:'Microsoft YaHei','Tahoma', 'Arial', 'Helvetica', 'STHeiti';font-size:16px;padding:5px;margin:5px;border-bottom:2px solid #cccccc;}
-.contentMain{background-color:#ffffff;float:left;border:1px solid #cccccc;width:760px;margin:0px 0px 0px 5px;padding:0px 10px;
-	-webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
-        border-radius: 10px;
-}
-.contentMainBox{width:48%;float:left;margin:0px 1%;}
+.contentNaviBox{margin:auto;padding:10px;border:0}
+.contentNaviBox .contentNaviBoxTitle{width:100%; font-family:'Microsoft YaHei','Tahoma', 'Arial', 'Helvetica', 'STHeiti';font-size:16px;padding:5px;margin:5px;border-bottom:2px solid #cccccc;clear:both;over-flow:hidden}
+.contentMain{background-color:#ffffff;border:1px solid #cccccc;margin:0px;padding:10px;}
+.contentMainBox{padding:10px;}
 .contentMainBox ul li b{padding-right:10px;}
 .contentMainBoxItem{width:98%;clear:both;border:0;height:auto;overflow:hidden;padding:10px 1%;margin:0px;}
 .contentMainBoxItem ul{list-style:none;padding:5px;margin:0px;}

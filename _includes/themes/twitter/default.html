@@ -3,6 +3,7 @@
  <head>
     <meta charset="utf-8" />
     <!-- Setup for Responsive Web Design -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!--[if lt IE 9]>
 　　　　<script src="/scripts/css3-mediaqueries.js"></script>
@@ -25,25 +26,11 @@
       <script src="/scripts/html5.js"></script>
     <![endif]-->
 	
-
-    
     <!-- Le styles -->
     <link href="/assets/themes/twitter/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/assets/themes/twitter/css/style.css" rel="stylesheet" >
-    <script  src="/scripts/jquery.min.js"></script>
-    <script  src="/scripts/jquery.tools.js"></script>
-    
-    <script src="/scripts/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script>
-    <script language="javascript">
-	$.fn.tagcloud.defaults = {
-    		size: {start: 0.9, end: 2, unit: 'em'},
-      		color: {start: '#e77471', end: '#f62817'}
-	};
- 
-	$(function () {
-    		$('#tag_cloud a').tagcloud();
-	});
-    </script>
+    <link rel="stylesheet" href="/assets/themes/twitter/bootstrap/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="/assets/themes/twitter/font-awesome/css/font-awesome.css" />
+    <link href="/assets/themes/twitter/css/style.css" rel="stylesheet" > 
     <link rel="shortcut icon" href="/images/favicon.ico">
     <!-- touch icons
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
@@ -53,39 +40,54 @@
 	   
     <!-- Pygments -->
     <link rel="stylesheet"  href="/styles/pygments.css" />
+    
+
+    
 
     <!-- Highlight.js -->
     <link rel="stylesheet" href="/styles/tomorrow-night.min.css">
     <script src="/scripts/highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script> 
 </head>
-  <body>
-    <header class="navbar">
-      <div class="navbar-inner">
-        <nav class="container">
-          <a class="brand" href="{{ HOME_PATH }}" name="top"> &lt;? {{ site.title }}</a>
-          <ul class="nav">
-            {% assign pages_list = site.pages %}
-            {% assign group = 'navigation' %}
-            {% include JB/pages_list %}
-	    <li><a href="/library/jekyll.html">JEKYLL</a></li>
-	   </ul>
-
-	<ul class="nav pull-right">
-	       <li class="sharing" style="padding-top:6px;">
-		<a href="https://twitter.com/share" class="twitter-share-button" data-via="lampnode" style="border:0;padding:0px;font-size:10pt;color:#ffffff">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-		</li>
-            	<li class="divider-vertical"></li>
-	</ul>
-	</nav>
-      </div>
-    </header>
-	 
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navichannel" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ HOME_PATH }}" > &lt;? {{ site.title }}</a>
+            </div>
+             <div  class="navbar-collapse collapse" id="navichannel">
+                <ul class="nav navbar-nav navbar-right">
+                    {% assign pages_list = site.pages %}
+                    {% assign group = 'navigation' %}
+                    {% include JB/pages_list %}
+                    <li><a href="/library/jekyll.html">JEKYLL</a></li>
+                    <li>
+                        <ul class="sharing">
+                        <li><a href="https://twitter.com/share" class="twitter-share-button" data-via="lampnode" style="border:0;padding:0px;font-size:10pt;color:#ffffff">Tweet</a>
+                        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                        </li>
+                        <li class="divider-vertical"></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+ 
    <div class="container">
-      <div class="content">
-         <section class="contentNavi">
-	  <div class="contentNaviBox">
+      <div class="row-fluid">
+            <!--left sider -->
+            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-2">
+             <a href="#" name="top"></a>
+            <div class="contentNavi">
+	        <!--box1-->
+            <div class="contentNaviBox">
                         <form action="http://www.google.com/search" style="padding:5px;" target="google_window">
                                 <label for="g_search" class="hidden"></label>
                                 <input id="g_search" style="width:140px;float:left;" type="text"  placeholder="Search.." name="q" />
@@ -96,46 +98,50 @@
                                 <input type="hidden" name="domains" value="www.lampnode.com" />
                                 <input type="hidden" name="sitesearch" value="www.lampnode.com" />
                          </form>
-	   </div>
-	   <div class="contentNaviBox">
+	        </div>
+	        <!--box2-->
+            <div class="contentNaviBox col-sm-6 col-md-7">
                 <p class="contentNaviBoxTitle"><a href="/categories.html">Categories</a></p>
                 <ul class="tag_box inline">
                         {% assign categories_list = site.categories %}
                         {% include JB/categories_list %}
                 </ul>
            </div> 
-	   <div class="contentNaviBox">
-		<p class="contentNaviBoxTitle"><a href="/tags.html">Tags</a></p>
-	  	<div id='tag_cloud' style="padding:5px;">
-			{% for tag in site.tags %}
-				<a href="/tags.html#{{ tag[0] }}-ref" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>
-			{% endfor %}
-		</div>
-	  </div>
-	  <div class="contentNaviBox">
-	  	<p class="contentNaviBoxTitle">Links</p> 
-	  	<ul>
-			<li><a href="http://www.php.net">PHP.net</a></li>
-			<li><a href="http://www.centos.org">Centos.org</a></li>
-		</ul>   
-	  </div>
-	</section>
-	<section class="contentMain"> 
-	 {{ content }}
-	</section>
-      </div>
-     </div> 
-      <footer>
+	        <!--box3-->
+          <div class="contentNaviBox">
+		    <p class="contentNaviBoxTitle"><a href="/tags.html">Tags</a></p>
+	  	    <div id='tag_cloud' style="padding:5px;">
+			    {% for tag in site.tags %}
+				    <a href="/tags.html#{{ tag[0] }}-ref" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>
+			    {% endfor %}
+		    </div>
+	      </div>
+	      <!--box4 -->
+          <div class="contentNaviBox">
+	  	    <p class="contentNaviBoxTitle">Links</p> 
+	  	    <ul>
+			    <li><a href="http://www.php.net">PHP.net</a></li>
+			    <li><a href="http://www.centos.org">Centos.org</a></li>
+		    </ul>   
+	      </div>
+          </div>
+	    </div>
+        <!--right sider -->
+	    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-10"> 
+	        <div class="contentMain"> 
+                {{ content }}
+            </div>
+	    </div>
+        </div>
+      <footer class="row-fluid">
         <ul id="footerNaviBnt">
                                 <a href="/"><img src="/images/bnt_home.gif"/></a>
                                 <a href="#top"><img src="/images/bnt_top.gif"/></a>
                         </ul>
         <div id="footerContent"> 
-	 <div class="footerLogo">
-		<img src="/images/lampnode-code-small.png" width="90px" height="90px" style="background-color:#cccccc;border:1px solid #555555;padding:5px;margin:0px 10px"/>
-	 </div>
+	    <div class="footerLogo"><img src="/images/lampnode-code-small.png" width="90px" height="90px" style="background-color:#cccccc;border:1px solid #555555;padding:5px;margin:0px 10px"/></div>
          <div class="footerBox">
-            	<p class="footBoxItems">
+            <p class="footBoxItems">
 	    		<ul id="footerNaviList">
              			{% assign pages_list = site.pages %}
              			{% assign group = 'navigation' %}
@@ -144,14 +150,26 @@
 				<li> <a href="/atom.xml" title="ATOM" class="siteRss"><img src="/images/atom.png" /></a></li>
 			</ul>
            	</p>
-	   	<p class="footBoxItems"><img src="/images/gnu-fdl.png"/> Copyleft 2013-{{ site.time | date: '%Y' }} for {{ site.author.name }}. Unless otherwise stated, all content are available under <a href="http://www.gnu.org/copyleft/fdl.html" class="external ">GNU Free Documentation License 1.3</a>.</p>
-    	   	<p class="footBoxItems">Powered by Github, With help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a> and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>.</p> 
-		<p class="footBoxItems">LAMPNode.com, Build 0.{{ site.time | date: '%m' }}.{{ site.time | date: '%Y%m%d' }}</p>
-	<p class="footBoxItems">
-	</p>
-	</div>
-     </div>     
-</footer>
+	   	    <p class="footBoxItems"><img src="/images/gnu-fdl.png"/> Copyleft 2013-{{ site.time | date: '%Y' }} for {{ site.author.name }}. Unless otherwise stated, all content are available under <a href="http://www.gnu.org/copyleft/fdl.html" class="external ">GNU Free Documentation License 1.3</a>.</p>
+		    <p class="footBoxItems">LAMPNode.com, Build 0.{{ site.time | date: '%m' }}.{{ site.time | date: '%Y%m%d' }}</p>
+	        <p class="footBoxItems"></p>
+        </div>
+    </footer>
+</div>
+<script src="/scripts/jquery.min.js"></script>
+<script src="/assets/themes/twitter/bootstrap/js/bootstrap.min.js"></script>
+<script  src="/scripts/jquery.tools.js"></script>
+<script src="/scripts/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script>
+<script language="javascript">
+    $.fn.tagcloud.defaults = {
+        size: {start: 0.9, end: 2, unit: 'em'},
+        color: {start: '#e77471', end: '#f62817'}
+    };
+                                             
+    $(function () {
+        $('#tag_cloud a').tagcloud();
+    });
+</script>
 <!-- google anylytics start -->
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
